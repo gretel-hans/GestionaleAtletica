@@ -1,4 +1,5 @@
 package com.hans.entity;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -20,13 +21,10 @@ public class Indirizzo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String via;
+	@Column(name="nome_via")
+	private String nomeVia;
 	
 	private String civico;
-	
-	private String localita;
-	
-	private String cap;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Comune comune;

@@ -37,9 +37,7 @@ public class Utente {
 	@Column(nullable = false)
 	private String username;
 
-	@Column(nullable = false)
-	private String nome;
-	
+	private String nome;	
 	
 	@Column(nullable = false)
 	private String email;

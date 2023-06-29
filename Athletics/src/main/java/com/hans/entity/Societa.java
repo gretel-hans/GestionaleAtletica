@@ -33,7 +33,7 @@ public class Societa {
     @ManyToOne
     private Indirizzo indirizzo;
     
-    @Column(name = "nome_societa")
+    @Column(name = "nome_societa",nullable = false)
     private String nomeSocieta;
     
     @OneToMany
@@ -52,7 +52,7 @@ public class Societa {
     @Column(nullable = false)
     private String password;
     
-    @Column(name = "date_registration")
+    @Column(name = "date_registration",nullable = false)
     private LocalDateTime dateRegistration;
     
     @ManyToOne

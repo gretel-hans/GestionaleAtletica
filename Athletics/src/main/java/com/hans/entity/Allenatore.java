@@ -32,8 +32,10 @@ public class Allenatore {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @Column(nullable = false)
     private String name;
     
+    @Column(nullable = false)
     private String lastname;
     
     @Enumerated(EnumType.STRING)

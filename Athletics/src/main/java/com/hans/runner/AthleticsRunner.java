@@ -37,6 +37,7 @@ public class AthleticsRunner implements CommandLineRunner{
 		setComune();
 	}
 
+	
 	}
 	
 	
@@ -55,7 +56,10 @@ public class AthleticsRunner implements CommandLineRunner{
 				rigaProvincia = provinceTotali.split("\n");
 				for (int i = 0; i < rigaProvincia.length; i++) {
 					unicaProvincia = rigaProvincia[i].split(";");
-					Provincia p = new Provincia(null, unicaProvincia[0], unicaProvincia[1], unicaProvincia[2]);
+					if(i==0) {
+						unicaProvincia[0]="AG";
+					}
+					Provincia p = new Provincia(null, unicaProvincia[0].trim(), unicaProvincia[1], unicaProvincia[2].trim());
 					provinciaService.salvaProvincia(p);
 				}
 			}
@@ -82,6 +86,9 @@ public class AthleticsRunner implements CommandLineRunner{
 				rigaComuni = comuniTotali.split("\n");
 				for (int i = 0; i < rigaComuni.length; i++) {
 					unicoComune = rigaComuni[i].split(";");
+					if(i==0) {
+						unicoComune[0]=unicoComune[1];
+					}
 					
 					if( !(unicoComune[1].equals("#RIF!"))  ){
 						Provincia p1 = provinciaService.cercaProvinciaConNome(unicoComune[3].trim());

@@ -18,7 +18,9 @@ import org.springframework.stereotype.Service;
 import com.hans.repository.UtenteRepository;
 import com.hans.entity.Allenatore;
 import com.hans.entity.Atleta;
+import com.hans.entity.Indirizzo;
 import com.hans.entity.Role;
+import com.hans.entity.Societa;
 import com.hans.entity.Utente;
 import com.hans.enums.ERole;
 import com.hans.enums.Genere;
@@ -40,6 +42,10 @@ public class AuthServiceImpl implements AuthService {
     private JwtTokenProvider jwtTokenProvider;
     @Autowired AllenatoreService allenatoreService;
     @Autowired AtletaService atletaService;
+    @Autowired SocietaService societaService;
+	@Autowired ComuneService comuneService;
+	@Autowired ProvinciaService provinciaService;
+	@Autowired IndirizzoService indirizzoService;
 
 
     public AuthServiceImpl(AuthenticationManager authenticationManager,
@@ -69,8 +75,7 @@ public class AuthServiceImpl implements AuthService {
         System.out.println(token);
         return token;
     }
-
-    Integer s=0;  		
+	
     @Override
     public String register(RegisterDto registerDto) {
     	
@@ -103,7 +108,7 @@ public class AuthServiceImpl implements AuthService {
 	        	}else if(role.equals("ATLETA")) {
 	        		creaAtleta(registerDto);
 	        	}else if(role.equals("SOCIETA")) {
-	        		//creaSocieta(registerDto);
+	        		creaSocieta(registerDto);
 	        	}
 	        	roles.add(userRole);
 	        });
@@ -119,7 +124,20 @@ public class AuthServiceImpl implements AuthService {
         return "User registered successfully!.";
     }
     
-    private void creaAtleta(RegisterDto registerDto) {
+    private void creaSocieta(RegisterDto registerDto) {
+		Societa societa= new Societa();
+		Indirizzo i=indirizzoService.salvaInidirzzo(registerDto.getIndirizzo());
+		societa.setIndirizzo(i);
+		societa.setNomeSocieta(registerDto.getNomeSocieta());
+		societa.setUsername(registerDto.getUsername());
+		societa.setEmail(registerDto.getEmail());
+		societa.setPassword(passwordEncoder.encode(registerDto.getPassword()));
+		societa.setDateRegistration(LocalDateTime.now());
+		societa.setRole(roleRepository.findByRoleName(ERole.ROLE_SOCIETA).get());
+		societaService.salvaSocieta(societa);
+	}
+
+	private void creaAtleta(RegisterDto registerDto) {
     	Genere g;
     	
     	if(registerDto.getGenere().equalsIgnoreCase("Uomo")) {

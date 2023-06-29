@@ -17,7 +17,7 @@ import com.hans.service.AuthService;
 
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/athletics")
 public class AuthController {
 
     private AuthService authService;

@@ -3,6 +3,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.hans.enums.Genere;
 import com.hans.model.Risultato;
 import com.hans.security.PasswordConverter;
 
@@ -24,12 +25,18 @@ public class Atleta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @Column(nullable = false)
     private String name;
     
+    @Column(nullable = false)
     private String lastname;
+    
+    @Column(nullable = false)
+    private Genere genere;
     
     private Integer age;
     
+    @Column(nullable = false)
     private LocalDate birthdate;
     
     @Column(nullable = false, unique = true)
@@ -51,6 +58,9 @@ public class Atleta {
    
    @OneToMany(fetch = FetchType.EAGER)
    @JoinColumn(name="atleta_id")
-   List<RisultatoSerie> risultatiCorseAtleta;
-    
+   List<RisultatoBatteria> risultatiCorseAtleta;
+   
+   @ManyToOne
+   private Role role;
+   
 }

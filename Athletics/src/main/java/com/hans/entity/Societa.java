@@ -37,12 +37,10 @@ public class Societa {
     private String nomeSocieta;
     
     @OneToMany
-    @JoinColumn(name="lista_allenatori")
-    List<Allenatore> listaAllenatori;
+    List<Allenatore> allenatori;
     
     @OneToMany
-    @JoinColumn(name="lista_atleti")
-    List<Atleta> listaAtleti;
+    List<Atleta> atleti;
 	
     @Column(nullable = false, unique = true)
     private String username;
@@ -56,4 +54,7 @@ public class Societa {
     
     @Column(name = "date_registration")
     private LocalDateTime dateRegistration;
+    
+    @ManyToOne
+    private Role role;
 }

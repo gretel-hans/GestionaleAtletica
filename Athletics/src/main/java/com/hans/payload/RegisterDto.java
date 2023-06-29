@@ -1,6 +1,9 @@
 package com.hans.payload;
 
+import java.time.LocalDate;
 import java.util.Set;
+
+import com.hans.enums.Genere;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,7 +18,10 @@ import lombok.ToString;
 @AllArgsConstructor
 public class RegisterDto {
     private String name;
+    private String lastname;
     private String username;
+    private String genere;
+    private LocalDate birthdate;
     private String email;
     private String password;
     // Passagio di ruoli dal client (Facoltativo)

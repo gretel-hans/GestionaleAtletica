@@ -10,4 +10,7 @@ public class AthleticsApplication {
 		SpringApplication.run(AthleticsApplication.class, args);
 	}
 
+	public void setAll(){
+		
+	}
 }

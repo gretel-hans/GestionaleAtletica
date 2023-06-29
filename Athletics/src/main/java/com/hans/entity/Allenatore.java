@@ -3,14 +3,19 @@ package com.hans.entity;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import com.hans.enums.ERole;
+import com.hans.enums.Genere;
 import com.hans.security.PasswordConverter;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,7 +36,8 @@ public class Allenatore {
     
     private String lastname;
     
-    private Integer age;
+    @Enumerated(EnumType.STRING)
+    private Genere genere;
     
     private LocalDate birthdate;
     
@@ -48,4 +54,6 @@ public class Allenatore {
     @Column(name = "date_registration")
     private LocalDateTime dateRegistration;
     
+    @ManyToOne
+    private Role role;
 }

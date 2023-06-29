@@ -25,16 +25,15 @@ public class AuthRunner implements ApplicationRunner {
 	@Autowired PasswordEncoder passwordEncoder;
 	@Autowired AuthService authService;
 	
-	private Set<Role> adminRole;
-	private Set<Role> moderatorRole;
-	private Set<Role> userRole;
 	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		System.out.println("Run...");
 		// Metodo da lanciare solo la prima volta
 		// Serve per salvare i ruoli nel DB
-		//setRoleDefault();
+		if(roleRepository.findAll().size()==0) {
+			setRoleDefault();
+		}
 		
 	}
 	

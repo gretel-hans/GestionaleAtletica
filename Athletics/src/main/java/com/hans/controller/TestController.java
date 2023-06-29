@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/test")
+@RequestMapping("/athletics/test")
 public class TestController {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -25,16 +25,22 @@ public class TestController {
 		return "Autenticated Content.";
 	}
 	
-	@GetMapping("/user")
-	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+	@GetMapping("/atleta")
+	@PreAuthorize("hasRole('ATLETA')")
 	public String userAccess() {
-		return "User Content.";
+		return "ATLETA Content.";
 	}
 
-	@GetMapping("/mod")
-	@PreAuthorize("hasRole('MODERATOR')")
+	@GetMapping("/allenatore")
+	@PreAuthorize("hasRole('ALLENATORE')")
+	public String allenatoreAccess() {
+		return "ALLENATORE Board.";
+	}
+	
+	@GetMapping("/societa")
+	@PreAuthorize("hasRole('SOCIETA')")
 	public String moderatorAccess() {
-		return "Moderator Board.";
+		return "SOCIETA Board.";
 	}
 
 	@GetMapping("/admin")

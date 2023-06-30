@@ -24,7 +24,7 @@ public class Indirizzo {
 	@Column(name="nome_via")
 	private String nomeVia;
 	
-	private String civico;
+	private Integer civico;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Comune comune;

@@ -22,6 +22,10 @@ public class ComuneService {
 		return comuneRepository.findByNomeComune(nomeComune);
 	}
 	
+	public Comune cercaComuneConId(Long id) {
+		return comuneRepository.findById(id).get();
+	}
+	
 	public List<Comune> cercaTuttiComuni() {
 		return comuneRepository.findAll();
 	}

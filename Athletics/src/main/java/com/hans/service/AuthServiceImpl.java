@@ -3,7 +3,9 @@ package com.hans.service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -152,6 +154,7 @@ public class AuthServiceImpl implements AuthService {
     	 atleta.setBirthdate(registerDto.getBirthdate());
     	 Period d=Period.between(atleta.getBirthdate(), LocalDate.now());
     	 atleta.setAge(d.getYears());
+    	 atleta.setSocieta(societaService.cercaSocietaConId(registerDto.getSocieta().getId()));
     	 atleta.setUsername(registerDto.getUsername());
     	 atleta.setEmail(registerDto.getEmail());
     	 atleta.setPassword(passwordEncoder.encode(registerDto.getPassword()));
@@ -159,6 +162,8 @@ public class AuthServiceImpl implements AuthService {
     	 atleta.setRole(roleRepository.findByRoleName(ERole.ROLE_ALLENATORE).get());
 		 atletaService.salvaAtleta(atleta);
 		 System.out.println("atleta creato:\n"+atleta);
+		 
+		 
 		
 	}
 
@@ -175,6 +180,7 @@ public class AuthServiceImpl implements AuthService {
     	 allenatore.setLastname(registerDto.getLastname());
     	 allenatore.setGenere(g);
     	 allenatore.setBirthdate(registerDto.getBirthdate());
+    	 allenatore.setSocieta(societaService.cercaSocietaConId(registerDto.getSocieta().getId()));
     	 allenatore.setUsername(registerDto.getUsername());
     	 allenatore.setEmail(registerDto.getEmail());
     	 allenatore.setPassword(passwordEncoder.encode(registerDto.getPassword()));

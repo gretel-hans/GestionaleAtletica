@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Set;
 
 import com.hans.entity.Indirizzo;
+import com.hans.entity.Societa;
 import com.hans.enums.Genere;
 
 import lombok.AllArgsConstructor;
@@ -26,6 +27,7 @@ public class RegisterDto {
     private String email;
     private String password;
     private String nomeSocieta;
+    private Societa societa;
     private Indirizzo indirizzo;
     // Passagio di ruoli dal client (Facoltativo)
     private Set<String> roles;

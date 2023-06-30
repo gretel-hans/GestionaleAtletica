@@ -1,5 +1,7 @@
 package com.hans.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +16,13 @@ public class AllenatoreService {
 	
 	public Allenatore salvaAllenatore(Allenatore a) {
 		return aRepo.save(a);
+	}
+	
+	public List<Allenatore> cercaTuttiAllenatori(){
+		return aRepo.findAll();
+	}
+	
+	public Allenatore cercaAllenatoreConId(Long id) {
+		return aRepo.findById(id).get();
 	}
 }

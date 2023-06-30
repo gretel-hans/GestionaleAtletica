@@ -32,6 +32,8 @@ public class GaraCorsa {
     @Enumerated(EnumType.STRING)
     private TipiGare tipo;
     
+    @Column(nullable=false)
+    @Enumerated(EnumType.STRING)
     private Genere genereGara;
     
     @OneToMany

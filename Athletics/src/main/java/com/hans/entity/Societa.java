@@ -35,12 +35,6 @@ public class Societa {
     
     @Column(name = "nome_societa",nullable = false)
     private String nomeSocieta;
-    
-    @OneToMany
-    List<Allenatore> allenatori;
-    
-    @OneToMany
-    List<Atleta> atleti;
 	
     @Column(nullable = false, unique = true)
     private String username;

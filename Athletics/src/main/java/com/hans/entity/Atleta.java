@@ -31,6 +31,7 @@ public class Atleta {
     @Column(nullable = false)
     private String lastname;
     
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Genere genere;
     
@@ -38,6 +39,10 @@ public class Atleta {
     
     @Column(nullable = false)
     private LocalDate birthdate;
+    
+    @JoinColumn(nullable = false)
+    @ManyToOne
+    private Societa societa;
     
     @Column(nullable = false, unique = true)
     private String username;

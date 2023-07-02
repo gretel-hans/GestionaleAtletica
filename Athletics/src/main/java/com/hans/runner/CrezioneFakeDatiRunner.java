@@ -154,14 +154,16 @@ public class CrezioneFakeDatiRunner implements CommandLineRunner{
 			GaraCorsa gC=new GaraCorsa();
 			gC.setGenereGara(Genere.F);
 			gC.setTipo(TipiGare.Velocita_100m);
-			gC.setPartecipanti(atletaService.cercaTuttiAtleti());
+			gC.setMassimoPartecipanti(5);
 			listaCorse.add(garaCorsaService.salvaGaraCorsa(gC));
+			garaCorsaService.iscriviAtleta(listaCorse.get(0).getId(), atletaService.cercaTuttiAtleti());
 			
 			GaraCorsa gCM=new GaraCorsa();
 			gCM.setGenereGara(Genere.M);
 			gCM.setTipo(TipiGare.Velocita_100m);
-			gCM.setPartecipanti(atletaService.cercaTuttiAtleti());
+			gCM.setMassimoPartecipanti(5);
 			listaCorse.add(garaCorsaService.salvaGaraCorsa(gCM));
+			garaCorsaService.iscriviAtleta(listaCorse.get(1).getId(), atletaService.cercaTuttiAtleti());
 		
 		Evento evento=new Evento();
 		evento.setCodice(t);

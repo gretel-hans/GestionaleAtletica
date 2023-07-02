@@ -19,11 +19,15 @@ public class GaraCorsaService {
 	
 	public GaraCorsa salvaGaraCorsa(GaraCorsa garaC) {
 		List<Atleta> listaAtleti=new ArrayList<Atleta>();
-		garaC.getPartecipanti().forEach(a->{
-			if(garaC.getGenereGara()==(a.getGenere())) {
-				listaAtleti.add(a);
-			}
-		});
+		
+		if(garaC.getPartecipanti()!=null) {
+			garaC.getPartecipanti().forEach(a->{
+				if(garaC.getGenereGara()==(a.getGenere())) {
+					listaAtleti.add(a);
+				}
+			});			
+		}
+		
 		garaC.setPartecipanti(listaAtleti);
 		return garaCorsaRepo.save(garaC);
 	}
@@ -35,4 +39,22 @@ public class GaraCorsaService {
 	public GaraCorsa cercaGaraCorsaConId(Long id) {
 		return garaCorsaRepo.findById(id).get();
 	}
+	
+	
+	public GaraCorsa iscriviAtleta(Long id, List<Atleta> atleti) {
+		GaraCorsa gara=garaCorsaRepo.findById(id).get();
+		List<Atleta> listaDefinitiva=new ArrayList<>();
+		if(gara.getPartecipanti().size()==0) {
+		}else {
+			listaDefinitiva.addAll(gara.getPartecipanti());			
+		}
+		atleti.forEach(a->{
+			if(gara.getPartecipanti().size()<=gara.getMassimoPartecipanti()) {
+				listaDefinitiva.add(a);
+			}			
+		});
+		gara.setPartecipanti(listaDefinitiva);
+		return salvaGaraCorsa (gara);
+	}
+	
 }

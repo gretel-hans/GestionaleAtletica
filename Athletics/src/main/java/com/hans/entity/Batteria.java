@@ -11,6 +11,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -28,12 +30,16 @@ public class Batteria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @ManyToOne
+    @JoinColumn(name="batteria_id") 
+    private GaraCorsa garaCorsa;
+    
     @OneToMany
     @Column(name="composizioni_batterie")
     List<AtletaCorsiaGara> composizioneBatteria;
     
-    @OneToMany
-    private List<RisultatoBatteria> risultato;
+   /* @OneToMany
+    private List<RisultatoBatteria> risultato;*/
     
     @Column(name="ora_inizio")
     private LocalTime oraInizio;

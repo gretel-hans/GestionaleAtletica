@@ -9,6 +9,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -34,6 +35,8 @@ public class GaraCorsa {
     @Enumerated(EnumType.STRING)
     private TipiGare tipo;
     
+    private Integer massimoPartecipanti;
+    
     /*
     @ManyToOne
     private Evento evento;
@@ -42,14 +45,14 @@ public class GaraCorsa {
     @Enumerated(EnumType.STRING)
     private Genere genereGara;
     
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     List<Atleta> partecipanti;
     
     @Column(name="classifica_generale")
     @OneToMany
     List<Atleta> classificaGenerale;
     
-    @Column(name="classifica_generale")
+   /* @Column(name="classifica_generale")
     @OneToMany
-    List<Batteria> listaBatterie;
+    List<Batteria> listaBatterie;*/
 }

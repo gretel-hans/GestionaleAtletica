@@ -29,8 +29,8 @@ public class Batteria {
     private Long id;
     
     @OneToMany
-    @Column(name="partecipanti_serie")
-    List<Atleta> partecipantiBatteria;
+    @Column(name="composizioni_batterie")
+    List<AtletaCorsiaGara> composizioneBatteria;
     
     @OneToMany
     private List<RisultatoBatteria> risultato;

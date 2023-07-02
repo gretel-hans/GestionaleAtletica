@@ -70,11 +70,11 @@ public class AuthServiceImpl implements AuthService {
         				loginDto.getUsername(), loginDto.getPassword()
         		)
         ); 
-    	System.out.println(authentication);
+    	//System.out.println(authentication);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String token = jwtTokenProvider.generateToken(authentication);
-        System.out.println(token);
+       // System.out.println(token);
         return token;
     }
 	
@@ -120,7 +120,7 @@ public class AuthServiceImpl implements AuthService {
         }
         
         user.setRoles(roles);
-        System.out.println(user);
+        //System.out.println(user);
         userRepository.save(user);
 
         return "User registered successfully!.";
@@ -161,7 +161,7 @@ public class AuthServiceImpl implements AuthService {
     	 atleta.setDateRegistration(LocalDateTime.now());
     	 atleta.setRole(roleRepository.findByRoleName(ERole.ROLE_ALLENATORE).get());
 		 atletaService.salvaAtleta(atleta);
-		 System.out.println("atleta creato:\n"+atleta);
+		// System.out.println("atleta creato:\n"+atleta);
 		 
 		 
 		
@@ -187,7 +187,7 @@ public class AuthServiceImpl implements AuthService {
 		 allenatore.setDateRegistration(LocalDateTime.now());
 		 allenatore.setRole(roleRepository.findByRoleName(ERole.ROLE_ALLENATORE).get());
 		 allenatoreService.salvaAllenatore(allenatore);
-		 System.out.println("allenatore creato:\n"+allenatore);
+		// System.out.println("allenatore creato:\n"+allenatore);
 	}
 
 	public ERole getRole(String role) {

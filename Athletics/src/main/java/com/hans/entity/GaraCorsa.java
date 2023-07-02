@@ -12,6 +12,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -32,11 +34,15 @@ public class GaraCorsa {
     @Enumerated(EnumType.STRING)
     private TipiGare tipo;
     
+    /*
+    @ManyToOne
+    private Evento evento;
+    */
     @Column(nullable=false)
     @Enumerated(EnumType.STRING)
     private Genere genereGara;
     
-    @OneToMany
+    @ManyToMany
     List<Atleta> partecipanti;
     
     @Column(name="classifica_generale")

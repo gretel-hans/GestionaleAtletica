@@ -23,9 +23,7 @@ public class EventoService {
 	
 	public Evento salvaEvento(Evento a) {
 		String email=tokenP.getUsername(a.getCodice());
-		System.out.println("email:\n"+email);
 		Societa s=societaService.cercaSocietaConEmail(email);
-		System.out.println("societaa:\n"+s);
 		a.setOrganizzatori(s);
 		a.setLuogoGara(s.getIndirizzo());
 		a.setCodice(null);

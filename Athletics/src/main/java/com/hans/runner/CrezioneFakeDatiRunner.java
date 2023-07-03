@@ -17,6 +17,7 @@ import com.hans.entity.Evento;
 import com.hans.entity.GaraCorsa;
 import com.hans.entity.Indirizzo;
 import com.hans.entity.Societa;
+import com.hans.enums.Categorie;
 import com.hans.enums.Genere;
 import com.hans.enums.TipiGare;
 import com.hans.payload.LoginDto;
@@ -71,7 +72,6 @@ public class CrezioneFakeDatiRunner implements CommandLineRunner{
 		
 		iscriviAtleti();
 	
-		
 	}
 
 
@@ -181,6 +181,7 @@ public class CrezioneFakeDatiRunner implements CommandLineRunner{
 			gC.setGenereGara(Genere.F);
 			gC.setTipo(TipiGare.Velocita_100m);
 			gC.setMassimoPartecipanti(25);
+			gC.setCategoria(Categorie.Assoluti);
 			listaCorse.add(garaCorsaService.salvaGaraCorsa(gC));
 			
 			

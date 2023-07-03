@@ -2,6 +2,7 @@ package com.hans.entity;
 
 import java.util.List;
 
+import com.hans.enums.Categorie;
 import com.hans.enums.Genere;
 import com.hans.enums.TipiGare;
 
@@ -44,6 +45,9 @@ public class GaraCorsa {
     @Column(nullable=false)
     @Enumerated(EnumType.STRING)
     private Genere genereGara;
+
+    @Enumerated(EnumType.STRING)
+    private Categorie categoria;
     
     @ManyToMany(fetch = FetchType.EAGER)
     List<Atleta> partecipanti;

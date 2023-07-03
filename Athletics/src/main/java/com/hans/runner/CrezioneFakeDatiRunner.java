@@ -69,8 +69,32 @@ public class CrezioneFakeDatiRunner implements CommandLineRunner{
 			creaEvento();
 		}
 		
+		iscriviAtleti();
 	
 		
+	}
+
+
+
+
+
+	private void iscriviAtleti() {
+		List<Atleta> lista=new ArrayList<Atleta>();
+		lista.add(atletaService.cercaAtletaConId(1l));
+		lista.add(atletaService.cercaAtletaConId(2l));
+		lista.add(atletaService.cercaAtletaConId(3l));
+		lista.add(atletaService.cercaAtletaConId(4l));
+		lista.add(atletaService.cercaAtletaConId(5l));
+		lista.add(atletaService.cercaAtletaConId(6l));
+		lista.add(atletaService.cercaAtletaConId(7l));
+		garaCorsaService.iscriviAtleta(1l, lista);
+
+		List<Atleta> lista2=new ArrayList<Atleta>();
+		lista2.add(atletaService.cercaAtletaConId(2l));
+		lista2.add(atletaService.cercaAtletaConId(4l));
+		lista2.add(atletaService.cercaAtletaConId(5l));
+		lista2.add(atletaService.cercaAtletaConId(1l));
+		garaCorsaService.iscriviAtleta(1l, lista2);
 	}
 
 
@@ -156,16 +180,15 @@ public class CrezioneFakeDatiRunner implements CommandLineRunner{
 			GaraCorsa gC=new GaraCorsa();
 			gC.setGenereGara(Genere.F);
 			gC.setTipo(TipiGare.Velocita_100m);
-			gC.setMassimoPartecipanti(5);
+			gC.setMassimoPartecipanti(25);
 			listaCorse.add(garaCorsaService.salvaGaraCorsa(gC));
-			garaCorsaService.iscriviAtleta(listaCorse.get(0).getId(), atletaService.cercaTuttiAtleti());
+			
 			
 			GaraCorsa gCM=new GaraCorsa();
 			gCM.setGenereGara(Genere.M);
 			gCM.setTipo(TipiGare.Velocita_100m);
 			gCM.setMassimoPartecipanti(10);
-			listaCorse.add(garaCorsaService.salvaGaraCorsa(gCM));
-			garaCorsaService.iscriviAtleta(listaCorse.get(1).getId(), atletaService.cercaTuttiAtleti());
+			//listaCorse.add(garaCorsaService.salvaGaraCorsa(gCM));
 		
 		Evento evento=new Evento();
 		evento.setCodice(t);

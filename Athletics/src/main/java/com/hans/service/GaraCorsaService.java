@@ -10,6 +10,8 @@ import com.hans.entity.Atleta;
 import com.hans.entity.GaraCorsa;
 import com.hans.repository.GaraCorsaRepository;
 
+import jakarta.persistence.EntityExistsException;
+
 @Service
 public class GaraCorsaService {
 
@@ -18,17 +20,6 @@ public class GaraCorsaService {
 	
 	
 	public GaraCorsa salvaGaraCorsa(GaraCorsa garaC) {
-		List<Atleta> listaAtleti=new ArrayList<Atleta>();
-		
-		if(garaC.getPartecipanti()!=null) {
-			garaC.getPartecipanti().forEach(a->{
-				if(garaC.getGenereGara()==(a.getGenere())) {
-					listaAtleti.add(a);
-				}
-			});			
-		}
-		
-		garaC.setPartecipanti(listaAtleti);
 		return garaCorsaRepo.save(garaC);
 	}
 	
@@ -39,25 +30,31 @@ public class GaraCorsaService {
 	public GaraCorsa cercaGaraCorsaConId(Long id) {
 		return garaCorsaRepo.findById(id).get();
 	}
-	
-	
+
+	boolean giaEsistente;
 	public GaraCorsa iscriviAtleta(Long id, List<Atleta> atleti) {
 		GaraCorsa gara=garaCorsaRepo.findById(id).get();
 		List<Atleta> listaDefinitiva=new ArrayList<>();
 		if(gara.getPartecipanti().size()==0) {
 
 		}else {
-			listaDefinitiva.addAll(gara.getPartecipanti());			
+			listaDefinitiva.addAll(gara.getPartecipanti());
 		}
 		atleti.forEach(a->{
+			giaEsistente=false;
 			if(listaDefinitiva.size()<gara.getMassimoPartecipanti()&&a.getGenere()==gara.getGenereGara()) {
-				//System.out.println("ecco quanti sono gli atleti in tutto: "+listaDefinitiva.size());
-				listaDefinitiva.add(a);
-			}			
+				 garaCorsaRepo.findById(id).get().getPartecipanti().forEach(atleta->{
+					if(atleta.getEmail().equalsIgnoreCase(a.getEmail())){
+						System.out.println("Atleta già presente con id"+a.getId());
+						giaEsistente=true;
+					}
+				 });
+				 	if(!giaEsistente){
+						 listaDefinitiva.add(a);
+					}
+			}
 		});
-		//System.out.println("atleti in tutto: "+listaDefinitiva.size());
 		gara.setPartecipanti(listaDefinitiva);
-		gara.getPartecipanti().forEach(a->System.out.println("nome: "+a.getId()));
 		return salvaGaraCorsa (gara);
 	}
 	

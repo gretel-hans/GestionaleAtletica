@@ -31,6 +31,9 @@ public class GaraConcorso {
     
     @Enumerated(EnumType.STRING)
     private TipiGare tipo;
+
+    private Integer massimoPartecipanti;
+    
     
     private Genere genereGara;
     

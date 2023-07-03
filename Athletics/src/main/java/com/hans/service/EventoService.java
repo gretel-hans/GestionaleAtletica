@@ -6,12 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hans.entity.Allenatore;
 import com.hans.entity.Evento;
 import com.hans.entity.GaraConcorso;
 import com.hans.entity.GaraCorsa;
 import com.hans.entity.Societa;
-import com.hans.repository.AllenatoreRepository;
 import com.hans.repository.EventoRepository;
 import com.hans.security.JwtTokenProvider;
 

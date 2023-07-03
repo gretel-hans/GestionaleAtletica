@@ -3,8 +3,6 @@ package com.hans.entity;
 import java.time.LocalTime;
 import java.util.List;
 
-import com.hans.enums.Genere;
-import com.hans.enums.TipiGare;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

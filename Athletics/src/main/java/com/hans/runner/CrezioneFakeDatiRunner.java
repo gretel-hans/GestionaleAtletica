@@ -17,7 +17,6 @@ import com.hans.entity.Evento;
 import com.hans.entity.GaraConcorso;
 import com.hans.entity.GaraCorsa;
 import com.hans.entity.Indirizzo;
-import com.hans.entity.Societa;
 import com.hans.enums.Categorie;
 import com.hans.enums.Genere;
 import com.hans.enums.TipiGare;

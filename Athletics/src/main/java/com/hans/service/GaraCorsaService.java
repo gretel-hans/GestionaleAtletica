@@ -8,10 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.hans.entity.Atleta;
 import com.hans.entity.GaraCorsa;
-import com.hans.enums.Categorie;
 import com.hans.repository.GaraCorsaRepository;
 
-import jakarta.persistence.EntityExistsException;
 
 @Service
 public class GaraCorsaService {

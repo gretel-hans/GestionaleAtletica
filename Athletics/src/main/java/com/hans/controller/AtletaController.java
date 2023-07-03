@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hans.entity.Allenatore;
 import com.hans.entity.Atleta;
-import com.hans.service.AllenatoreService;
 import com.hans.service.AtletaService;
 
 @RestController
@@ -30,7 +28,7 @@ public class AtletaController {
 	
 	@GetMapping("/{id}")
 	@PreAuthorize("isAuthenticated()")
-	public ResponseEntity<Atleta> cercaAllenatore(@PathVariable Long id) {
+	public ResponseEntity<Atleta> cercaAtletaConId(@PathVariable Long id) {
 		return new ResponseEntity<>(atletaService.cercaAtletaConId(id),HttpStatus.OK);
 	}
 

@@ -11,25 +11,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hans.entity.Societa;
-import com.hans.service.SocietaService;
+import com.hans.entity.GaraCorsa;
+import com.hans.service.GaraCorsaService;
 
 @RestController
-@RequestMapping("/athletics/societa")
-public class SocietaController {
-	
-	@Autowired SocietaService societaService;
+@RequestMapping("/athletics/garaCorsa")
+public class GaraCorsaController {
+
+	@Autowired GaraCorsaService garaCorsaService;
 	
 	@GetMapping()
 	@PreAuthorize("isAuthenticated()")
-	public ResponseEntity<List<Societa>> cercaTutteSocieta() {
-		return new ResponseEntity<>(societaService.cercaTutteSocieta(),HttpStatus.OK);
+	public ResponseEntity<List<GaraCorsa>> cercaTutteGareCorse() {
+		return new ResponseEntity<>(garaCorsaService.cercaTutteGareCorse(),HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
 	@PreAuthorize("isAuthenticated()")
-	public ResponseEntity<Societa> cercaAllenatore(@PathVariable Long id) {
-		return new ResponseEntity<>(societaService.cercaSocietaConId(id),HttpStatus.OK);
+	public ResponseEntity<GaraCorsa> cercaGaraCorsaConId(@PathVariable Long id) {
+		return new ResponseEntity<>(garaCorsaService.cercaGaraCorsaConId(id),HttpStatus.OK);
 	}
 
 }

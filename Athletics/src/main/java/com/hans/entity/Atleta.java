@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.hans.enums.Genere;
-import com.hans.model.Risultato;
 import com.hans.security.PasswordConverter;
 
 import jakarta.persistence.*;

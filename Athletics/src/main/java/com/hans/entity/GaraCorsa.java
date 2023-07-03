@@ -5,6 +5,7 @@ import java.util.List;
 import com.hans.enums.Categorie;
 import com.hans.enums.Genere;
 import com.hans.enums.TipiGare;
+import com.hans.model.Gara;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,7 +16,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name="gare_corse")
-public class GaraCorsa {
+public class GaraCorsa extends Gara{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

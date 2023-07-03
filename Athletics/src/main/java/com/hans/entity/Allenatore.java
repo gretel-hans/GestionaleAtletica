@@ -3,7 +3,6 @@ package com.hans.entity;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import com.hans.enums.ERole;
 import com.hans.enums.Genere;
 import com.hans.security.PasswordConverter;
 

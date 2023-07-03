@@ -5,6 +5,7 @@ import java.util.List;
 import com.hans.enums.Categorie;
 import com.hans.enums.Genere;
 import com.hans.enums.TipiGare;
+import com.hans.model.Gara;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,7 +27,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name="gare_concorsi")
-public class GaraConcorso {
+public class GaraConcorso extends Gara{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

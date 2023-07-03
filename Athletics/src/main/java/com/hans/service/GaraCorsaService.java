@@ -37,7 +37,7 @@ public class GaraCorsaService {
 	public GaraCorsa iscriviAtleta(Long id, List<Atleta> atleti) {
 		GaraCorsa gara=garaCorsaRepo.findById(id).get();
 		Integer[] range= range(gara.getCategoria().toString());
-		System.out.println("min: "+range[0]+" max:"+range[1]);
+		//System.out.println("min: "+range[0]+" max:"+range[1]);
 		
 		List<Atleta> listaDefinitiva=new ArrayList<>();
 		if(gara.getPartecipanti().size()==0) {
@@ -50,12 +50,12 @@ public class GaraCorsaService {
 			if(listaDefinitiva.size()<gara.getMassimoPartecipanti()&&a.getGenere()==gara.getGenereGara()&& (a.getAge()>= range[0]&&a.getAge()<= range[1])) {
 				 garaCorsaRepo.findById(id).get().getPartecipanti().forEach(atleta->{
 					if(atleta.getEmail().equalsIgnoreCase(a.getEmail())){
-						System.out.println("Atleta già presente con id"+a.getId());
+						//System.out.println("Atleta già presente con id"+a.getId());
 						giaEsistente=true;
 					}
 				 });
 				 	if(!giaEsistente){
-						System.out.println("ecco l'eta:"+a.getAge());
+						//System.out.println("ecco l'eta:"+a.getAge());
 						 listaDefinitiva.add(a);
 					}
 			}

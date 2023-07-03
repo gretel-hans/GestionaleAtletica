@@ -2,6 +2,7 @@ package com.hans.entity;
 
 import java.util.List;
 
+import com.hans.enums.Categorie;
 import com.hans.enums.Genere;
 import com.hans.enums.TipiGare;
 
@@ -9,9 +10,11 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -34,11 +37,14 @@ public class GaraConcorso {
 
     private Integer massimoPartecipanti;
     
+    @Enumerated(EnumType.STRING)
+    private Categorie categoria;
     
     private Genere genereGara;
     
-    @OneToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     List<Atleta> partecipanti;
+    
     
     @Column(name="classifica_generale")
     @OneToMany

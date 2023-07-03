@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import com.github.javafaker.Faker;
 import com.hans.entity.Atleta;
 import com.hans.entity.Evento;
+import com.hans.entity.GaraConcorso;
 import com.hans.entity.GaraCorsa;
 import com.hans.entity.Indirizzo;
 import com.hans.entity.Societa;
@@ -27,6 +28,7 @@ import com.hans.service.AtletaService;
 import com.hans.service.AuthService;
 import com.hans.service.ComuneService;
 import com.hans.service.EventoService;
+import com.hans.service.GaraConcorsoService;
 import com.hans.service.GaraCorsaService;
 import com.hans.service.IndirizzoService;
 import com.hans.service.SocietaService;
@@ -42,6 +44,8 @@ public class CrezioneFakeDatiRunner implements CommandLineRunner{
 	@Autowired AllenatoreService allenatoreService;
 	
 	@Autowired GaraCorsaService garaCorsaService;
+
+	@Autowired GaraConcorsoService garaConcorsoService;
 	
 	@Autowired EventoService eventoService; 
 	
@@ -95,6 +99,17 @@ public class CrezioneFakeDatiRunner implements CommandLineRunner{
 		lista2.add(atletaService.cercaAtletaConId(5l));
 		lista2.add(atletaService.cercaAtletaConId(1l));
 		garaCorsaService.iscriviAtleta(1l, lista2);
+
+		List<Atleta> lista3=new ArrayList<Atleta>();
+		lista3.add(atletaService.cercaAtletaConId(1l));
+		lista3.add(atletaService.cercaAtletaConId(2l));
+		lista3.add(atletaService.cercaAtletaConId(3l));
+		lista3.add(atletaService.cercaAtletaConId(4l));
+		lista3.add(atletaService.cercaAtletaConId(5l));
+		lista3.add(atletaService.cercaAtletaConId(6l));
+		lista3.add(atletaService.cercaAtletaConId(7l));
+		garaConcorsoService.iscriviAtleta(1l, lista3);
+
 	}
 
 
@@ -191,9 +206,21 @@ public class CrezioneFakeDatiRunner implements CommandLineRunner{
 			gCM.setMassimoPartecipanti(10);
 			//listaCorse.add(garaCorsaService.salvaGaraCorsa(gCM));
 		
+
+			List<GaraConcorso> listaConcorsi= new ArrayList<GaraConcorso>();
+
+			GaraConcorso g1=new GaraConcorso();
+			g1.setGenereGara(Genere.M);
+			g1.setTipo(TipiGare.Salto_lungo);
+			g1.setMassimoPartecipanti(30);
+			g1.setCategoria(Categorie.Assoluti);
+			listaConcorsi.add(garaConcorsoService.salvaGaraConcorso(g1));
+
+
 		Evento evento=new Evento();
 		evento.setCodice(t);
 		evento.setListaGareCorse(listaCorse);
+		evento.setListaGareConcorsi(listaConcorsi);
 		evento.setNomeEvento("Trofeo Pratizzoli");
 		System.out.println(eventoService.salvaEvento(evento));
 		

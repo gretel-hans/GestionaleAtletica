@@ -12,6 +12,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import com.github.javafaker.Faker;
+import com.hans.entity.Atleta;
 import com.hans.entity.Evento;
 import com.hans.entity.GaraCorsa;
 import com.hans.entity.Indirizzo;
@@ -64,8 +65,9 @@ public class CrezioneFakeDatiRunner implements CommandLineRunner{
 			creaAtleti();
 		}
 		
-		creaEvento();
-		
+		if(eventoService.cercaTuttiEventi().size()==0){
+			creaEvento();
+		}
 		
 	
 		
@@ -161,7 +163,7 @@ public class CrezioneFakeDatiRunner implements CommandLineRunner{
 			GaraCorsa gCM=new GaraCorsa();
 			gCM.setGenereGara(Genere.M);
 			gCM.setTipo(TipiGare.Velocita_100m);
-			gCM.setMassimoPartecipanti(5);
+			gCM.setMassimoPartecipanti(10);
 			listaCorse.add(garaCorsaService.salvaGaraCorsa(gCM));
 			garaCorsaService.iscriviAtleta(listaCorse.get(1).getId(), atletaService.cercaTuttiAtleti());
 		

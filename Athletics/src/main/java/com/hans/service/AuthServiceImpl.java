@@ -159,7 +159,7 @@ public class AuthServiceImpl implements AuthService {
     	 atleta.setEmail(registerDto.getEmail());
     	 atleta.setPassword(passwordEncoder.encode(registerDto.getPassword()));
     	 atleta.setDateRegistration(LocalDateTime.now());
-    	 atleta.setRole(roleRepository.findByRoleName(ERole.ROLE_ALLENATORE).get());
+    	 atleta.setRole(roleRepository.findByRoleName(ERole.ROLE_ATLETA).get());
 		 atletaService.salvaAtleta(atleta);
 		// System.out.println("atleta creato:\n"+atleta);
 		 

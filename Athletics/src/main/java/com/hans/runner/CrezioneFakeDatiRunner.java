@@ -204,7 +204,7 @@ public class CrezioneFakeDatiRunner implements CommandLineRunner{
 			gCM.setGenereGara(Genere.M);
 			gCM.setTipo(TipiGare.Velocita_100m);
 			gCM.setMassimoPartecipanti(10);
-			//listaCorse.add(garaCorsaService.salvaGaraCorsa(gCM));
+			//listaCorse.add(gCM);
 		
 
 			List<GaraConcorso> listaConcorsi= new ArrayList<GaraConcorso>();
@@ -214,7 +214,7 @@ public class CrezioneFakeDatiRunner implements CommandLineRunner{
 			g1.setTipo(TipiGare.Salto_lungo);
 			g1.setMassimoPartecipanti(30);
 			g1.setCategoria(Categorie.Assoluti);
-			listaConcorsi.add(garaConcorsoService.salvaGaraConcorso(g1));
+			listaConcorsi.add(g1);
 
 
 		Evento evento=new Evento();

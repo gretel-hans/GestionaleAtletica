@@ -13,11 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hans.entity.Allenatore;
-import com.hans.entity.Atleta;
 import com.hans.entity.Evento;
-import com.hans.service.AllenatoreService;
-import com.hans.service.AtletaService;
 import com.hans.service.EventoService;
 
 @RestController

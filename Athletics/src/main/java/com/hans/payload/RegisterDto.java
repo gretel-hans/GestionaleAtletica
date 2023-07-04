@@ -5,7 +5,6 @@ import java.util.Set;
 
 import com.hans.entity.Indirizzo;
 import com.hans.entity.Societa;
-import com.hans.enums.Genere;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

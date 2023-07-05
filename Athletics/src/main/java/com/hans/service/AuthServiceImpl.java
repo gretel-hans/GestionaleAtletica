@@ -79,9 +79,6 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public String register(RegisterDto registerDto) {
     	
- 
-    	
-
         // add check for username exists in database
         if(userRepository.existsByUsername(registerDto. getUsername())){
             throw new MyAPIException(HttpStatus.BAD_REQUEST, "Username is already exists!.");
@@ -118,7 +115,6 @@ public class AuthServiceImpl implements AuthService {
         }
         
         user.setRoles(roles);
-        //System.out.println(user);
         userRepository.save(user);
 
         return "User registered successfully!.";
@@ -159,10 +155,7 @@ public class AuthServiceImpl implements AuthService {
     	 atleta.setDateRegistration(LocalDateTime.now());
     	 atleta.setRole(roleRepository.findByRoleName(ERole.ROLE_ATLETA).get());
 		 atletaService.salvaAtleta(atleta);
-		// System.out.println("atleta creato:\n"+atleta);
 		 
-		 
-		
 	}
 
 	private void creaAllenatore(RegisterDto registerDto) {
@@ -185,7 +178,6 @@ public class AuthServiceImpl implements AuthService {
 		 allenatore.setDateRegistration(LocalDateTime.now());
 		 allenatore.setRole(roleRepository.findByRoleName(ERole.ROLE_ALLENATORE).get());
 		 allenatoreService.salvaAllenatore(allenatore);
-		// System.out.println("allenatore creato:\n"+allenatore);
 	}
 
 	public ERole getRole(String role) {

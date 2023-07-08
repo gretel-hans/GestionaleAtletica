@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
@@ -8,7 +8,19 @@ const [mostraPass,setMostraPass]=useState(true);
 
 const [datiLogin,setDatiLogin]=useState({username:"",password:""})
 
+const fetchLogin= async()=>{
+  let response=await
+  console.log(datiLogin);
 
+}
+
+const fetchTuttiUtenti=()=>{
+fetch("local")
+}
+
+useEffect(()=>{
+fetchTuttiUtenti()
+},[])
 
 
   return (
@@ -55,7 +67,7 @@ const [datiLogin,setDatiLogin]=useState({username:"",password:""})
                     </div>
                     <button
                       className="btn btn-outline-light btn-lg px-5 mt-4"
-                      onc
+                      onClick={fetchLogin}
                     >
                       Login
                     </button>

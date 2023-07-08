@@ -12,25 +12,8 @@ body{
   height:98vh;
 }
 
-
 #BenvenutoDivOne{
 height:28%;
 border-radius: 15px;
 background-color: rgba(127, 147, 187, 0.38);
-}
-
-
-/* PAGINA DI LOGIN */
-#typeEmailX, #typePasswordX{
-  background-color: transparent;
-  color:white;
-}
-#typeEmailX::placeholder, #typePasswordX::placeholder{
-  font-size: 1.0rem;
-  color:white
-}
-
-.mostraPass{
-  cursor: pointer;
-  font-size: 1.2rem;
 }

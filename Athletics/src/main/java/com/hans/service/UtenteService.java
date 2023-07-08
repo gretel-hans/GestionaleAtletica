@@ -51,6 +51,10 @@ public class UtenteService {
 		}else
 			throw new EntityExistsException("ERRORE!! L'utente cercato non esiste!!");
 	}
+
+	public Utente cercaUtenteConUsername(String username){
+	return db.findByUsername(username).get();
+	}
 	
 	
 	public List<Utente> cercaTuttiUtenti(){

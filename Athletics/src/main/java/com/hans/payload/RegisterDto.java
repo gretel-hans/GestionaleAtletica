@@ -25,7 +25,6 @@ public class RegisterDto {
     private LocalDate birthdate;
     private String email;
     private String password;
-    private String nomeSocieta;
     private Societa societa;
     private Indirizzo indirizzo;
     // Passagio di ruoli dal client (Facoltativo)

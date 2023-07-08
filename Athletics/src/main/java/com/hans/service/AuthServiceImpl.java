@@ -68,11 +68,11 @@ public class AuthServiceImpl implements AuthService {
         				loginDto.getUsername(), loginDto.getPassword()
         		)
         ); 
-    	//System.out.println(authentication);
+    	System.out.println("autenticazione: "+authentication);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String token = jwtTokenProvider.generateToken(authentication);
-       // System.out.println(token);
+       	System.out.println("ecco il token: "+token);
         return token;
     }
 	
@@ -124,7 +124,7 @@ public class AuthServiceImpl implements AuthService {
 		Societa societa= new Societa();
 		Indirizzo i=indirizzoService.salvaInidirzzo(registerDto.getIndirizzo());
 		societa.setIndirizzo(i);
-		societa.setNomeSocieta(registerDto.getNomeSocieta());
+		societa.setName(registerDto.getName());
 		societa.setUsername(registerDto.getUsername());
 		societa.setEmail(registerDto.getEmail());
 		societa.setPassword(passwordEncoder.encode(registerDto.getPassword()));

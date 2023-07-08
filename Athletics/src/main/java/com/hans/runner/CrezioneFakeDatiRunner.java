@@ -123,9 +123,9 @@ public class CrezioneFakeDatiRunner implements CommandLineRunner{
 			Indirizzo indirizzo= indirizzoService.salvaInidirzzo(new Indirizzo(null, fake.address().firstName(),fake.number().numberBetween(1, 99), comuneService.cercaComuneConId(fake.number().numberBetween(1l, 7050l)))); 
 			RegisterDto r= new RegisterDto();
 			r.setIndirizzo(indirizzo);
-			r.setNomeSocieta(fake.company().name());
+			r.setName(fake.company().name());
 			r.setUsername("Usocieta"+i);
-			r.setEmail(r.getNomeSocieta()+"@fidal.com");
+			r.setEmail(r.getName()+"@fidal.com");
 			r.setPassword("Psocieta"+i);
 			Set<String> ruoli= new HashSet<>();
 			ruoli.add("SOCIETA");

@@ -30,7 +30,7 @@ public class Societa {
     private Indirizzo indirizzo;
     
     @Column(name = "nome_societa",nullable = false)
-    private String nomeSocieta;
+    private String name;
 	
     @Column(nullable = false, unique = true)
     private String username;

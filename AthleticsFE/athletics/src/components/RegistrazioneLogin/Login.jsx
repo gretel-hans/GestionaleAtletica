@@ -7,7 +7,6 @@ const Login = () => {
 
   const [datiLogin, setDatiLogin] = useState({ username: "", password: "" });
 
-  const [utenti, setUtenti] = useState([]);
   const [token, setToken] = useState();
   const [counter , setCounter] = useState(0);
 
@@ -45,27 +44,21 @@ const Login = () => {
       console.log("ERRORE !:" + error);
     }
   };
+let u;
+u=sessionStorage.getItem("username")
+console.log(u)
 
-
-  /*
-const fetchTuttiUtenti= async()=>{
-  let response=await fetch("http://localhost:8080/athletics/utenti");
-  let data=await response.json();
-  setUtenti(data);
-  
-}*/
 
   useEffect(() => {
-    console.log("cambiato ")
-    window.location.reload()
-    //fetchTuttiUtenti()
+
   }, [counter]);
+  
+  console.log(sessionStorage.getItem("username")=="null");
 
   return (
     <div>
-
 {
- (sessionStorage.getItem("username")!=null&&(
+ ((sessionStorage.getItem("username")!=="null" && u!==null)&&(
         <div>
                 <section className="vh-100 gradient-custom">
         <div className="container py-5 h-100">
@@ -91,6 +84,7 @@ const fetchTuttiUtenti= async()=>{
                         //setLoggato(!loggato)
                         sessionStorage.setItem("username",null)
                         sessionStorage.setItem("bearerToken",null)
+                        setCounter(counter+1);
                       }}
                     >
                       Cambia account
@@ -110,7 +104,7 @@ const fetchTuttiUtenti= async()=>{
       
 }
 {
-  (sessionStorage.getItem("username")==null&&(
+  ((sessionStorage.getItem("username")==="null"|| u==null) &&(
     <div>
       <section className="vh-100 gradient-custom">
         <div className="container py-5 h-100">
@@ -122,7 +116,8 @@ const fetchTuttiUtenti= async()=>{
               >
                 <div className="card-body p-5 text-center">
                   <div className="mb-md-5 mt-md-4 pb-0">
-                    <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
+                    <h1 className="mb-1">ATHLETIX</h1>
+                    <h2 className="fw-bold mb-3 text-uppercase">Login</h2>
                     <p className="text-white-50 mb-5">
                       Inserisci il tuo username e password
                     </p>

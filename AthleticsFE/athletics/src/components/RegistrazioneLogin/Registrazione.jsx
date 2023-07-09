@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
+import RegistrazioneAtletaAllenatore from "./RegistrazioneAtletaAllenatore.jsx";
+import RegistrazioneSocieta from "./RegistrazioneSocieta.jsx";
 
 const Registrazione = () => {
   /*
@@ -10,9 +12,7 @@ const fetchTuttiUtenti= async()=>{
   setUtenti(data);
   
 }*/
-  let atleta = document.getElementById("atleta");
-  let allenatoreAtleta = document.getElementById("AllenatoreAtleta");
-  let societa = document.getElementById("societa");
+
   const [scelta,setScelta]=useState();
 
   const cambiaScelta=(e)=>{
@@ -39,8 +39,8 @@ setScelta(e.target.value);
                       </p>
 
                       <select
-                        className="form-select"
-                        id="scelta"
+                        className="form-select mx-0-auto"
+                        id="sceltaP"
                         value={scelta}
                         onChange={cambiaScelta}
                       >
@@ -51,9 +51,14 @@ setScelta(e.target.value);
                       </select>
 
                       <button
-                        className="btn btn-outline-light btn-lg px-5 mt-4 mb-5"
+                        className="btn btn-outline-light btn-lg px-5 mt-4 "
                         onClick={() => {
-                            
+                            if(scelta==="atleta"|| scelta==="allenatore" || scelta==="allenatoreAtleta"){
+                              <RegistrazioneAtletaAllenatore/>
+                            }else if(scelta==="societa"){
+                              {console.log("sono entrato in societa")}
+                              <RegistrazioneSocieta/>
+                            }
                           console.log(scelta);
                         }}
                       >

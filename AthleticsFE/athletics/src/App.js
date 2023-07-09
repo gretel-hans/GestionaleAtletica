@@ -1,6 +1,7 @@
 
 import './App.css';
 import './css/Login.css';
+import './css/Registrazione.css';
 import Benvenuto from './components/RegistrazioneLogin/Benvenuto';
 import Registrazione from './components/RegistrazioneLogin/Registrazione';
 import Login from './components/RegistrazioneLogin/Login';

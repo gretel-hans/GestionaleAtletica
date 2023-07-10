@@ -21,8 +21,6 @@ function App() {
         <Route path="/Registrazione" element={<Registrazione/>}></Route>
         <Route path="/Login" element={<Login/>}></Route>
         <Route path="/Homepage" element={<Homepage/>}></Route>
-        <Route path="/Registrazione/p" element={<RegistrazioneAtletaAllenatore/>}></Route>
-        <Route path="/Registrazione/s" element={<RegistrazioneSocieta/>}></Route>
       </Routes>
       </BrowserRouter>
     

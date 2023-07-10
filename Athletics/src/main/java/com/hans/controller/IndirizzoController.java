@@ -24,13 +24,11 @@ public class IndirizzoController {
 	
 	
 	@GetMapping("/comuni")
-	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<List<Comune>> listaComuni() {
 		return new ResponseEntity<>(dbComune.cercaTuttiComuni(),HttpStatus.OK);
 	}
 	
 	@GetMapping("/province")
-	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<List<Provincia>> autenticatedAccess() {
 		return new ResponseEntity<>(dbProvincia.cercaTutteProvince(),HttpStatus.OK);
 	}

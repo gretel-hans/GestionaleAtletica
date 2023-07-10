@@ -44,6 +44,7 @@ setScelta(e.target.value);
                         value={scelta}
                         onChange={cambiaScelta}
                       >
+                        <option>Seleziona tipo</option>
                         <option value="atleta">Atleta</option>
                         <option value="allenatore">Allenatore</option>
                         <option value="allenatoreAtleta">Allenatore e Atleta </option>
@@ -54,10 +55,9 @@ setScelta(e.target.value);
                         className="btn btn-outline-light btn-lg px-5 mt-4 "
                         onClick={() => {
                             if(scelta==="atleta"|| scelta==="allenatore" || scelta==="allenatoreAtleta"){
-                              <RegistrazioneAtletaAllenatore/>
+                              window.location.replace("/Registrazione/p")
                             }else if(scelta==="societa"){
-                              {console.log("sono entrato in societa")}
-                              <RegistrazioneSocieta/>
+                              window.location.replace("/Registrazione/s")
                             }
                           console.log(scelta);
                         }}

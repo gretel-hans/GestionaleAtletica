@@ -9,6 +9,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Homepage from './components/HomePage/Homapage';
+import RegistrazioneAtletaAllenatore from './components/RegistrazioneLogin/RegistrazioneAtletaAllenatore.jsx';
+import RegistrazioneSocieta from './components/RegistrazioneLogin/RegistrazioneSocieta';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route path="/Registrazione" element={<Registrazione/>}></Route>
         <Route path="/Login" element={<Login/>}></Route>
         <Route path="/Homepage" element={<Homepage/>}></Route>
+        <Route path="/Registrazione/p" element={<RegistrazioneAtletaAllenatore/>}></Route>
+        <Route path="/Registrazione/s" element={<RegistrazioneSocieta/>}></Route>
       </Routes>
       </BrowserRouter>
     

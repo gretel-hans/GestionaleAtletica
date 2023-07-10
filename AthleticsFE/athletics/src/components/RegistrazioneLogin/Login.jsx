@@ -15,7 +15,7 @@ const Login = () => {
   let scritta = document.getElementById("scrittaErratiDatiLogin");
 
   const fetchLogin = async () => {
-    console.log(datiLogin);
+    //console.log(datiLogin);
     try {
       let response = await fetch("http://localhost:8080/athletics/login", {
         method: "POST",
@@ -26,7 +26,7 @@ const Login = () => {
       });
       if (response.ok) {
         let token = await response.json();
-        console.log("token valido");
+        //console.log("token valido");
         setToken(token.accessToken);
         sessionStorage.setItem("bearerToken",token.accessToken);
         sessionStorage.setItem("username",token.username);
@@ -46,14 +46,14 @@ const Login = () => {
   };
 let u;
 u=sessionStorage.getItem("username")
-console.log(u)
+//console.log(u)
 
 
   useEffect(() => {
 
   }, [counter]);
   
-  console.log(sessionStorage.getItem("username")=="null");
+  //console.log(sessionStorage.getItem("username")=="null");
 
   return (
     <div>

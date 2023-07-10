@@ -13,11 +13,14 @@ const fetchTuttiUtenti= async()=>{
   
 }*/
 
-  const [scelta,setScelta]=useState();
+  const [scelta, setScelta] = useState();
+  const [mostraRegs, setMostraRegs] = useState(false);
 
-  const cambiaScelta=(e)=>{
-setScelta(e.target.value);
-  }
+  let divScelta=document.getElementById("sceltaOpzione")
+
+  const cambiaScelta = (e) => {
+    setScelta(e.target.value);
+  };
   return (
     <div>
       <div>
@@ -30,6 +33,9 @@ setScelta(e.target.value);
                   style={{ border: "border-radius: 1rem" }}
                 >
                   <div className="card-body p-5 text-center">
+                    <div id="selectOpzione">
+
+                    
                     <div className="mb-md-5 mt-md-4 pb-0">
                       <h2 className="fw-bold mb-2 text-uppercase">
                         Registrazione Athletix
@@ -47,30 +53,42 @@ setScelta(e.target.value);
                         <option>Seleziona tipo</option>
                         <option value="atleta">Atleta</option>
                         <option value="allenatore">Allenatore</option>
-                        <option value="allenatoreAtleta">Allenatore e Atleta </option>
+                        <option value="allenatoreAtleta">
+                          Allenatore e Atleta{" "}
+                        </option>
                         <option value="societa">Società</option>
                       </select>
 
                       <button
                         className="btn btn-outline-light btn-lg px-5 mt-4 "
                         onClick={() => {
-                            if(scelta==="atleta"|| scelta==="allenatore" || scelta==="allenatoreAtleta"){
-                              window.location.replace("/Registrazione/p")
-                            }else if(scelta==="societa"){
-                              window.location.replace("/Registrazione/s")
-                            }
+                          if (
+                            scelta === "atleta" ||
+                            scelta === "allenatore" ||
+                            scelta === "allenatoreAtleta"
+                          ) {
+                            window.location.replace("/Registrazione/p");
+                          } else if (scelta === "societa") {
+                            setMostraRegs(true);
+                          }
                           console.log(scelta);
                         }}
                       >
                         Procedi
                       </button>
                     </div>
-
                     <div>
                       <p className="mb-0">
                         Sei già registrato? <Link to="/Login">Accedi!</Link>
                       </p>
                     </div>
+                    </div>
+                    {mostraRegs && (
+                      <>
+                        <RegistrazioneSocieta />
+                        <h1>Ciaoo</h1>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>

@@ -19,7 +19,6 @@ const RegistrazioneSocieta = (props) => {
       comune: null,
     },
   });
-  const [comuneSelezionato,setComuneSelezionato]=useState();
   const [comuni, setComuni] = useState([]);
 
   const customStyles = {
@@ -142,8 +141,9 @@ const RegistrazioneSocieta = (props) => {
                     />
                   </div>
                 </Col>
-                <Col>
+                <Col className="mb-3 mb-md-0">
                   <Select
+                  placeholder="Seleziona comune..."
                     options={comuni}
                     styles={customStyles}
                     theme={(theme) => ({

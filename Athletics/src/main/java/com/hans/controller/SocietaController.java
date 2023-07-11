@@ -21,14 +21,12 @@ public class SocietaController {
 	@Autowired SocietaService societaService;
 	
 	@GetMapping()
-	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<List<Societa>> cercaTutteSocieta() {
 		return new ResponseEntity<>(societaService.cercaTutteSocieta(),HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
-	@PreAuthorize("isAuthenticated()")
-	public ResponseEntity<Societa> cercaAllenatore(@PathVariable Long id) {
+	public ResponseEntity<Societa> cercaSocietaConId(@PathVariable Long id) {
 		return new ResponseEntity<>(societaService.cercaSocietaConId(id),HttpStatus.OK);
 	}
 

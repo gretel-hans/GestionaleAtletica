@@ -3,20 +3,68 @@ import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Select from "react-select";
 
-const RegistrazioneSocieta = () => {
+const RegistrazioneSocieta = (props) => {
   const [mostraPass, setMostraPass] = useState(true);
-  const [datiRegistrazione, setDatiRegistrazione] = useState({});
+  const [datiRegistrazione, setDatiRegistrazione] = useState({
+    name: "",
+    username: "",
+    email: "",
+    password: "",
+    roles: ["SOCIETA"],
+    indirizzo: {
+      nomeVia: "",
+      civico: "",
+      comune: null,
+    },
+  });
+  const [comuneSelezionato,setComuneSelezionato]=useState();
+  const [comuni, setComuni] = useState([]);
 
-const fetchTuttiComuni= async()=>{
-    let response =fetch('http://localhost:8080/athletics/indirizzi/comuni')
-    let tuttiComuni= await (await response).json();
-}
+  const customStyles = {
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: "black",
+      color: "white",
+    }),
+  };
 
-  useEffect(()=>{
+  const fetchTuttiComuni = async () => {
+    let response = await fetch(
+      "http://localhost:8080/athletics/indirizzi/comuni"
+    );
+    let tuttiComuni = await response.json();
+
+    const opzioneComune = tuttiComuni.map((comune) => ({
+      value: comune,
+      label: `${comune.nomeComune}`,
+    }));
+    setComuni(opzioneComune);
+  };
+
+  useEffect(() => {
     fetchTuttiComuni();
-  },[])
-  const fetchRegister = () => {};
+  }, []);
+
+  const fetchRegister = async() => {
+    try {
+      let response= await fetch("http://localhost:8080/athletics/register",{
+        method:"POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body:JSON.stringify(datiRegistrazione)
+      });
+      if(response.ok){
+        alert("La tua società è stata registrata con successo! ")
+      }
+      
+    } catch (error) {
+      console.log("ERRORE!! "+error);
+    }
+     
+  };
 
   return (
     <div>
@@ -33,7 +81,7 @@ const fetchTuttiComuni= async()=>{
             </p>
             <Container fluid>
               <Row className="row-cols-1 row-cols-md-2 justify-content-center">
-              <Col >
+                <Col>
                   {" "}
                   <div className="form-outline form-white mb-4">
                     <input
@@ -41,39 +89,13 @@ const fetchTuttiComuni= async()=>{
                       id="nomeSocieta"
                       className="form-control form-control-lg"
                       placeholder="Nome società...."
-                    />
-                  </div>
-                </Col>
-                <Col >
-                  {" "}
-                  <div className="form-outline form-white mb-4">
-                    <input
-                      type="email"
-                      id="indirizzoCivico"
-                      className="form-control form-control-lg"
-                      placeholder="Indirizzo e civico...."
-                    />
-                  </div>
-                </Col>
-                <Col >
-                  {" "}
-                  <div className="form-outline form-white mb-4">
-                    <input
-                      type="email"
-                      id="username"
-                      className="form-control form-control-lg"
-                      placeholder="Username...."
-                    />
-                  </div>
-                </Col>
-                <Col >
-                  {" "}
-                  <div className="form-outline form-white mb-4">
-                    <input
-                      type="email"
-                      id="email"
-                      className="form-control form-control-lg"
-                      placeholder="Email...."
+                      value={datiRegistrazione.name}
+                      onChange={(e) => {
+                        setDatiRegistrazione({
+                          ...datiRegistrazione,
+                          name: e.target.value,
+                        });
+                      }}
                     />
                   </div>
                 </Col>
@@ -81,10 +103,122 @@ const fetchTuttiComuni= async()=>{
                   {" "}
                   <div className="form-outline form-white mb-4">
                     <input
+                      type="email"
+                      id="indirizzo"
+                      className="form-control form-control-lg"
+                      placeholder="Indirizzo...."
+                      value={datiRegistrazione.indirizzo.nomeVia}
+                      onChange={(e) => {
+                        setDatiRegistrazione({
+                          ...datiRegistrazione,
+                          indirizzo: {
+                            ...datiRegistrazione.indirizzo,
+                            nomeVia: e.target.value,
+                          },
+                        });
+                      }}
+                    />
+                  </div>
+                </Col>
+                <Col>
+                  {" "}
+                  <div className="form-outline form-white mb-4">
+                    <input
+                      type="text"
+                      id="civico"
+                      className="form-control form-control-lg"
+                      placeholder="Civico...."
+                      value={datiRegistrazione.indirizzo.civico}
+                      onChange={(e) => {
+                        setDatiRegistrazione({
+                          ...datiRegistrazione,
+                          indirizzo: {
+                            ...datiRegistrazione.indirizzo,
+                            civico: e.target.value,
+                          },
+                        });
+                        //console.log(e.value)
+                      }}
+                    />
+                  </div>
+                </Col>
+                <Col>
+                  <Select
+                    options={comuni}
+                    styles={customStyles}
+                    theme={(theme) => ({
+                      ...theme,
+                      borderRadius: 0,
+                      colors: {
+                        ...theme.colors,
+                        primary25: "hotpink",
+                        primary: "black",
+                      },
+                    })}
+                    //value={datiRegistrazione.indirizzo.comune}
+                    onChange={(e) => {
+                      setDatiRegistrazione({
+                        ...datiRegistrazione,
+                        indirizzo: {
+                          ...datiRegistrazione.indirizzo,
+                          comune: e.value,
+                        },
+                      });
+                    }}
+                  />
+                </Col>
+                <Col>
+                  {" "}
+                  <div className="form-outline form-white mb-4">
+                    <input
+                      type="email"
+                      id="username"
+                      className="form-control form-control-lg"
+                      placeholder="Username...."
+                      value={datiRegistrazione.username}
+                      onChange={(e) => {
+                        setDatiRegistrazione({
+                          ...datiRegistrazione,
+                          username: e.target.value,
+                        });
+                      }}
+                    />
+                  </div>
+                </Col>
+                <Col>
+                  {" "}
+                  <div className="form-outline form-white mb-4">
+                    <input
+                      type="email"
+                      id="email"
+                      className="form-control form-control-lg"
+                      placeholder="Email...."
+                      value={datiRegistrazione.email}
+                      onChange={(e) => {
+                        setDatiRegistrazione({
+                          ...datiRegistrazione,
+                          email: e.target.value,
+                        });
+                      }}
+                    />
+                  </div>
+                </Col>
+                <Col>
+                  {" "}
+                  <div className="form-outline form-white mb-4">
+                    <input
+                    required
                       type={mostraPass ? "password" : "text"}
                       id="password"
                       className="form-control form-control-lg small-text mb-2"
                       placeholder="Password..."
+                      value={datiRegistrazione.password}
+                      onChange={(e) => {
+                        setDatiRegistrazione({
+                          ...datiRegistrazione,
+                          password: e.target.value,
+                        });
+                      }}
                     />
                     <i
                       className="bi bi-eye mt-3 mostraPass"
@@ -100,7 +234,24 @@ const fetchTuttiComuni= async()=>{
 
             <button
               className="btn btn-outline-light btn-lg px-5 mt-4"
-              onClick={fetchRegister}
+              onClick={()=>{
+                let c=0;
+                props.listaUtenti.forEach(utente => {
+                  if(datiRegistrazione.email===utente.email || datiRegistrazione.username===utente.username){
+                    c++;
+                  }
+                });
+                if(c==0){
+                  if (datiRegistrazione.email.length>5&&datiRegistrazione.name.length!==0&&datiRegistrazione.username.length!==0&&datiRegistrazione.password.length!==0&&datiRegistrazione.indirizzo.nomeVia.length!==0&&datiRegistrazione.indirizzo.civico.length!==0&&datiRegistrazione.indirizzo.comune!==null){
+                    console.log("passato")
+                    fetchRegister()
+                  }else{
+                    alert("Riempi tutti i campi!")
+                  }
+                }else{
+                  alert("Username e/o email già esistenti!")
+                }
+              }}
             >
               Registrati
             </button>

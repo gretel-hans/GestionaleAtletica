@@ -1,25 +1,28 @@
 import { Link } from "react-router-dom";
-import Form from "react-bootstrap/Form";
 import Dropdown from "react-bootstrap/Dropdown";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RegistrazioneAtletaAllenatore from "./RegistrazioneAtletaAllenatore.jsx";
 import RegistrazioneSocieta from "./RegistrazioneSocieta.jsx";
 
 const Registrazione = () => {
-  /*
+
+  
+
+const [utenti,setUtenti]=useState([]);
 const fetchTuttiUtenti= async()=>{
   let response=await fetch("http://localhost:8080/athletics/utenti");
   let data=await response.json();
   setUtenti(data);
   
-}*/
-
+}
+useEffect(()=>{
+  fetchTuttiUtenti();
+},[])
   const [scelta, setScelta] = useState();
   const [mostraRegSocieta, setMostraRegSocieta] = useState(false);
   const [mostraRegPersona, setMostraRegPersona] = useState(false);
 
   let divScelta = document.getElementById("selectOpzione");
-  console.log(scelta);
   const cambiaScelta = (e) => {
     setScelta(e.target.value);
   };
@@ -100,12 +103,12 @@ const fetchTuttiUtenti= async()=>{
                     </div>
                     {mostraRegSocieta && (
                       <>
-                        <RegistrazioneSocieta />
+                        <RegistrazioneSocieta listaUtenti={utenti}/>
                       </>
                     )}
                     {mostraRegPersona && (
                       <>
-                        <RegistrazioneAtletaAllenatore />
+                        <RegistrazioneAtletaAllenatore listaUtenti={utenti} tipo={scelta}/>
                       </>
                     )}
                   </div>

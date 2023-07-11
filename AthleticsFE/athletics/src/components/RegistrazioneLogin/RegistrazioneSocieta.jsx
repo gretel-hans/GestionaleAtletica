@@ -57,7 +57,21 @@ const RegistrazioneSocieta = (props) => {
       });
       if(response.ok){
         alert("La tua società è stata registrata con successo! ")
+        let responseLogin= await fetch("http://localhost:8080/athletics/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({username:datiRegistrazione.username,password:datiRegistrazione.password}),
+        });
+        if(responseLogin.ok){
+          let token = await responseLogin.json();
+          sessionStorage.setItem("bearerToken",token.accessToken);
+          sessionStorage.setItem("username",token.username);
+          window.location.replace('/Homepage')
+        }
       }
+
       
     } catch (error) {
       console.log("ERRORE!! "+error);

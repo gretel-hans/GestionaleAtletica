@@ -1,20 +1,20 @@
 import { useState } from "react";
+import Navbar from "./Navbar";
 
 const Homepage=()=>{
-
-
-console.log(sessionStorage.getItem("Username"))
-
-
+//console.log(sessionStorage.getItem("username"))
 
     return(
         <div>
-            {sessionStorage.getItem("Username")==="null"&&(
+            {sessionStorage.getItem("username")===null&&(
                 <div>Non sei loggato per accedere ai contenuti fai il login!</div>
             )}
        
-        {sessionStorage.getItem("Username")!=="null"&&(
-            <div><h1>Benvenuto {sessionStorage.getItem("Username")}!!</h1></div> 
+        {sessionStorage.getItem("username")!==null&&(
+            <div>
+                <Navbar/>
+                <h1>Benvenuto {sessionStorage.getItem("username")}!!</h1>
+                </div> 
         )}
         </div>
     )

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Navbar from "./Navbar";
+import Navbar from "./NavbarAthletix";
 
 const Homepage=()=>{
 //console.log(sessionStorage.getItem("username"))

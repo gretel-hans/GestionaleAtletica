@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.hans.entity.Utente;
+import com.hans.model.UsernameToken;
 import com.hans.repository.UtenteRepository;
+import com.hans.security.JwtTokenProvider;
 
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
@@ -20,6 +22,7 @@ public class UtenteService {
 
 	@Autowired UtenteRepository db;
 	private boolean giaEsistente;
+	@Autowired JwtTokenProvider dbToken;
 	
 	
 	
@@ -55,13 +58,25 @@ public class UtenteService {
 	public Utente cercaUtenteConUsername(String username){
 	return db.findByUsername(username).get();
 	}
+
+	public Utente cercaUtenteConEmail(String email){
+		return db.findByEmail(email).get();
+		}
 	
 	
 	public List<Utente> cercaTuttiUtenti(){
 		return db.findAll();
 	}
 
-	
+	public Utente verificaUtente(UsernameToken ut){
+		String email=dbToken.getUsername(ut.getToken());
+		Utente u=db.findByEmail(email).get();
+		if(email.equalsIgnoreCase(u.getEmail())){
+			return u;
+		}
+		return null;
+	}
+
 	public boolean esisteUtente(Long id) {
 		if(db.existsById(id)) {
 			return true;

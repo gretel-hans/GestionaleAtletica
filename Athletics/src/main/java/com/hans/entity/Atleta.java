@@ -56,6 +56,7 @@ public class Atleta {
     @Column(name = "date_registration")
     private LocalDateTime dateRegistration;
     
+   /* 
    @OneToMany(fetch = FetchType.EAGER)
    @JoinColumn(name="atleta_id")
    List<RisultatoConcorso> risultatiConcorsiAtleta;
@@ -63,7 +64,7 @@ public class Atleta {
    @OneToMany(fetch = FetchType.EAGER)
    @JoinColumn(name="atleta_id")
    List<RisultatoBatteria> risultatiCorseAtleta;
-   
+   */ 
    @ManyToOne
    private Role role;
    

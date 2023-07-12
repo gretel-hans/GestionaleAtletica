@@ -203,7 +203,8 @@ public class CrezioneFakeDatiRunner implements CommandLineRunner{
 			gCM.setGenereGara(Genere.M);
 			gCM.setTipo(TipiGare.Velocita_100m);
 			gCM.setMassimoPartecipanti(10);
-			//listaCorse.add(gCM);
+			gCM.setCategoria(Categorie.Cadetti);
+			listaCorse.add(gCM);
 		
 
 			List<GaraConcorso> listaConcorsi= new ArrayList<GaraConcorso>();
@@ -221,6 +222,7 @@ public class CrezioneFakeDatiRunner implements CommandLineRunner{
 		evento.setListaGareCorse(listaCorse);
 		evento.setListaGareConcorsi(listaConcorsi);
 		evento.setNomeEvento("Trofeo Pratizzoli");
+		evento.setDataEvento(LocalDate.of(2023, 10, 04));
 		System.out.println(eventoService.salvaEvento(evento));
 		
 		

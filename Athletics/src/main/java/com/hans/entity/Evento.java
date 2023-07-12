@@ -1,5 +1,6 @@
 package com.hans.entity;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -40,6 +41,8 @@ public class Evento {
     @ManyToOne
     private Indirizzo luogoGara;
     
+    @Column(name="data_evento")
+    private LocalDate dataEvento;                                      
     
     @ManyToOne
     private Societa organizzatori;

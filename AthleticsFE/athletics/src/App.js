@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Homepage from './components/HomePage/Homapage';
+import CreazioneEventi from './components/Societa/CreazioneEventi';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/Registrazione" element={<Registrazione/>}></Route>
         <Route path="/Login" element={<Login/>}></Route>
         <Route path="/Homepage" element={<Homepage/>}></Route>
+        <Route path="/creaEvento" element={<CreazioneEventi/>}></Route>
       </Routes>
       </BrowserRouter>
     

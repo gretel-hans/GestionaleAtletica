@@ -46,12 +46,12 @@ public class GaraConcorso extends Gara{
     @ManyToMany(fetch = FetchType.EAGER)
     List<Atleta> partecipanti;
     
-    
+    /* 
     @Column(name="classifica_generale")
     @OneToMany
     List<Atleta> classificaGenerale;
     
     @Column(name="classifica_generale")
     @OneToMany
-    List<Serie> listaSerie;
+    List<Serie> listaSerie;*/
 }

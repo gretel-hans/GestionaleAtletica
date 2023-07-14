@@ -11,7 +11,8 @@ const CreazioneEventi = () => {
   const [formConcorsi, setFormConcorsi] = useState(false);
   const [mostraAltroFormConcorsi, setMostraAltroFormConcorsi] = useState(false);
   const [mostraAltroFormCorse, setMostraAltroFormCorse] = useState(false);
-
+  const ConGareConcorso=document.getElementById("ContainerDettagliGareConcorso")
+  const ConGareCorse=document.getElementById("ContainerDettagliGareCorse")
   let gareCorse = [
     { label: "60m", value: "Velocita_60m" },
     { label: "80m", value: "Velocita_80m" },
@@ -72,6 +73,8 @@ const CreazioneEventi = () => {
 
   const [gareConcorsiSelezionti,setGareConcorsiSelezionti]=useState([])
   const [gareCorseSelezionti,setGareCorseSelezionti]=useState([])
+
+
   const customStyles = {
     option: (provided, state) => ({
       ...provided,
@@ -98,8 +101,25 @@ const CreazioneEventi = () => {
     }],
   });
 
-  const [counter,setCounter]=useState(0);
+  const [selezioniGare,setSelezioniGare]=useState({ listaCorse: [{
+    tipo:"",
+    massimoPartecipanti:"",
+    genereGara:"",
+    categoria:""
+  }],
+  listaGareConcorsi: [{
+    tipo:"",
+    massimoPartecipanti:"",
+    genereGara:"",
+    categoria:""
+  }]})
 
+  const [counter,setCounter]=useState(0);
+  const [counterCorse,setCounterCorse]=useState(0);
+
+const fetchEvento= async ()=>{
+  let response = await("http://localhost:8080")
+}
 
   return (
     <>
@@ -174,7 +194,10 @@ const CreazioneEventi = () => {
                                 onClick={() => {
                                   setFormCorse(true);
                                   setFormConcorsi(false);
-                                }}
+                                  //ConGareConcorso.style.display="none"
+                                  if(ConGareConcorso!==null){
+                                    ConGareConcorso.style.display="none"
+                                  }}}
                               >
                                 Gestione lista Gare di Corsa
                               </button>
@@ -185,6 +208,9 @@ const CreazioneEventi = () => {
                                 onClick={() => {
                                   setFormConcorsi(true);
                                   setFormCorse(false);
+                                  if(ConGareCorse!==null){
+                                    ConGareCorse.style.display="none"
+                                  }
                                 }}
                               >
                                 Gestione lista Gare Concorsi
@@ -215,35 +241,41 @@ const CreazioneEventi = () => {
                                     },
                                   })}
                                   onChange={(e)=>{
-                                    console.log(e)
+                                    //console.log(e)
                                   setGareConcorsiSelezionti(e)
                                   }}
                                   value={gareConcorsiSelezionti}
                                 />
                                 <Link onClick={()=>{
                                   setFormConcorsi(false)
-                                  setMostraAltroFormConcorsi(false)
+                                  ConGareConcorso.style.display="none"
                                 }}> Chiudi</Link>
                               </Col>
                               <Col>
                               <i className="bi bi-plus-square-fill plusEvento" onClick={()=>{
                                 setMostraAltroFormConcorsi(true)
-                                console.log(counter)
+                                //console.log(counter)
                                 setCounter(counter+1)
-                                }}></i>
+                                //ConGareCorse.style.display="none"
+                                }}>
+                                  &nbsp;Aggiungi gara</i><br/>
+                                {counter>0?(<Link onClick={()=>{
+                                  ConGareConcorso.style.display="block"
+                                }}> Mostra dettagli gare concorsi</Link>):null}
+                                
                               </Col>
                             </Row>
                           </Container>
                         )}
                         
                         {mostraAltroFormConcorsi&&(<>
-                        <Container>
-                          
+                        <Container id="ContainerDettagliGareConcorso" >
+                          <h3>Dettagli gare di Concorso</h3>
                         {
                           Array.from({length:counter},(elemento,index)=>{
                             return (
-                              <Row key={index} className="row-cols-2 row-cols-md-4">
-                              <Col>
+                              <Row key={index} className="row-cols-2 row-cols-md-4 mb-3 d-flex align-items-center">
+                              <Col className="mb-2 mb-md-0">
                               <Select
                                   name="concorsi"
                                   options={gareConcorsiSelezionti}
@@ -260,15 +292,15 @@ const CreazioneEventi = () => {
                                       primary: "black",
                                     },
                                   })}
-                                  
-                                  onChange={(e)=>{
+                                 onChange={(e)=>{
                                     let updatedGareConcorsi=[...evento.listaGareConcorsi]
                                     updatedGareConcorsi[index]={tipo:e.value}
                                   setEvento({...evento,listaGareConcorsi:updatedGareConcorsi})
+                                  //console.log(selezioniGare.listaGareConcorsi[index])
                                   }}
-                                />
+                                   />
                               </Col>
-                              <Col>
+                              <Col className="mb-2 mb-md-0">
                               <Select
                                   name="concorsi"
                                   options={categorie}
@@ -333,7 +365,10 @@ const CreazioneEventi = () => {
                               )
                           })
                         }
-                          <Link onClick={()=>setMostraAltroFormConcorsi(false)}>Chiudi Info Gare</Link>
+                          <Link onClick={()=>{
+                            //setMostraAltroFormConcorsi(false)
+                            ConGareConcorso.style.display="none"
+                            }}>Chiudi Info Gare</Link>
                         
                       </Container>
                          </>)}
@@ -359,26 +394,138 @@ const CreazioneEventi = () => {
                                     },
                                   })}
                                   onChange={(e)=>{
-                                    console.log(e)
+                                    //console.log(e)
                                   setGareCorseSelezionti(e)
                                   }}
                                   value={gareCorseSelezionti}
                                 />
-                                <Link onClick={()=>setFormCorse(false)}> Chiudi</Link>
+                                <Link onClick={()=>{
+                                  setFormCorse(false)
+                                  ConGareCorse.style.display="none"
+                                  }}> Chiudi</Link>
                               </Col>
                               <Col>
-                              <i className="bi bi-plus-square-fill plusEvento"></i>
+                              <i className="bi bi-plus-square-fill plusEvento" onClick={()=>{
+                                setMostraAltroFormCorse(true)
+                                setCounterCorse(counterCorse+1)
+                                //ConGareConcorso.style.display="none"
+                              }}>
+                                 &nbsp;Aggiungi gara</i><br/>
+                                 {counterCorse>0?(<Link onClick={()=>{
+                                  ConGareCorse.style.display="block"
+                                }}> Mostra dettagli gare corse</Link>):null}
                               </Col>
                             </Row>
                           </Container>
                         )}
 
-
+{mostraAltroFormCorse&&(<>
+                        <Container id="ContainerDettagliGareCorse" >
+                          <h3>Dettagli gare di Corsa</h3>
+                        {
+                          Array.from({length:counterCorse},(elemento,index)=>{
+                            return (
+                              <Row key={index} className="row-cols-2 row-cols-md-4 mb-3 d-flex align-items-center">
+                              <Col className="mb-2 mb-md-0">
+                              <Select
+                                  name="concorsi"
+                                  options={gareCorseSelezionti}
+                                  className="basic-multi-select"
+                                  classNamePrefix="select"
+                                  placeholder="Seleziona gara"
+                                  styles={customStyles}
+                                  theme={(theme) => ({
+                                    ...theme,
+                                    borderRadius: 0,
+                                    colors: {
+                                      ...theme.colors,
+                                      primary25: "hotpink",
+                                      primary: "black",
+                                    },
+                                  })}
+                                 onChange={(e)=>{
+                                    let updatedGareCorse=[...evento.listaCorse]
+                                    updatedGareCorse[index]={tipo:e.value}
+                                  setEvento({...evento,listaCorse:updatedGareCorse})
+                                  //console.log(selezioniGare.listaGareConcorsi[index])
+                                  }}
+                                   />
+                              </Col>
+                              <Col className="mb-2 mb-md-0">
+                              <Select
+                                  name="concorsi"
+                                  options={categorie}
+                                  className="basic-multi-select"
+                                  classNamePrefix="select"
+                                  placeholder="Seleziona categoria"
+                                  styles={customStyles}
+                                  theme={(theme) => ({
+                                    ...theme,
+                                    borderRadius: 0,
+                                    colors: {
+                                      ...theme.colors,
+                                      primary25: "hotpink",
+                                      primary: "black",
+                                    },
+                                  })}
+                                  onChange={(e)=>{
+                                    let updatedGareCorse=[...evento.listaCorse]
+                                    updatedGareCorse[index]={...updatedGareCorse[index],categoria:e.value}
+                                  setEvento({...evento,listaCorse:updatedGareCorse})
+                                  }}
+                                  />
+                              </Col>
+                              <Col>
+                              <Select
+                                  name="concorsi"
+                                  options={genere}
+                                  className="basic-multi-select"
+                                  classNamePrefix="select"
+                                  placeholder="Seleziona genere"
+                                  styles={customStyles}
+                                  theme={(theme) => ({
+                                    ...theme,
+                                    borderRadius: 0,
+                                    colors: {
+                                      ...theme.colors,
+                                      primary25: "hotpink",
+                                      primary: "black",
+                                    },
+                                  })}
+                                  onChange={(e)=>{
+                                    let updatedGareCorse=[...evento.listaCorse]
+                                    updatedGareCorse[index]={...updatedGareCorse[index],genereGara:e.value}
+                                  setEvento({...evento,listaCorse:updatedGareCorse})
+                                  }}
+                                  />
+                              </Col>
+                              <Col>
+                              <input
+                                  type="number"
+                                  id="civico"
+                                  placeholder="massimo partecipanti"
+                                  className="form-control form-control-lg"
+                                  onChange={(e)=>{
+                                    let updatedGareCorse=[...evento.listaCorse]
+                                    updatedGareCorse[index]={...updatedGareCorse[index],massimoPartecipanti:e.target.value}
+                                  setEvento({...evento,listaCorse:updatedGareCorse})
+                                  }}
+                                />
+                              </Col>
+                              </Row>
+                              )
+                          })
+                        }
+                          <Link onClick={()=>{
+                            //setMostraAltroFormConcorsi(false)
+                            ConGareCorse.style.display="none"
+                            }}>Chiudi Info Gare</Link>
+                        
+                      </Container>
+                         </>)}
                         <button className="btn btn-outline-light btn-lg px-5 mt-4"
                         onClick={()=>{
-                          for(let i=0;i<gareConcorsiSelezionti.length;i++){
-                            console.log(gareConcorsiSelezionti[i].value)
-                          }
+                          console.log(evento)
                         }}
                         >
                           Crea Evento

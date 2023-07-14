@@ -22,3 +22,8 @@ background-color: rgba(127, 147, 187, 0.38);
   height: 2em;
   border-radius: 1em;
 }
+
+/* SOCIETA */
+.plusEvento{
+  cursor: pointer;
+}

@@ -9,6 +9,9 @@ import Col from "react-bootstrap/Col";
 const CreazioneEventi = () => {
   const [formCorse, setFormCorse] = useState(false);
   const [formConcorsi, setFormConcorsi] = useState(false);
+  const [mostraAltroFormConcorsi, setMostraAltroFormConcorsi] = useState(false);
+  const [mostraAltroFormCorse, setMostraAltroFormCorse] = useState(false);
+
   let gareCorse = [
     { label: "60m", value: "Velocita_60m" },
     { label: "80m", value: "Velocita_80m" },
@@ -45,6 +48,9 @@ const CreazioneEventi = () => {
     { label: "Lancio del Martello", value: "Lancio_martello" },
     { label: "Lancio del Giavellotto", value: "Lancio_giavellotto" },
   ];
+
+  const [gareConcorsiSelezionti,setGareConcorsiSelezionti]=useState([])
+  const [gareCorseSelezionti,setGareCorseSelezionti]=useState([])
   const customStyles = {
     option: (provided, state) => ({
       ...provided,
@@ -90,7 +96,7 @@ const CreazioneEventi = () => {
                           Inserisci i dati dell'evento che vuoi creare
                         </p>
                         <Container fluid>
-                          <Row className="row-cols-1 row-cols-md-2 justify-content-center">
+                          <Row className="row-cols-1 row-cols-md-2 justify-content-center pb-md-4">
                             <Col>
                               {" "}
                               <div className="form-outline form-white mb-4">
@@ -139,7 +145,7 @@ const CreazioneEventi = () => {
                                 Gestione lista Gare di Corsa
                               </button>
                             </Col>
-                            <Col>
+                            <Col className="py-3 py-md-0">
                               <button
                                 className="btn btn-outline-light"
                                 onClick={() => {
@@ -163,6 +169,7 @@ const CreazioneEventi = () => {
                                   options={gareConcorsi}
                                   className="basic-multi-select"
                                   classNamePrefix="select"
+                                  placeholder="Seleziona/ricerca le gare dei concorsi da aggiungere"
                                   styles={customStyles}
                                   theme={(theme) => ({
                                     ...theme,
@@ -173,11 +180,27 @@ const CreazioneEventi = () => {
                                       primary: "black",
                                     },
                                   })}
+                                  onChange={(e)=>{
+                                    console.log(e)
+                                  setGareConcorsiSelezionti(e)
+                                  }}
+                                  value={gareConcorsiSelezionti}
                                 />
+                                <Link onClick={()=>setFormConcorsi(false)}> Chiudi</Link>
+                              </Col>
+                              <Col>
+                              <i className="bi bi-plus-square-fill plusEvento" onClick={()=>{
+                                setMostraAltroFormConcorsi(true)
+                                
+                                }}></i>
                               </Col>
                             </Row>
                           </Container>
                         )}
+                        {mostraAltroFormConcorsi&&(<>
+                          <h1>Ciaoo</h1>
+                          <Link onClick={()=>setMostraAltroFormConcorsi(false)}>Chiudi</Link>
+                         </>)}
                         {formCorse && (
                           <Container fluid>
                             <Row className="row-cols-1 justify-content-center">
@@ -186,15 +209,42 @@ const CreazioneEventi = () => {
                                   isMulti
                                   name="corse"
                                   options={gareCorse}
+                                  placeholder="Seleziona/ricerca le gare di corsa da aggiungere"
                                   className="basic-multi-select"
                                   classNamePrefix="select"
+                                  styles={customStyles}
+                                  theme={(theme) => ({
+                                    ...theme,
+                                    borderRadius: 0,
+                                    colors: {
+                                      ...theme.colors,
+                                      primary25: "hotpink",
+                                      primary: "black",
+                                    },
+                                  })}
+                                  onChange={(e)=>{
+                                    console.log(e)
+                                  setGareCorseSelezionti(e)
+                                  }}
+                                  value={gareCorseSelezionti}
                                 />
+                                <Link onClick={()=>setFormCorse(false)}> Chiudi</Link>
+                              </Col>
+                              <Col>
+                              <i className="bi bi-plus-square-fill plusEvento"></i>
                               </Col>
                             </Row>
                           </Container>
                         )}
 
-                        <button className="btn btn-outline-light btn-lg px-5 mt-4">
+
+                        <button className="btn btn-outline-light btn-lg px-5 mt-4"
+                        onClick={()=>{
+                          for(let i=0;i<gareConcorsiSelezionti.length;i++){
+                            console.log(gareConcorsiSelezionti[i].value)
+                          }
+                        }}
+                        >
                           Crea Evento
                         </button>
 

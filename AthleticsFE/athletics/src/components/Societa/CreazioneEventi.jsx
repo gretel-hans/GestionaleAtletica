@@ -36,6 +36,11 @@ const CreazioneEventi = () => {
     { label: "4000m", value: "MezzoFondo_4000m" },
     { label: "5000m", value: "MezzoFondo_5000m" },
     { label: "10000m", value: "MezzoFondo_10000m" },
+    { label: "Marcia 5km", value: "Marcia_5000m" },
+    { label: "Marcia 10km", value: "Marcia_10000m" },
+    { label: "Marcia 20km", value: "Marcia_20000m" },
+    { label: "Marcia 35km", value: "Marcia_35000m" },
+    { label: "Marcia 50km", value: "Marcia_50000m" },
   ];
   let gareConcorsi = [
     { label: "Salto in Lungo", value: "Salto_lungo" },
@@ -48,6 +53,22 @@ const CreazioneEventi = () => {
     { label: "Lancio del Martello", value: "Lancio_martello" },
     { label: "Lancio del Giavellotto", value: "Lancio_giavellotto" },
   ];
+
+  let categorie = [
+    { label: "Esordienti", value: "Esordienti" },
+    { label: "Ragazzi", value: "Ragazzi" },
+    { label: "Cadetti", value: "Cadetti" },
+    { label: "Allievi", value: "Allievi" },
+    { label: "Juniores", value: "Juniores" },
+    { label: "Promesse", value: "Promesse" },
+    { label: "Seniores", value: "Seniores" },
+    { label: "Master", value: "Master" },
+    { label: "Assoluti", value: "Assoluti" },
+  ]
+
+  let genere = [
+    { label: "Uomini", value: "M" },
+    { label: "Donne", value: "F" },]
 
   const [gareConcorsiSelezionti,setGareConcorsiSelezionti]=useState([])
   const [gareCorseSelezionti,setGareCorseSelezionti]=useState([])
@@ -63,9 +84,22 @@ const CreazioneEventi = () => {
     codice: sessionStorage.getItem("bearerToken"),
     nomeEvento: "",
     dataEvento: "",
-    listaCorse: [],
-    listaGareConcorsi: [],
+    listaCorse: [{
+      tipo:"",
+      massimoPartecipanti:"",
+      genereGara:"",
+      categoria:""
+    }],
+    listaGareConcorsi: [{
+      tipo:"",
+      massimoPartecipanti:"",
+      genereGara:"",
+      categoria:""
+    }],
   });
+
+  const [counter,setCounter]=useState(0);
+
 
   return (
     <>
@@ -84,7 +118,7 @@ const CreazioneEventi = () => {
           <section className="vh-100 gradient-custom">
             <div className="container h-100">
               <div className="row d-flex justify-content-center h-100">
-                <div className="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div className="col-12 col-md-10">
                   <h1 className="mt-2">Benvenuto nella creazione di Eventi!</h1>
                   <div
                     className="card bg-dark text-white"
@@ -186,20 +220,122 @@ const CreazioneEventi = () => {
                                   }}
                                   value={gareConcorsiSelezionti}
                                 />
-                                <Link onClick={()=>setFormConcorsi(false)}> Chiudi</Link>
+                                <Link onClick={()=>{
+                                  setFormConcorsi(false)
+                                  setMostraAltroFormConcorsi(false)
+                                }}> Chiudi</Link>
                               </Col>
                               <Col>
                               <i className="bi bi-plus-square-fill plusEvento" onClick={()=>{
                                 setMostraAltroFormConcorsi(true)
-                                
+                                console.log(counter)
+                                setCounter(counter+1)
                                 }}></i>
                               </Col>
                             </Row>
                           </Container>
                         )}
+                        
                         {mostraAltroFormConcorsi&&(<>
-                          <h1>Ciaoo</h1>
-                          <Link onClick={()=>setMostraAltroFormConcorsi(false)}>Chiudi</Link>
+                        <Container>
+                          
+                        {
+                          Array.from({length:counter},(elemento,index)=>{
+                            return (
+                              <Row key={index} className="row-cols-2 row-cols-md-4">
+                              <Col>
+                              <Select
+                                  name="concorsi"
+                                  options={gareConcorsiSelezionti}
+                                  className="basic-multi-select"
+                                  classNamePrefix="select"
+                                  placeholder="Seleziona gara"
+                                  styles={customStyles}
+                                  theme={(theme) => ({
+                                    ...theme,
+                                    borderRadius: 0,
+                                    colors: {
+                                      ...theme.colors,
+                                      primary25: "hotpink",
+                                      primary: "black",
+                                    },
+                                  })}
+                                  
+                                  onChange={(e)=>{
+                                    let updatedGareConcorsi=[...evento.listaGareConcorsi]
+                                    updatedGareConcorsi[index]={tipo:e.value}
+                                  setEvento({...evento,listaGareConcorsi:updatedGareConcorsi})
+                                  }}
+                                />
+                              </Col>
+                              <Col>
+                              <Select
+                                  name="concorsi"
+                                  options={categorie}
+                                  className="basic-multi-select"
+                                  classNamePrefix="select"
+                                  placeholder="Seleziona categoria"
+                                  styles={customStyles}
+                                  theme={(theme) => ({
+                                    ...theme,
+                                    borderRadius: 0,
+                                    colors: {
+                                      ...theme.colors,
+                                      primary25: "hotpink",
+                                      primary: "black",
+                                    },
+                                  })}
+                                  onChange={(e)=>{
+                                    let updatedGareConcorsi=[...evento.listaGareConcorsi]
+                                    updatedGareConcorsi[index]={...updatedGareConcorsi[index],categoria:e.value}
+                                  setEvento({...evento,listaGareConcorsi:updatedGareConcorsi})
+                                  }}
+                                  />
+                              </Col>
+                              <Col>
+                              <Select
+                                  name="concorsi"
+                                  options={genere}
+                                  className="basic-multi-select"
+                                  classNamePrefix="select"
+                                  placeholder="Seleziona genere"
+                                  styles={customStyles}
+                                  theme={(theme) => ({
+                                    ...theme,
+                                    borderRadius: 0,
+                                    colors: {
+                                      ...theme.colors,
+                                      primary25: "hotpink",
+                                      primary: "black",
+                                    },
+                                  })}
+                                  onChange={(e)=>{
+                                    let updatedGareConcorsi=[...evento.listaGareConcorsi]
+                                    updatedGareConcorsi[index]={...updatedGareConcorsi[index],genereGara:e.value}
+                                  setEvento({...evento,listaGareConcorsi:updatedGareConcorsi})
+                                  }}
+                                  />
+                              </Col>
+                              <Col>
+                              <input
+                                  type="number"
+                                  id="civico"
+                                  placeholder="massimo partecipanti"
+                                  className="form-control form-control-lg"
+                                  onChange={(e)=>{
+                                    let updatedGareConcorsi=[...evento.listaGareConcorsi]
+                                    updatedGareConcorsi[index]={...updatedGareConcorsi[index],massimoPartecipanti:e.target.value}
+                                  setEvento({...evento,listaGareConcorsi:updatedGareConcorsi})
+                                  }}
+                                />
+                              </Col>
+                              </Row>
+                              )
+                          })
+                        }
+                          <Link onClick={()=>setMostraAltroFormConcorsi(false)}>Chiudi Info Gare</Link>
+                        
+                      </Container>
                          </>)}
                         {formCorse && (
                           <Container fluid>

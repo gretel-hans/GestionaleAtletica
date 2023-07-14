@@ -7,4 +7,5 @@ public enum TipiGare {
 	Salto_lungo,Salto_triplo,Salto_alto,Salto_asta,
 	MezzoFondo_800m,MezzoFondo_1000m,MezzoFondo_1500m,MezzoFondo_2000m,MezzoFondo_3000m,MezzoFondo_5000m,MezzoFondo_10000m,
 	Lancio_peso,Lancio_vortex,Lancio_disco,Lancio_martello,Lancio_giavellotto,
+	Marcia_5000m,Marcia_10000m,Marcia_20000m,Marcia_35000m,Marcia_50000m,
 }

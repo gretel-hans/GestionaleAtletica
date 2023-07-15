@@ -87,7 +87,7 @@ const CreazioneEventi = () => {
     codice: sessionStorage.getItem("bearerToken"),
     nomeEvento: "",
     dataEvento: "",
-    listaCorse: [{
+    listaGareCorse: [{
       tipo:"",
       massimoPartecipanti:"",
       genereGara:"",
@@ -101,7 +101,7 @@ const CreazioneEventi = () => {
     }],
   });
 
-  const [selezioniGare,setSelezioniGare]=useState({ listaCorse: [{
+  const [selezioniGare,setSelezioniGare]=useState({ listaGareCorse: [{
     tipo:"",
     massimoPartecipanti:"",
     genereGara:"",
@@ -118,7 +118,18 @@ const CreazioneEventi = () => {
   const [counterCorse,setCounterCorse]=useState(0);
 
 const fetchEvento= async ()=>{
-  let response = await("http://localhost:8080")
+  let response = await fetch("http://localhost:8080/athletics/eventi",{
+    method:"POST",
+    headers:{
+      Authorization:"Bearer "+sessionStorage.getItem("bearerToken"),
+      'Content-Type': 'application/json',
+    },
+    body:JSON.stringify(evento),
+  });
+  if(response.ok){
+    alert("Evento creato con successo!")
+    window.location.replace("/Homepage")
+  }
 }
 
   return (
@@ -444,9 +455,9 @@ const fetchEvento= async ()=>{
                                     },
                                   })}
                                  onChange={(e)=>{
-                                    let updatedGareCorse=[...evento.listaCorse]
+                                    let updatedGareCorse=[...evento.listaGareCorse]
                                     updatedGareCorse[index]={tipo:e.value}
-                                  setEvento({...evento,listaCorse:updatedGareCorse})
+                                  setEvento({...evento,listaGareCorse:updatedGareCorse})
                                   //console.log(selezioniGare.listaGareConcorsi[index])
                                   }}
                                    />
@@ -469,9 +480,9 @@ const fetchEvento= async ()=>{
                                     },
                                   })}
                                   onChange={(e)=>{
-                                    let updatedGareCorse=[...evento.listaCorse]
+                                    let updatedGareCorse=[...evento.listaGareCorse]
                                     updatedGareCorse[index]={...updatedGareCorse[index],categoria:e.value}
-                                  setEvento({...evento,listaCorse:updatedGareCorse})
+                                  setEvento({...evento,listaGareCorse:updatedGareCorse})
                                   }}
                                   />
                               </Col>
@@ -493,9 +504,9 @@ const fetchEvento= async ()=>{
                                     },
                                   })}
                                   onChange={(e)=>{
-                                    let updatedGareCorse=[...evento.listaCorse]
+                                    let updatedGareCorse=[...evento.listaGareCorse]
                                     updatedGareCorse[index]={...updatedGareCorse[index],genereGara:e.value}
-                                  setEvento({...evento,listaCorse:updatedGareCorse})
+                                  setEvento({...evento,listaGareCorse:updatedGareCorse})
                                   }}
                                   />
                               </Col>
@@ -506,9 +517,9 @@ const fetchEvento= async ()=>{
                                   placeholder="massimo partecipanti"
                                   className="form-control form-control-lg"
                                   onChange={(e)=>{
-                                    let updatedGareCorse=[...evento.listaCorse]
+                                    let updatedGareCorse=[...evento.listaGareCorse]
                                     updatedGareCorse[index]={...updatedGareCorse[index],massimoPartecipanti:e.target.value}
-                                  setEvento({...evento,listaCorse:updatedGareCorse})
+                                  setEvento({...evento,listaGareCorse:updatedGareCorse})
                                   }}
                                 />
                               </Col>
@@ -525,7 +536,11 @@ const fetchEvento= async ()=>{
                          </>)}
                         <button className="btn btn-outline-light btn-lg px-5 mt-4"
                         onClick={()=>{
-                          console.log(evento)
+                          if((evento.nomeEvento&&evento.dataEvento)!==""&&(gareCorseSelezionti.length&&gareConcorsiSelezionti.length)>1){
+                            fetchEvento()
+                          }else {
+                            alert("Compila tutti i campi e inserisci almeno due gare di corsa e concorso!")
+                          }
                         }}
                         >
                           Crea Evento

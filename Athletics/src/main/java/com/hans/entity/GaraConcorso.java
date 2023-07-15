@@ -41,6 +41,7 @@ public class GaraConcorso extends Gara{
     @Enumerated(EnumType.STRING)
     private Categorie categoria;
     
+    @Enumerated(EnumType.STRING)
     private Genere genereGara;
     
     @ManyToMany(fetch = FetchType.EAGER)

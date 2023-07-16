@@ -101,19 +101,6 @@ const CreazioneEventi = () => {
     }],
   });
 
-  const [selezioniGare,setSelezioniGare]=useState({ listaGareCorse: [{
-    tipo:"",
-    massimoPartecipanti:"",
-    genereGara:"",
-    categoria:""
-  }],
-  listaGareConcorsi: [{
-    tipo:"",
-    massimoPartecipanti:"",
-    genereGara:"",
-    categoria:""
-  }]})
-
   const [counter,setCounter]=useState(0);
   const [counterCorse,setCounterCorse]=useState(0);
 
@@ -536,7 +523,7 @@ const fetchEvento= async ()=>{
                          </>)}
                         <button className="btn btn-outline-light btn-lg px-5 mt-4"
                         onClick={()=>{
-                          if((evento.nomeEvento&&evento.dataEvento)!==""&&(gareCorseSelezionti.length&&gareConcorsiSelezionti.length)>1){
+                          if((evento.nomeEvento&&evento.dataEvento)!==""&&(evento.listaGareConcorsi.length&&evento.listaGareCorse.length)>1){
                             fetchEvento()
                           }else {
                             alert("Compila tutti i campi e inserisci almeno due gare di corsa e concorso!")

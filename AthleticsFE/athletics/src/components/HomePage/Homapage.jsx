@@ -2,8 +2,7 @@ import { useState } from "react";
 import NavbarAthletix from "./NavbarAthletix";
 
 const Homepage=()=>{
-//console.log(sessionStorage.getItem("username"))
-
+    
     return(
         <div>
             {(sessionStorage.getItem("username")===null || sessionStorage.getItem("username")==="null" )&&(

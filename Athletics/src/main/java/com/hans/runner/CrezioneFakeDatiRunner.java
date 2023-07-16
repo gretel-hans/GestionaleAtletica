@@ -74,10 +74,13 @@ public class CrezioneFakeDatiRunner implements CommandLineRunner{
 		}
 		
 		iscriviAtleti();
+
+
 	
 	}
 
 
+	
 
 
 
@@ -159,7 +162,7 @@ public class CrezioneFakeDatiRunner implements CommandLineRunner{
 	}
 	
 	private void creaAtleti() {
-		for(int i=1; i<31;i++) {
+		for(int i=1; i<80;i++) {
 			Faker fake= Faker.instance(new Locale("it-IT"));
 			
 			RegisterDto r= new RegisterDto();

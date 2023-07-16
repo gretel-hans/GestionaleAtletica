@@ -77,6 +77,9 @@ const verificaRuoli=(ruoli)=>{
               {societa&&(
                 <Link to="/creaEvento" className="nav-link">Crea Evento</Link>
               )}
+              {allenatore&&(
+                <Link to="/IscrizioniGare" className="nav-link">Effettua iscrizioni</Link>
+              )}
               <Nav.Link href="#link">Link</Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>

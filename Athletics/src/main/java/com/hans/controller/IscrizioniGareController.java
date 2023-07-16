@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hans.entity.GaraConcorso;
 import com.hans.entity.GaraCorsa;
+import com.hans.model.IscrizioneGaraConcorso;
 import com.hans.model.IscrizioneGaraCorsa;
 import com.hans.service.GaraConcorsoService;
 import com.hans.service.GaraCorsaService;
@@ -44,8 +45,8 @@ public class IscrizioniGareController {
 
 	@PostMapping("/gareConcorsi")
 	@PreAuthorize("hasRole('ALLENATORE')")
-	public ResponseEntity<GaraConcorso> iscriviAtletiGaraConcorso(@RequestBody IscrizioneGaraCorsa g) {
-		return new ResponseEntity<>(garaConcorsoService.iscriviAtleta(g.getGaraCorsa().getId(), g.getAtletiPartecipanti()),HttpStatus.CREATED);
+	public ResponseEntity<GaraConcorso> iscriviAtletiGaraConcorso(@RequestBody IscrizioneGaraConcorso g) {
+		return new ResponseEntity<>(garaConcorsoService.iscriviAtleta(g.getGaraConcorso().getId(), g.getAtletiPartecipanti()),HttpStatus.CREATED);
 	}
 
 }

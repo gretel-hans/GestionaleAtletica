@@ -15,5 +15,5 @@ import lombok.NoArgsConstructor;
 public  class IscrizioneGaraConcorso {
 
 	private List<Atleta> atletiPartecipanti;
-	private GaraConcorso garaCorsa;
+	private GaraConcorso garaConcorso;
 }

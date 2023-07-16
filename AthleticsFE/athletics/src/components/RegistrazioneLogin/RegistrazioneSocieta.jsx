@@ -238,9 +238,6 @@ const RegistrazioneSocieta = (props) => {
                       className="bi bi-eye mt-3 mostraPass"
                       onClick={() => setMostraPass(!mostraPass)}
                     ></i>
-                    <p id="scrittaErratiDatiLogin">
-                      Username e/o password errati!
-                    </p>
                   </div>
                 </Col>
               </Row>

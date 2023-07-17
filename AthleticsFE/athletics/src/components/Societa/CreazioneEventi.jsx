@@ -19,7 +19,7 @@ const CreazioneEventi = () => {
     { label: "100m", value: "Velocita_100m" },
     { label: "150m", value: "Velocita_150m" },
     { label: "200m", value: "Velocita_200m" },
-    { label: "300m", value: "Velocita_100m" },
+    { label: "300m", value: "Velocita_300m" },
     { label: "400m", value: "Velocita_400m" },
     { label: "4x100m", value: "Staffetta_4x100" },
     { label: "4x200m", value: "Staffetta_4x200" },

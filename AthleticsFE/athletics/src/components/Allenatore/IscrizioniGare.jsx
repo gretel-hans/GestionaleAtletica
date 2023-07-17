@@ -13,7 +13,7 @@ const IscrizioniGare = () => {
     "Velocita_100m",
     "Velocita_150m",
     "Velocita_200m",
-    "Velocita_100m",
+    "Velocita_300m",
     "Velocita_400m",
     "Staffetta_4x100",
     "Staffetta_4x200",
@@ -161,8 +161,8 @@ const IscrizioniGare = () => {
                     >
                       <div className="card-body md-p-5 text-center">
                         <div className="mb-md-5 mt-md-4 pb-0">
-                          <p className="text-white-50 mb-5">
-                            Inserisci i dati dell'evento che vuoi creare
+                          <p className="text-white-50 mb-4">
+                            Inserisci i dati relativi alle iscrizioni
                           </p>
                           <Select
                             name="concorsi"

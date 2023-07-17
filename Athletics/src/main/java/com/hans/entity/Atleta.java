@@ -1,7 +1,6 @@
 package com.hans.entity;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import com.hans.enums.Genere;
 import com.hans.security.PasswordConverter;

@@ -81,7 +81,6 @@ u=sessionStorage.getItem("username")
                     <button
                       className="btn btn-outline-light btn-lg px-5 mt-4"
                       onClick={()=>{
-                        //setLoggato(!loggato)
                         sessionStorage.setItem("username",null)
                         sessionStorage.setItem("bearerToken",null)
                         setCounter(counter+1);

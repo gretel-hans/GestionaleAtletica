@@ -10,9 +10,15 @@ const Registrazione = () => {
 
 const [utenti,setUtenti]=useState([]);
 const fetchTuttiUtenti= async()=>{
-  let response=await fetch("http://localhost:8080/athletics/utenti");
-  let data=await response.json();
-  setUtenti(data);
+  try {
+    let response=await fetch("http://localhost:8080/athletics/utenti");
+    if(response.ok){
+      let data=await response.json();
+      setUtenti(data);
+    }
+  } catch (error) {
+    console.log("ERRORE! Durante il caricamento di tutti gli utenti")
+  }
   
 }
 useEffect(()=>{

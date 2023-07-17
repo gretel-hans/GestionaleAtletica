@@ -11,6 +11,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Homepage from './components/HomePage/Homapage';
 import CreazioneEventi from './components/Societa/CreazioneEventi';
 import IscrizioniGare from './components/Allenatore/IscrizioniGare';
+import RicercaEvento from './components/Ricerche/RicercaEvento';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/Homepage" element={<Homepage/>}/>
         <Route path="/creaEvento" element={<CreazioneEventi/>}/>
         <Route path="/IscrizioniGare" element={<IscrizioniGare/>}/>
+        <Route path="/ricercaEventi" element={<RicercaEvento/>}/>
       </Routes>
       </BrowserRouter>
     

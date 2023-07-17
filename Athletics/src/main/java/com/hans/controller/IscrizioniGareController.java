@@ -24,19 +24,7 @@ public class IscrizioniGareController {
 	@Autowired GaraCorsaService garaCorsaService;
 
 	@Autowired GaraConcorsoService garaConcorsoService;
-	/*
-	@GetMapping()
-	@PreAuthorize("isAuthenticated()")
-	public ResponseEntity<List<Evento>> cercaTuttiEventi() {
-		return new ResponseEntity<>(eventoService.cercaTuttiEventi(),HttpStatus.OK);
-	}
-	
-	@GetMapping("/{id}")
-	@PreAuthorize("isAuthenticated()")
-	public ResponseEntity<Evento> cercaEvento(@PathVariable Long id) {
-		return new ResponseEntity<>(eventoService.cercaEventoConId(id),HttpStatus.OK);
-	}
-	 */
+
 	@PostMapping("/gareCorse")
 	@PreAuthorize("hasRole('ALLENATORE')")
 	public ResponseEntity<GaraCorsa> iscriviAtletiGaraCorsa(@RequestBody IscrizioneGaraCorsa g) {

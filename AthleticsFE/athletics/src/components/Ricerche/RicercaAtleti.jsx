@@ -1,4 +1,8 @@
 const RicercaAtleti=({listaAtleti})=>{
+
+  let atletiLive=[...listaAtleti]
+
+
     console.log(listaAtleti)
     return(
         <>

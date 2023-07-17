@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -46,7 +47,10 @@ public class Utente {
     @Column(nullable = false)
     private String password;
 
-    
+	private String cognome;
+
+	@ManyToOne
+	private Societa societa;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
@@ -54,11 +58,7 @@ public class Utente {
     )
     private Set<Role> roles = new HashSet<>();
     
-	public Utente(String username, String nome, String email) {
-		this.username = username;
-		this.nome = nome;
-		this.email = email;
-	}
+
 	
 	
 	

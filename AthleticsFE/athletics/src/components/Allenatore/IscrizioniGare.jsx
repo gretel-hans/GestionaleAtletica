@@ -104,27 +104,33 @@ const IscrizioniGare = () => {
             console.log(data)
         }
     } catch (error) {
-        
+        console.log("ERRORE!! "+error)
     }
   }
 
   const fetchAtleti=async()=>{
-    let response= await fetch("http://localhost:8080/athletics/atleti/cercaAtletiConS",{
-        method:"POST",
-        body:sessionStorage.getItem("bearerToken"),
-        headers:{
-            Authorization:"Bearer "+sessionStorage.getItem("bearerToken"),
-            'Content-Type':"text/plain"
-        }
-    })
-    if(response.ok){
-        let data= await response.json();
-       // console.log(data)
-        const opzioniAtleti=data.map((atleta)=>({
-            value:atleta, label:`${atleta.name} ${atleta.lastname} ${atleta.age} ${atleta.genere}`
-        }));
-        setListaAtleti(opzioniAtleti)
-        
+
+    try {
+      
+      let response= await fetch("http://localhost:8080/athletics/atleti/cercaAtletiConS",{
+          method:"POST",
+          body:sessionStorage.getItem("bearerToken"),
+          headers:{
+              Authorization:"Bearer "+sessionStorage.getItem("bearerToken"),
+              'Content-Type':"text/plain"
+          }
+      })
+      if(response.ok){
+          let data= await response.json();
+         // console.log(data)
+          const opzioniAtleti=data.map((atleta)=>({
+              value:atleta, label:`${atleta.name} ${atleta.lastname} ${atleta.age} ${atleta.genere}`
+          }));
+          setListaAtleti(opzioniAtleti)
+          
+      }
+    } catch (error) {
+      console.log("ERRORE!! "+error)
     }
   }
 

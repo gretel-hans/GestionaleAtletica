@@ -49,7 +49,7 @@ console.log(atleti)
                 <NavbarAthletix/>
                 <Container className="mt-3">
                     <Row className="row-cols-1">
-                        <Col><RicercaAtleti listaAtleti={atleti}/></Col>
+                        <Col></Col>
                         <Col>2</Col>
                         <Col>3</Col>
                     </Row>

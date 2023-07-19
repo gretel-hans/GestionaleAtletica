@@ -12,6 +12,7 @@ import Homepage from './components/HomePage/Homapage';
 import CreazioneEventi from './components/Societa/CreazioneEventi';
 import IscrizioniGare from './components/Allenatore/IscrizioniGare';
 import RicercaEvento from './components/Ricerche/RicercaEvento';
+import RicercaAtleti from './components/Ricerche/RicercaAtleti';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/creaEvento" element={<CreazioneEventi/>}/>
         <Route path="/IscrizioniGare" element={<IscrizioniGare/>}/>
         <Route path="/ricercaEventi" element={<RicercaEvento/>}/>
+        <Route path="/ricercaAtleti" element={<RicercaAtleti/>}/>
       </Routes>
       </BrowserRouter>
     

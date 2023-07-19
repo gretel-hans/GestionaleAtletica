@@ -79,8 +79,9 @@ const verificaRuoli=(ruoli)=>{
               {allenatore&&(
                 <Link to="/IscrizioniGare" className="nav-link">Effettua iscrizioni</Link>
               )}
-              <Nav.Link href="#link">Link</Nav.Link>
-              <Link to="/ricercaEventi" className="nav-link">Ricerca eventi</Link>
+              <Link to="/ricercaEventi" className="nav-link">Eventi</Link>
+              <Link to="/ricercaSocieta" className="nav-link">Società</Link>
+              <Link to="/ricercaAtleti" className="nav-link">Atleti</Link>
 
             </Nav>
           </Navbar.Collapse>

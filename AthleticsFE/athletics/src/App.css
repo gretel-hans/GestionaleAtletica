@@ -29,3 +29,8 @@ background-color: rgba(127, 147, 187, 0.38);
 .plusEvento{
   cursor: pointer;
 }
+
+#ricercaAtletiRow{
+  height: 75vh;
+  overflow: scroll;
+}

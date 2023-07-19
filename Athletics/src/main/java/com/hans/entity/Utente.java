@@ -49,6 +49,8 @@ public class Utente {
 
 	private String cognome;
 
+	private Integer eta;
+
 	@ManyToOne
 	private Societa societa;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)

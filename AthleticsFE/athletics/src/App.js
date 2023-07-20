@@ -13,6 +13,7 @@ import CreazioneEventi from './components/Societa/CreazioneEventi';
 import IscrizioniGare from './components/Allenatore/IscrizioniGare';
 import RicercaEvento from './components/Ricerche/RicercaEvento';
 import RicercaAtleti from './components/Ricerche/RicercaAtleti';
+import RicercaSocieta from './components/Ricerche/RicercaSocieta';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/IscrizioniGare" element={<IscrizioniGare/>}/>
         <Route path="/ricercaEventi" element={<RicercaEvento/>}/>
         <Route path="/ricercaAtleti" element={<RicercaAtleti/>}/>
+        <Route path="/ricercaSocieta" element={<RicercaSocieta/>}/>
       </Routes>
       </BrowserRouter>
     

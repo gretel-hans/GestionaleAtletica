@@ -4,10 +4,11 @@ import NavbarAthletix from "../HomePage/NavbarAthletix";
 import Card from "react-bootstrap/Card";
 
 const RicercaAtleti = () => {
-  let [atleti, setAtleti] = useState([]);
-  let [risultatoAtleti, setRisultatoAtleti] = useState([]);
-  let [inputBarra, setInputBarra] = useState("");
-  const [mostraAtleti,setMostraAtleti]= useState(true);
+  const [atleti, setAtleti] = useState([]);
+  const [risultatoAtleti, setRisultatoAtleti] = useState([]);
+  const [inputBarra, setInputBarra] = useState("");
+  const [nessunRisultato, setNessunRisultato] = useState(false);
+  let risultatoFiltrato=[];
 
   const fetchAtleti = async () => {
     try {
@@ -57,65 +58,54 @@ const RicercaAtleti = () => {
                       placeholder="Ricerca atleti..."
                       aria-label="Search"
                       onChange={(e) => {
-                        //console.log(e.target.value);
                         setInputBarra(e.target.value);
                         if (e.target.value === "") {
                           setRisultatoAtleti(atleti);
-                          //console.log(risultatoAtleti);
-                          setMostraAtleti(true)
                         }
+
+                        let c=0
+                        atleti.forEach((singoloAtleta)=>{
+
+                          if ((singoloAtleta.name.toLowerCase() +" " +singoloAtleta.lastname.toLowerCase()).includes(e.target.value.toLocaleLowerCase())) {
+                            risultatoFiltrato.push(singoloAtleta);
+                            setRisultatoAtleti(risultatoFiltrato);
+                            setNessunRisultato(false)
+                          }else{
+                            risultatoFiltrato.push(undefined);
+                            setRisultatoAtleti(risultatoFiltrato);
+                            c++
+                          }
+                        })
+                        if(c===risultatoAtleti.length){
+                          setNessunRisultato(true)
+                        }
+
+                        //console.log(risultatoAtleti)
                       }}
                     />
-                    <Button
-                      variant="outline-light"
-                      onClick={() => {
-                        risultatoAtleti = [];
-                        atleti.forEach((atleta, index) => {
-                          //console.log("nome: "+atleta.nome.toLocaleLowerCase())
-                          if (
-                            (
-                              atleta.name.toLowerCase() +
-                              " " +
-                              atleta.lastname.toLowerCase()
-                            ).includes(inputBarra.toLocaleLowerCase())
-                          ) {
-                            //console.log(atleta);
-                            risultatoAtleti.push(atleta);
-                            setRisultatoAtleti(risultatoAtleti);
-                            setMostraAtleti(true)
-                          }
-                        });
-                        if(risultatoAtleti.length===0){
-                          //console.log("nessun atleta trovato")
-                          setMostraAtleti(false)
-                        }
-                        //console.log(risultatoAtleti);
-                      }}
-                    >
-                      Cerca
-                    </Button>
+
                   </form>
-                  {!mostraAtleti&&(
-                    <div className="mt-3">
-                    <h2>L'atleta cercato non esiste nell'elenco di atleti presenti!!</h2>
-                    </div>
-                  )}
-                  {mostraAtleti&&(
+
+{nessunRisultato&&(
+  <>
+  <h1>L'atleta cercato non è stato trovato!!</h1>
+  </>
+)}
+
                   <Container>
                     <Row className="row-cols-1 row-cols-sm-4 mt-4 justify-content-center" id="ricercaAtletiRow">
                       {risultatoAtleti.map((atleta, index) => {
+                        if (atleta!==undefined){
                         return (
                           <Col
                             className="card m-2"
-                            style={{ width: "15rem" }}
+                            style={{ width: "15rem",height: "14rem" }}
                             key={index}
                           >
                             <Card.Body>
                               <Card.Title>Atleta</Card.Title>
                               <Card.Text>
-                                Nome: {atleta.name}
-                                <br />
-                                Cognome: {atleta.lastname}
+                                <b> {atleta.name} {atleta.lastname}</b>
                                 <br />
                                 Età: {atleta.age}
                                 <br />
@@ -126,10 +116,10 @@ const RicercaAtleti = () => {
                             </Card.Body>
                           </Col>
                         );
+                      }
                       })}
                     </Row>
                   </Container>
-                  )}
                 </div>
               </div>
             </div>

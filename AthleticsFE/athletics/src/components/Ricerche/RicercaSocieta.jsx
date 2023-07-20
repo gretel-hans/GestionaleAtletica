@@ -4,10 +4,11 @@ import NavbarAthletix from "../HomePage/NavbarAthletix";
 import Card from "react-bootstrap/Card";
 
 const RicercaSocieta = () => {
-  let [societa, setSocieta] = useState([]);
-  let [risultatoSocieta, setRisultatoSocieta] = useState([]);
-  let [inputBarra, setInputBarra] = useState("");
-  const [mostraSocieta,setMostraSocieta]= useState(true);
+  const [societa, setSocieta] = useState([]);
+  const [risultatoSocieta, setRisultatoSocieta] = useState([]);
+  const [inputBarra, setInputBarra] = useState("");
+  const [nessunRisultato, setNessunRisultato] = useState(false);
+  let risultatoFiltrato=[];
 
   const fetchSocieta = async () => {
     try {
@@ -56,51 +57,40 @@ const RicercaSocieta = () => {
                       value={inputBarra}
                       placeholder="Ricerca società..."
                       aria-label="Search"
-                      onChange={(e) => {
-                        //console.log(e.target.value);
+                      onChange={(e) => {;
                         setInputBarra(e.target.value);
-                        if (e.target.value === "") {
-                          setRisultatoSocieta(societa);
-                          //console.log(risultatoSocieta);
-                          setMostraSocieta(true)
+                        let c=0
+                        societa.forEach((societa, index) => {
+                          if (
+                            (societa.name.toLowerCase()).includes(e.target.value.toLocaleLowerCase())
+                          ) {
+                            risultatoFiltrato.push(societa)
+                            setRisultatoSocieta(risultatoFiltrato);
+                            setNessunRisultato(false)
+                          }else{
+                            risultatoFiltrato.push(undefined)
+                            setRisultatoSocieta(risultatoFiltrato);
+                            c++
+                          }
+                        });
+                        if(c===risultatoSocieta.length){
+                          setNessunRisultato(true)
                         }
                       }}
                     />
-                    <Button
-                    variant="outline-light"
-                      
-                      onClick={() => {
-                        risultatoSocieta = [];
-                        societa.forEach((societa, index) => {
-                          //console.log("nome: "+societa.nome.toLocaleLowerCase())
-                          if (
-                            (societa.name.toLowerCase()).includes(inputBarra.toLocaleLowerCase())
-                          ) {
-                            //console.log(societa);
-                            risultatoSocieta.push(societa);
-                            setRisultatoSocieta(risultatoSocieta);
-                            setMostraSocieta(true)
-                          }
-                        });
-                        if(risultatoSocieta.length===0){
-                          //console.log("nessuna societa trovata")
-                          setMostraSocieta(false)
-                        }
-                       // console.log(risultatoSocieta);
-                      }}
-                    >
-                      Cerca
-                    </Button>
+
                   </form>
-                  {!mostraSocieta&&(
-                    <div className="mt-3">
-                    <h2>La società cercata non esiste nell'elenco di società presenti!!</h2>
-                    </div>
-                  )}
-                  {mostraSocieta&&(
+
+                  {nessunRisultato&&(
+  <>
+  <h1>La società cercata non è stato trovato!!</h1>
+  </>
+)}
+
                   <Container>
                     <Row className="row-cols-1 row-cols-sm-4 mt-4 justify-content-center" id="ricercaAtletiRow">
                       {risultatoSocieta.map((societa, index) => {
+                        if(societa!==undefined){
                         return (
                           <Col
                             className="card m-1 "
@@ -120,10 +110,11 @@ const RicercaSocieta = () => {
                             </Card.Body>
                           </Col>
                         );
+                        }
                       })}
                     </Row>
                   </Container>
-                  )}
+                  
                 </div>
               </div>
             </div>

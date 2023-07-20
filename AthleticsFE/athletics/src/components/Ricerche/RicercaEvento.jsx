@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import NavbarAthletix from "../HomePage/NavbarAthletix"
+import NavbarAthletix from "../HomePage/NavbarAthletix";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 
-const RicercaEvento=()=>{
-
-  let [evento, setEvento] = useState([]);
-  let [inputBarra, setInputBarra] = useState("");
-  let [risultatoLive, setRisultatoLive]= useState([]);
+const RicercaEvento = () => {
+  const [evento, setEvento] = useState([]);
+  const [inputBarra, setInputBarra] = useState("");
+  const [risultatoLive, setRisultatoLive] = useState([]);
+  let risultatoFiltrato = [];
+  const [nessunRisultato, setNessunRisultato] = useState(false);
 
   const fetchEventi = async () => {
     try {
@@ -19,32 +20,31 @@ const RicercaEvento=()=>{
       if (response.ok) {
         let data = await response.json();
         setEvento(data);
-        setRisultatoLive(data)
-        console.log(risultatoLive)
+        setRisultatoLive(data);
+        //console.log(risultatoLive);
       }
     } catch (error) {
       console.log("ERRORE! Durante il caricamento di tutti gli eventi");
     }
   };
   //console.log(utenteAtleta)
-  let risultatoFiltrato=[];
   useEffect(() => {
     fetchEventi();
   }, []);
-    return (
-        <>
-              {(sessionStorage.getItem("username") === null ||
+  return (
+    <>
+      {(sessionStorage.getItem("username") === null ||
         sessionStorage.getItem("username") === "null") && (
         <div>
           Non sei loggato per accedere ai contenuti esegui il login o
           registrati!
         </div>
       )}
-{(sessionStorage.getItem("username") !== null ||
-        sessionStorage.getItem("username") !== "null") &&(
-            <>
-            <NavbarAthletix/>
-            <section className="vh-100 gradient-custom">
+      {(sessionStorage.getItem("username") !== null ||
+        sessionStorage.getItem("username") !== "null") && (
+        <>
+          <NavbarAthletix />
+          <section className="vh-100 gradient-custom">
             <div className="container h-100">
               <div className="row d-flex justify-content-center h-100  mt-3">
                 <div className="col-12 col-md-11">
@@ -55,42 +55,66 @@ const RicercaEvento=()=>{
                       value={inputBarra}
                       placeholder="Ricerca eventi..."
                       aria-label="Search"
-                      
                       onChange={(e) => {
                         setInputBarra(e.target.value);
-                        
-                        evento.forEach((eventoSingolo)=>{
-                          if((eventoSingolo.nomeEvento.toLowerCase()).includes(e.target.value.toLocaleLowerCase())){
-                            risultatoFiltrato.push(eventoSingolo)
-                            setRisultatoLive(risultatoFiltrato)
-                          }else{
-                            risultatoFiltrato.push(undefined)
-                            setRisultatoLive(risultatoFiltrato)
+                        let c = 0;
+                        evento.forEach((eventoSingolo) => {
+                          if (
+                            eventoSingolo.nomeEvento
+                              .toLowerCase()
+                              .includes(e.target.value.toLocaleLowerCase())
+                          ) {
+                            risultatoFiltrato.push(eventoSingolo);
+                            setRisultatoLive(risultatoFiltrato);
+                            setNessunRisultato(false);
+                          } else {
+                            risultatoFiltrato.push(undefined);
+                            setRisultatoLive(risultatoFiltrato);
+                            c++
                           }
-                        })
-                        console.log(risultatoLive)
+                        });
+                        if (c === risultatoLive.length) {
+                          setNessunRisultato(true);
+                        }
                       }}
                     />
-
                   </form>
-
+                  {nessunRisultato && (
+                    <>
+                      <h1>L'evento cercato non è stato trovato!!</h1>
+                    </>
+                  )}
                   <Container>
-                    <Row className="row-cols-1 row-cols-sm-4 mt-4 justify-content-center" id="ricercaAtletiRow">
+                    <Row
+                      className="row-cols-1 row-cols-sm-4 mt-4 justify-content-center"
+                      id="ricercaAtletiRow"
+                    >
                       {risultatoLive.map((evento, index) => {
-                        if (evento!==undefined){
+                        if (evento !== undefined) {
                           return (
                             <Col
                               className="card m-2"
-                              style={{ width: "15rem" }}
+                              style={{ width: "15rem", height: "17rem" }}
                               key={index}
                             >
                               <Card.Body>
                                 <Card.Title>Evento</Card.Title>
                                 <Card.Text>
-                                  Nome: {evento.nomeEvento}
+                                  <b>{evento.nomeEvento} </b>
                                   <br />
                                   Data: {evento.dataEvento}
-                                  
+                                  <br />
+                                  Organizzatore: {evento.organizzatori.name}
+                                  <br />
+                                  Luogo: Via{" "}
+                                  {evento.organizzatori.indirizzo.nomeVia +
+                                    " " +
+                                    evento.organizzatori.indirizzo.civico +
+                                    ", " +
+                                    evento.organizzatori.indirizzo.comune.cap +
+                                    " " +
+                                    evento.organizzatori.indirizzo.comune
+                                      .provinca.sigla}
                                 </Card.Text>
                               </Card.Body>
                             </Col>
@@ -103,11 +127,10 @@ const RicercaEvento=()=>{
               </div>
             </div>
           </section>
-            </>
-        )}
-
         </>
-    )
-}
+      )}
+    </>
+  );
+};
 
 export default RicercaEvento;

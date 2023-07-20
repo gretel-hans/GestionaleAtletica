@@ -1,0 +1,11 @@
+[
+    { "label": "Salto in Lungo", "value": "Salto_lungo" },
+    { "label": "Salto in Alto", "value": "Salto_alto" },
+    { "label": "Salto Triplo", "value": "Salto_triplo" },
+    { "label": "Salto con l'Asta", "value": "Salto_asta" },
+    { "label": "Lancio del Peso", "value": "Lancio_peso" },
+    { "label": "Lancio del Vortex", "value": "Lancio_vortex" },
+    { "label": "Lancio del Disco", "value": "Lancio_disco" },
+    { "label": "Lancio del Martello", "value": "Lancio_martello" },
+    { "label": "Lancio del Giavellotto", "value": "Lancio_giavellotto" }
+  ]

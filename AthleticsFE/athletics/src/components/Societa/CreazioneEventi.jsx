@@ -5,6 +5,8 @@ import NavbarAthletix from "../HomePage/NavbarAthletix";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import gareCorse from "../../dati/gareCorse.json"
+import gareConcorsi from "../../dati/gareConcorsi.json"
 
 const CreazioneEventi = () => {
   const [formCorse, setFormCorse] = useState(false);
@@ -13,47 +15,6 @@ const CreazioneEventi = () => {
   const [mostraAltroFormCorse, setMostraAltroFormCorse] = useState(false);
   const ConGareConcorso=document.getElementById("ContainerDettagliGareConcorso")
   const ConGareCorse=document.getElementById("ContainerDettagliGareCorse")
-  let gareCorse = [
-    { label: "60m", value: "Velocita_60m" },
-    { label: "80m", value: "Velocita_80m" },
-    { label: "100m", value: "Velocita_100m" },
-    { label: "150m", value: "Velocita_150m" },
-    { label: "200m", value: "Velocita_200m" },
-    { label: "300m", value: "Velocita_300m" },
-    { label: "400m", value: "Velocita_400m" },
-    { label: "4x100m", value: "Staffetta_4x100" },
-    { label: "4x200m", value: "Staffetta_4x200" },
-    { label: "4x400m", value: "Staffetta_4x400" },
-    { label: "3x800m", value: "Staffetta_3x800" },
-    { label: "3x1000m", value: "Staffetta_3x1000" },
-    { label: "100hs", value: "Ostacoli_100hs" },
-    { label: "110hs", value: "Ostacoli_110hs" },
-    { label: "400hs", value: "Ostacoli_400hs" },
-    { label: "800m", value: "MezzoFondo_800m" },
-    { label: "1000m", value: "MezzoFondo_1000m" },
-    { label: "1500m", value: "MezzoFondo_1500m" },
-    { label: "2000m", value: "MezzoFondo_2000m" },
-    { label: "3000m", value: "MezzoFondo_3000m" },
-    { label: "4000m", value: "MezzoFondo_4000m" },
-    { label: "5000m", value: "MezzoFondo_5000m" },
-    { label: "10000m", value: "MezzoFondo_10000m" },
-    { label: "Marcia 5km", value: "Marcia_5000m" },
-    { label: "Marcia 10km", value: "Marcia_10000m" },
-    { label: "Marcia 20km", value: "Marcia_20000m" },
-    { label: "Marcia 35km", value: "Marcia_35000m" },
-    { label: "Marcia 50km", value: "Marcia_50000m" },
-  ];
-  let gareConcorsi = [
-    { label: "Salto in Lungo", value: "Salto_lungo" },
-    { label: "Salto in Alto", value: "Salto_alto" },
-    { label: "Salto Triplo", value: "Salto_triplo" },
-    { label: "Salto con l'Asta", value: "Salto_asta" },
-    { label: "Lancio del Peso", value: "Lancio_peso" },
-    { label: "Lancio del Vortex", value: "Lancio_vortex" },
-    { label: "Lancio del Disco", value: "Lancio_disco" },
-    { label: "Lancio del Martello", value: "Lancio_martello" },
-    { label: "Lancio del Giavellotto", value: "Lancio_giavellotto" },
-  ];
 
   let categorie = [
     { label: "Esordienti", value: "Esordienti" },

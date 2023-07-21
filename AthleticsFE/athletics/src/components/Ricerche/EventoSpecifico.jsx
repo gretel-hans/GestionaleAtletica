@@ -47,7 +47,17 @@ const EventoSpecifico = () => {
           <section className="vh-100 gradient-custom">
             <div className="container h-100">
               <div className="row d-flex justify-content-center h-100 mt-3">
-                <div className="col-12 col-md-11"></div>
+                <div className="col-12 col-md-11">
+                  {evento.organizzatori.name!==undefined&&(
+                    <>
+                    <h1>{evento.nomeEvento}</h1>
+                    <h4>{evento.organizzatori.username}</h4>
+                    <p>{evento.dataEvento}</p>
+                    
+                    </>
+                  )}
+
+                </div>
               </div>
             </div>
           </section>

@@ -68,11 +68,11 @@ public class AuthServiceImpl implements AuthService {
         				loginDto.getUsername(), loginDto.getPassword()
         		)
         ); 
-    	System.out.println("autenticazione: "+authentication);
+    	//System.out.println("autenticazione: "+authentication);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String token = jwtTokenProvider.generateToken(authentication);
-       	System.out.println("ecco il token: "+token);
+       	//System.out.println("ecco il token: "+token);
         return token;
     }
 	

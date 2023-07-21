@@ -97,7 +97,7 @@ const RicercaEvento = () => {
                               style={{ width: "15rem", height: "17rem" }}
                               key={index}
                             >
-                              <Card.Body>
+                              <Card.Body className="cardEvento" onClick={()=>window.location.replace(`/eventoSpecifico/${evento.id}`)}>
                                 <Card.Title>Evento</Card.Title>
                                 <Card.Text>
                                   <b>{evento.nomeEvento} </b>

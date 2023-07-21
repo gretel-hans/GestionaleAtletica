@@ -67,7 +67,7 @@ const verificaRuoli=(ruoli)=>{
       >
         <Container fluid>
           <Link to="/Homepage" className="navbar-brand">
-            <img id="LogoAthletix" src="./images/LogoAthletix.png" alt="Logo" />
+            <img id="LogoAthletix" src="/images/LogoAthletix.png" alt="Logo" />
           </Link>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">

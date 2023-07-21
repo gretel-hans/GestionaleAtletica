@@ -1,0 +1,10 @@
+[
+    { "nome":"E" ,"range1":6, "range2":11 },
+    { "nome":"R" ,"range1":12, "range2":13 },
+    { "nome":"C" ,"range1":14, "range2":15 },
+    { "nome":"A" ,"range1":16, "range2":17 },
+    { "nome":"J" ,"range1":18, "range2":19 },
+    { "nome":"P" ,"range1":20, "range2":22 },
+    { "nome":"S" ,"range1":23, "range2":34 },
+    { "nome":"M" ,"range1":35, "range2":100 }
+]

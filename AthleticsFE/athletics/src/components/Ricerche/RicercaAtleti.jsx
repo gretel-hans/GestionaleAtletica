@@ -42,10 +42,10 @@ const RicercaAtleti = () => {
         </div>
       )}
 
-      {(sessionStorage.getItem("username") !== null ||
-        sessionStorage.getItem("username") !== "null") && (
+      {(sessionStorage.getItem("username") !== null ) && (
         <div>
           <NavbarAthletix />
+
           <section className="vh-100 gradient-custom">
             <div className="container h-100">
               <div className="row d-flex justify-content-center h-100  mt-3">
@@ -120,6 +120,8 @@ const RicercaAtleti = () => {
                       })}
                     </Row>
                   </Container>
+
+                  
                 </div>
               </div>
             </div>

@@ -44,7 +44,7 @@ console.log(atleti)
                 <div>Non sei loggato per accedere ai contenuti esegui il login o registrati!</div>
             )}
        
-        {(sessionStorage.getItem("username")!==null || sessionStorage.getItem("username")!=="null" )&&(
+        {(sessionStorage.getItem("username")!==null)&&(
             <div>
                 <NavbarAthletix/>
                 <Container className="mt-3">

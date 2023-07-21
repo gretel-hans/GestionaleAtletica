@@ -62,8 +62,9 @@ const verificaRuoli=(ruoli)=>{
     <>
       <Navbar
         expand="sm"
-        className="bg-dark border-bottom border-bottom-dark"
+        className="bg-dark border-bottom border-bottom-dark "
         data-bs-theme="dark"
+        id="navbarAthletix"
       >
         <Container fluid>
           <Link to="/Homepage" className="navbar-brand">

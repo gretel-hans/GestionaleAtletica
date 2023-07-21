@@ -42,8 +42,7 @@ const RicercaSocieta = () => {
         </div>
       )}
 
-      {(sessionStorage.getItem("username") !== null ||
-        sessionStorage.getItem("username") !== "null") && (
+      {(sessionStorage.getItem("username") !== null) && (
         <div>
           <NavbarAthletix />
           <section className="vh-100 gradient-custom">

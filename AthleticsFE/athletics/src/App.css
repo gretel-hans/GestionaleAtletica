@@ -33,3 +33,22 @@ background-color: rgba(127, 147, 187, 0.38);
   height: 75vh;
   overflow: scroll;
 }
+
+@media screen and (max-width:550px) {
+  .societaAtleta, .dataAtleta, .categoriaAtleta{
+    display: none;
+  }
+  
+}
+
+#navbarAthletix{
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+#contenitoreGara{
+  background-color: #212529;
+  color: white;
+  border-radius: 1em;
+  padding: 1em;
+}

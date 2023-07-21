@@ -33,8 +33,7 @@ const RicercaEvento = () => {
   }, []);
   return (
     <>
-      {(sessionStorage.getItem("username") === null ||
-        sessionStorage.getItem("username") === "null") && (
+      {(sessionStorage.getItem("username") === null ) && (
         <div>
           Non sei loggato per accedere ai contenuti esegui il login o
           registrati!

@@ -119,6 +119,7 @@ public class CrezioneFakeDatiRunner implements CommandLineRunner{
 
 
 	private void creaSocieta() {
+		String[] listaSocieta={"G.S.Self Atl. Montanari Gruzza","A.S La Fratellanza 1874","A.S.D. Pontevecchio Bologna","Atletica Ravenna","Atletica Firenze Marathon S.S"};
 		
 		for(int i=1; i<6;i++) {
 			Faker fake= Faker.instance(new Locale("it-IT"));
@@ -126,7 +127,7 @@ public class CrezioneFakeDatiRunner implements CommandLineRunner{
 			Indirizzo indirizzo= indirizzoService.salvaInidirzzo(new Indirizzo(null, fake.address().firstName(),fake.number().numberBetween(1, 99), comuneService.cercaComuneConId(fake.number().numberBetween(1l, 7050l)))); 
 			RegisterDto r= new RegisterDto();
 			r.setIndirizzo(indirizzo);
-			r.setName(fake.company().name());
+			r.setName(listaSocieta[i-1]);
 			r.setUsername("Usocieta"+i);
 			r.setEmail(r.getName()+"@fidal.com");
 			r.setPassword("Psocieta"+i);

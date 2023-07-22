@@ -15,6 +15,7 @@ import RicercaEvento from './components/Ricerche/RicercaEvento';
 import RicercaAtleti from './components/Ricerche/RicercaAtleti';
 import RicercaSocieta from './components/Ricerche/RicercaSocieta';
 import EventoSpecifico from './components/Ricerche/EventoSpecifico';
+import PaginaInesistente from './components/HomePage/PaginaInesistente';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/ricercaAtleti" element={<RicercaAtleti/>}/>
         <Route path="/ricercaSocieta" element={<RicercaSocieta/>}/>
         <Route path="/eventoSpecifico/:id" element={<EventoSpecifico/>}/>
+        <Route path="*" element={<PaginaInesistente/>}/>
       </Routes>
       </BrowserRouter>
     

@@ -30,16 +30,21 @@ const RegistrazioneSocieta = (props) => {
   };
 
   const fetchTuttiComuni = async () => {
-    let response = await fetch(
-      "http://localhost:8080/athletics/indirizzi/comuni"
-    );
-    let tuttiComuni = await response.json();
 
-    const opzioneComune = tuttiComuni.map((comune) => ({
-      value: comune,
-      label: `${comune.nomeComune}`,
-    }));
-    setComuni(opzioneComune);
+    try {
+      let response = await fetch(
+        "http://localhost:8080/athletics/indirizzi/comuni"
+      );
+      let tuttiComuni = await response.json();
+  
+      const opzioneComune = tuttiComuni.map((comune) => ({
+        value: comune,
+        label: `${comune.nomeComune}`,
+      }));
+      setComuni(opzioneComune);
+    } catch (error) {
+      console.log("ERRORE!! Durante il caricamento di tutti i comuni!"+error);
+    }
   };
 
   useEffect(() => {
@@ -74,7 +79,7 @@ const RegistrazioneSocieta = (props) => {
 
       
     } catch (error) {
-      console.log("ERRORE!! "+error);
+      console.log("ERRORE!! Durante la registrazione!!"+error);
     }
      
   };
@@ -254,7 +259,7 @@ const RegistrazioneSocieta = (props) => {
                 });
                 if(c==0){
                   if (datiRegistrazione.email.length>5&&datiRegistrazione.name.length!==0&&datiRegistrazione.username.length!==0&&datiRegistrazione.password.length!==0&&datiRegistrazione.indirizzo.nomeVia.length!==0&&datiRegistrazione.indirizzo.civico.length!==0&&datiRegistrazione.indirizzo.comune!==null){
-                    console.log("passato")
+                   
                     fetchRegister()
                   }else{
                     alert("Riempi tutti i campi!")

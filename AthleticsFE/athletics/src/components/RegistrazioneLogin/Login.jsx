@@ -35,7 +35,7 @@ const Login = () => {
         scritta.style.display="none"
         window.location.replace('/Homepage')
       } else {
-        console.log("Username o password errati!");
+        //console.log("Username o password errati!");
         pass.style.border="1.5px solid red";
         user.style.border="1.5px solid red";
         scritta.style.display="block"
@@ -159,7 +159,14 @@ u=sessionStorage.getItem("username")
                     </div>
                     <button
                       className="btn btn-outline-light btn-lg px-5 mt-4"
-                      onClick={fetchLogin}
+                      onClick={()=>{
+                        
+                       if(datiLogin.username!==""&&datiLogin.password!==""){
+                          fetchLogin()
+                        }else{
+                          alert("Inserisci tutti i dati per poter accedere!!")
+                        }
+                      }}
                     >
                       Login
                     </button>

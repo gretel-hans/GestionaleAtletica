@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import NavbarAthletix from "../HomePage/NavbarAthletix";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
+import AccessoNegato from "../HomePage/AccessoNegato";
 
 const RicercaEvento = () => {
   const [evento, setEvento] = useState([]);
@@ -24,7 +25,7 @@ const RicercaEvento = () => {
         //console.log(risultatoLive);
       }
     } catch (error) {
-      console.log("ERRORE! Durante il caricamento di tutti gli eventi");
+      console.log("ERRORE! Durante il caricamento di tutti gli eventi!"+error);
     }
   };
   //console.log(utenteAtleta)
@@ -34,12 +35,9 @@ const RicercaEvento = () => {
   return (
     <>
       {(sessionStorage.getItem("username") === null ) && (
-        <div>
-          Non sei loggato per accedere ai contenuti esegui il login o
-          registrati!
-        </div>
+        <AccessoNegato/>
       )}
-      {(sessionStorage.getItem("username") !== null ||
+      {(sessionStorage.getItem("username") !== null &&
         sessionStorage.getItem("username") !== "null") && (
         <>
           <NavbarAthletix />
@@ -92,7 +90,7 @@ const RicercaEvento = () => {
                         if (evento !== undefined) {
                           return (
                             <Col
-                              className="card m-2"
+                              className="card m-2 cardPagine"
                               style={{ width: "15rem", height: "17rem" }}
                               key={index}
                             >

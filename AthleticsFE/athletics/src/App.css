@@ -13,6 +13,23 @@ body{
   height:98vh;
 }
 
+.paginaErrore{
+  background-image: url("../public/images/LogoAthletix.png");
+}
+
+
+.lead{
+  font-weight: 400!important;
+}
+
+.sfondoErrore{
+  height: 40%;
+  width: 60%;
+  border-radius: 1em;
+    padding: 1em;
+    background: radial-gradient(circle, rgba(63,94,251,0.97) 0%, rgba(252,70,107,0.97) 100%);
+}
+
 #BenvenutoDivOne{
 height:28%;
 border-radius: 15px;
@@ -22,6 +39,11 @@ background-color: rgba(127, 147, 187, 0.38);
 #LogoAthletix{
   height: 2em;
   border-radius: 1em;
+}
+
+.cardPagine{
+      color: white!important;
+    background-color: #212529!important;
 }
 
 /* SOCIETA */

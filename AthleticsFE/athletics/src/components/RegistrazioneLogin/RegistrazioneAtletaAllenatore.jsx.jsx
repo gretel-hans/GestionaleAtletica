@@ -30,22 +30,27 @@ const RegistrazioneAtletaAllenatore=(props)=>{
   };
 
   const fetchTutteSocieta = async () => {
-    let response = await fetch(
-      "http://localhost:8080/athletics/societa"
-    );
-    let tutteSocieta = await response.json();
-
-    const opzioneSocieta = tutteSocieta.map((societa) => ({
-      value: societa,
-      label: `${societa.name}`,
-    }));
-    setSocieta(opzioneSocieta);
-    if(props.tipo==="Allenatore"){
-        setDatiRegistrazione({...datiRegistrazione,roles:["ALLENATORE"]})
-    }else if(props.tipo==="Atleta"){
-        setDatiRegistrazione({...datiRegistrazione,roles:["ATLETA"]})
-    }else if(props.tipo==="Atleta e allenatore"){
-        setDatiRegistrazione({...datiRegistrazione,roles:["ATLETA","ALLENATORE"]})
+    try {
+      
+      let response = await fetch(
+        "http://localhost:8080/athletics/societa"
+      );
+      let tutteSocieta = await response.json();
+  
+      const opzioneSocieta = tutteSocieta.map((societa) => ({
+        value: societa,
+        label: `${societa.name}`,
+      }));
+      setSocieta(opzioneSocieta);
+      if(props.tipo==="Allenatore"){
+          setDatiRegistrazione({...datiRegistrazione,roles:["ALLENATORE"]})
+      }else if(props.tipo==="Atleta"){
+          setDatiRegistrazione({...datiRegistrazione,roles:["ATLETA"]})
+      }else if(props.tipo==="Atleta e allenatore"){
+          setDatiRegistrazione({...datiRegistrazione,roles:["ATLETA","ALLENATORE"]})
+      }
+    } catch (error) {
+      console.log("ERRORE!! durante il caricamento di tutte le società!!")
     }
   };
 
@@ -54,9 +59,9 @@ const RegistrazioneAtletaAllenatore=(props)=>{
   }, []);
 
   const fetchRegister = async() => {
-    if(datiRegistrazione.roles.length!==0){
+    /*if(datiRegistrazione.roles.length!==0){
         console.log(datiRegistrazione)
-    }
+    }*/
     
     try {
       let response= await fetch("http://localhost:8080/athletics/register",{
@@ -67,7 +72,7 @@ const RegistrazioneAtletaAllenatore=(props)=>{
         body:JSON.stringify(datiRegistrazione)
       });
       if(response.ok){
-        alert(`Il tuo profilo: ${props.tipo} è stata registrato con successo!`)
+        alert(`${datiRegistrazione.name} il tuo profilo è stato registrato con successo!`)
         let responseLogin= await fetch("http://localhost:8080/athletics/login", {
             method: "POST",
             headers: {
@@ -84,7 +89,7 @@ const RegistrazioneAtletaAllenatore=(props)=>{
       }
       
     } catch (error) {
-      console.log("ERRORE!! "+error);
+      console.log("ERRORE!! Durante la registrazione "+error);
     }
      
   };
@@ -277,7 +282,7 @@ const RegistrazioneAtletaAllenatore=(props)=>{
                 });
                 if(c===0){
                   if (datiRegistrazione.email.length>5&&datiRegistrazione.name.length!==0&&datiRegistrazione.username.length!==0&&datiRegistrazione.password.length!==0&&datiRegistrazione.birthdate.length!==0&&datiRegistrazione.societa!==undefined){
-                    console.log("passato"+props.tipo)
+                    //console.log("passato"+props.tipo)
                     fetchRegister()
                   }else{
                     alert("Riempi tutti i campi!")

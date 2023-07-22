@@ -5,6 +5,7 @@ import gareConcorsi from "../../dati/gareConcorsi.json";
 import gareCorse from "../../dati/gareCorse.json";
 import categorie from "../../dati/categorie.json";
 import { Col, Container, Row } from "react-bootstrap";
+import AccessoNegato from "../HomePage/AccessoNegato";
 
 const EventoSpecifico = () => {
   const params = useParams();
@@ -40,32 +41,25 @@ const EventoSpecifico = () => {
           });
         });
         setGare(gare1);
-        console.log(gare1[0]);
       }
     } catch (error) {
-      console.log("ERRORE!! " + error);
+      console.log("ERRORE!! Durante il caricamento dell'evento!" + error);
     }
   };
 
-  let age = 20;
-  const controlloCategoria = (a) => {};
-  console.log(controlloCategoria(20));
+
 
   useEffect(() => {
     fetchEvento();
   }, []);
-  console.log(gare);
   return (
     <>
       {(sessionStorage.getItem("username") === null ||
         sessionStorage.getItem("username") === "null") && (
-        <div>
-          Non sei loggato per accedere ai contenuti esegui il login o
-          registrati!
-        </div>
+          <AccessoNegato/>
       )}
 
-      {sessionStorage.getItem("username") !== null && (
+      {(sessionStorage.getItem("username") !== null && sessionStorage.getItem("username") !== "null") && (
         <div>
           <NavbarAthletix />
           <section className="vh-100 gradient-custom">

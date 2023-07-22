@@ -5,6 +5,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Link } from "react-router-dom";
+import AccessoNegato from "../HomePage/AccessoNegato";
 
 const IscrizioniGare = () => {
   let gareCorse = [
@@ -72,18 +73,23 @@ const IscrizioniGare = () => {
   };
 
   const fetchTuttiEventi = async () => {
-    let response = await fetch("http://localhost:8080/athletics/eventi", {
-      headers: {
-        Authorization: "Bearer " + sessionStorage.getItem("bearerToken"),
-      },
-    });
-    if (response.ok) {
-      let data = await response.json();
-      const opzioniEventi = data.map((evento) => ({
-        value: evento,
-        label: `${evento.nomeEvento}`,
-      }));
-      setListaEventi(opzioniEventi);
+    try {
+      let response = await fetch("http://localhost:8080/athletics/eventi", {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("bearerToken"),
+        },
+      });
+      if (response.ok) {
+        let data = await response.json();
+        const opzioniEventi = data.map((evento) => ({
+          value: evento,
+          label: `${evento.nomeEvento}`,
+        }));
+        setListaEventi(opzioniEventi);
+      }
+      
+    } catch (error) {
+      console.log("ERRORE!! "+error)
     }
   };
 
@@ -99,9 +105,9 @@ const IscrizioniGare = () => {
             }
         })
         if(response.ok){
-            console.log("Iscrizione effettuato con successo!")
+            alert("Iscrizioni effettuate con successo!")
             let data=await response.json()
-            console.log(data)
+            window.location.replace(`eventoSpecifico/${eventoSelezionato.value.id}`)
         }
     } catch (error) {
         console.log("ERRORE!! "+error)
@@ -143,10 +149,7 @@ const IscrizioniGare = () => {
     <div>
       {(sessionStorage.getItem("username") === null ||
         sessionStorage.getItem("username") === "null") && (
-        <div>
-          Non sei loggato per accedere ai contenuti esegui il login o
-          registrati!
-        </div>
+          <AccessoNegato/>
       )}
 
       {(sessionStorage.getItem("username") !== null ||
@@ -270,15 +273,16 @@ const IscrizioniGare = () => {
                                               },
                                             })}
                                            onChange={(e)=>{
-                                            if (!iscrizioniGare[index]) {
-                                                iscrizioniGare[index] = { gara: "", atletiPartecipanti: [{}] };
+                                             if (!iscrizioniGare[index]) {
+                                               iscrizioniGare[index] = { gara: "", atletiPartecipanti: [{}] };
                                               }
-                                                let iscrizioneUpdated=[...iscrizioniGare]
-                                                iscrizioneUpdated[index]={gara:e.value,atletiPartecipanti:iscrizioneUpdated[index].atletiPartecipanti};
-                                                setIscrizioniGare(iscrizioneUpdated);
-                                                //console.log(index)
+                                              let iscrizioneUpdated=[...iscrizioniGare]
+                                              iscrizioneUpdated[index]={gara:e.value,atletiPartecipanti:iscrizioneUpdated[index].atletiPartecipanti};
+                                              setIscrizioniGare(iscrizioneUpdated);
+                                              //console.log(index)
                                             }}
                                           />
+                                            
                                         </Col>
                                         <Col>
                                           <Select
@@ -333,17 +337,17 @@ const IscrizioniGare = () => {
                           <button
                             className="btn btn-outline-light btn-lg px-5 mt-4"
                             onClick={()=>{
-                                console.log(iscrizioniGare)
+                                //console.log(iscrizioniGare)
                                 iscrizioniGare.forEach((iscrizione)=>{
                                     gareCorse.forEach((gara)=>{
                                         if(iscrizione.gara.tipo===gara){
-                                            console.log("Gara di corsa")
+                                            //console.log("Gara di corsa")
                                             iscrizioneGaraFetch({garaCorsa:iscrizione.gara,atletiPartecipanti:iscrizione.atletiPartecipanti},true)
                                         }
                                     })
                                     gareConcorsi.forEach((gara)=>{
                                         if(iscrizione.gara.tipo===gara){
-                                            console.log("Gara concorso")
+                                            //console.log("Gara concorso")
                                             iscrizioneGaraFetch({garaConcorso:iscrizione.gara,atletiPartecipanti:iscrizione.atletiPartecipanti},false)
                                         }
                                     })

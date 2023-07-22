@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import NavbarAthletix from "../HomePage/NavbarAthletix";
 import Card from "react-bootstrap/Card";
+import AccessoNegato from "../HomePage/AccessoNegato";
 
 const RicercaSocieta = () => {
   const [societa, setSocieta] = useState([]);
@@ -23,7 +24,7 @@ const RicercaSocieta = () => {
         setRisultatoSocieta(data);
       }
     } catch (error) {
-      console.log("ERRORE! Durante il caricamento di tutti gli utenti");
+      console.log("ERRORE! Durante il caricamento di tutte le società!"+error);
     }
   };
   //console.log(utenteAtleta)
@@ -36,13 +37,10 @@ const RicercaSocieta = () => {
     <>
       {(sessionStorage.getItem("username") === null ||
         sessionStorage.getItem("username") === "null") && (
-        <div>
-          Non sei loggato per accedere ai contenuti esegui il login o
-          registrati!
-        </div>
+          <AccessoNegato/>
       )}
 
-      {(sessionStorage.getItem("username") !== null) && (
+      {(sessionStorage.getItem("username") !== null && sessionStorage.getItem("username") !== "null") && (
         <div>
           <NavbarAthletix />
           <section className="vh-100 gradient-custom">
@@ -92,7 +90,7 @@ const RicercaSocieta = () => {
                         if(societa!==undefined){
                         return (
                           <Col
-                            className="card m-1 "
+                            className="card m-1 cardPagine"
                             style={{ width: "14rem", height:"15em" }}
                             key={index}
                           >

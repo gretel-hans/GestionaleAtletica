@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import NavbarAthletix from "../HomePage/NavbarAthletix";
 import Card from "react-bootstrap/Card";
+import AccessoNegato from "../HomePage/AccessoNegato";
 
 const RicercaAtleti = () => {
   const [atleti, setAtleti] = useState([]);
@@ -23,7 +24,7 @@ const RicercaAtleti = () => {
         setRisultatoAtleti(data);
       }
     } catch (error) {
-      console.log("ERRORE! Durante il caricamento di tutti gli utenti");
+      console.log("ERRORE! Durante il caricamento di tutti gli atleti!"+error);
     }
   };
   //console.log(utenteAtleta)
@@ -36,13 +37,10 @@ const RicercaAtleti = () => {
     <>
       {(sessionStorage.getItem("username") === null ||
         sessionStorage.getItem("username") === "null") && (
-        <div>
-          Non sei loggato per accedere ai contenuti esegui il login o
-          registrati!
-        </div>
+          <AccessoNegato/>
       )}
 
-      {(sessionStorage.getItem("username") !== null ) && (
+      {(sessionStorage.getItem("username") !== null && sessionStorage.getItem("username") !== "null") && (
         <div>
           <NavbarAthletix />
 
@@ -98,7 +96,7 @@ const RicercaAtleti = () => {
                         if (atleta!==undefined){
                         return (
                           <Col
-                            className="card m-2"
+                            className="card m-2 cardPagine"
                             style={{ width: "15rem",height: "14rem" }}
                             key={index}
                           >

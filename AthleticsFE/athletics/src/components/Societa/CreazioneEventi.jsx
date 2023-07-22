@@ -7,6 +7,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import gareCorse from "../../dati/gareCorse.json"
 import gareConcorsi from "../../dati/gareConcorsi.json"
+import AccessoNegato from "../HomePage/AccessoNegato";
 
 const CreazioneEventi = () => {
   const [formCorse, setFormCorse] = useState(false);
@@ -66,17 +67,22 @@ const CreazioneEventi = () => {
   const [counterCorse,setCounterCorse]=useState(0);
 
 const fetchEvento= async ()=>{
-  let response = await fetch("http://localhost:8080/athletics/eventi",{
-    method:"POST",
-    headers:{
-      Authorization:"Bearer "+sessionStorage.getItem("bearerToken"),
-      'Content-Type': 'application/json',
-    },
-    body:JSON.stringify(evento),
-  });
-  if(response.ok){
-    alert("Evento creato con successo!")
-    window.location.replace("/Homepage")
+  try {
+    let response = await fetch("http://localhost:8080/athletics/eventi",{
+      method:"POST",
+      headers:{
+        Authorization:"Bearer "+sessionStorage.getItem("bearerToken"),
+        'Content-Type': 'application/json',
+      },
+      body:JSON.stringify(evento),
+    });
+    if(response.ok){
+      alert("Evento creato con successo!")
+      window.location.replace("/Homepage")
+    }
+    
+  } catch (error) {
+    console.log("ERRORE!! Durante la creazione dell'evento!"+error)
   }
 }
 
@@ -84,13 +90,10 @@ const fetchEvento= async ()=>{
     <>
       {(sessionStorage.getItem("username") === null ||
         sessionStorage.getItem("username") === "null") && (
-        <div>
-          Non sei loggato per accedere ai contenuti esegui il login o
-          registrati!
-        </div>
+          <AccessoNegato/>
       )}
 
-      {(sessionStorage.getItem("username") !== null ||
+      {(sessionStorage.getItem("username") !== null &&
         sessionStorage.getItem("username") !== "null") && (
         <div>
           <NavbarAthletix />
@@ -205,10 +208,6 @@ const fetchEvento= async ()=>{
                                   }}
                                   value={gareConcorsiSelezionti}
                                 />
-                                <Link onClick={()=>{
-                                  setFormConcorsi(false)
-                                  ConGareConcorso.style.display="none"
-                                }}> Chiudi</Link>
                               </Col>
                               <Col>
                               <i className="bi bi-plus-square-fill plusEvento" onClick={()=>{
@@ -218,9 +217,12 @@ const fetchEvento= async ()=>{
                                 //ConGareCorse.style.display="none"
                                 }}>
                                   &nbsp;Aggiungi gara</i><br/>
-                                {counter>0?(<Link onClick={()=>{
-                                  ConGareConcorso.style.display="block"
-                                }}> Mostra dettagli gare concorsi</Link>):null}
+                                {((evento.listaGareConcorsi[0].tipo!=="")===true)&&(<Link onClick={()=>{
+                                  if(ConGareConcorso!==null&&ConGareConcorso!==undefined){
+                                    ConGareConcorso.style.display="block"
+                                  }
+                                  
+                                }}> Mostra dettagli gare concorsi</Link>)}
                                 
                               </Col>
                             </Row>
@@ -324,10 +326,15 @@ const fetchEvento= async ()=>{
                               )
                           })
                         }
-                          <Link onClick={()=>{
-                            //setMostraAltroFormConcorsi(false)
-                            ConGareConcorso.style.display="none"
-                            }}>Chiudi Info Gare</Link>
+                        {
+                          ((evento.listaGareConcorsi[0].genereGara!=="")===true&&(
+
+                            <Link onClick={()=>{
+                              //setMostraAltroFormConcorsi(false)
+                              ConGareConcorso.style.display="none"
+                              }}>Chiudi Info Gare</Link>
+                          ))
+                        }
                         
                       </Container>
                          </>)}
@@ -358,10 +365,8 @@ const fetchEvento= async ()=>{
                                   }}
                                   value={gareCorseSelezionti}
                                 />
-                                <Link onClick={()=>{
-                                  setFormCorse(false)
-                                  ConGareCorse.style.display="none"
-                                  }}> Chiudi</Link>
+
+                                
                               </Col>
                               <Col>
                               <i className="bi bi-plus-square-fill plusEvento" onClick={()=>{
@@ -370,9 +375,12 @@ const fetchEvento= async ()=>{
                                 //ConGareConcorso.style.display="none"
                               }}>
                                  &nbsp;Aggiungi gara</i><br/>
-                                 {counterCorse>0?(<Link onClick={()=>{
-                                  ConGareCorse.style.display="block"
-                                }}> Mostra dettagli gare corse</Link>):null}
+
+                                 {((evento.listaGareCorse[0].tipo!=="")===true)&&(<Link onClick={()=>{
+                                  if(ConGareCorse!==null||ConGareCorse!==undefined){
+                                    ConGareCorse.style.display="block"
+                                  }
+                                }}> Mostra dettagli gare corse</Link>)}
                               </Col>
                             </Row>
                           </Container>
@@ -474,11 +482,16 @@ const fetchEvento= async ()=>{
                               </Row>
                               )
                           })
-                        }
-                          <Link onClick={()=>{
-                            //setMostraAltroFormConcorsi(false)
-                            ConGareCorse.style.display="none"
+                        }{
+                          ((evento.listaGareCorse[0].genereGara!=="")===true&&(
+                            <Link onClick={()=>{
+                            if(ConGareCorse!==null){
+                              ConGareCorse.style.display="none"
+                            }
                             }}>Chiudi Info Gare</Link>
+                          ))
+                        }
+                          
                         
                       </Container>
                          </>)}
@@ -494,17 +507,7 @@ const fetchEvento= async ()=>{
                           Crea Evento
                         </button>
 
-                        <div className="d-flex justify-content-center text-center mt-4 pt-1">
-                          <a href="#!" className="text-white">
-                            <i className="fab fa-facebook-f fa-lg"></i>
-                          </a>
-                          <a href="#!" className="text-white">
-                            <i className="fab fa-twitter fa-lg mx-4 px-2"></i>
-                          </a>
-                          <a href="#!" className="text-white">
-                            <i className="fab fa-google fa-lg"></i>
-                          </a>
-                        </div>
+
                       </div>
                     </div>
                   </div>

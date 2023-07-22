@@ -4,6 +4,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import RicercaAtleti from "../Ricerche/RicercaAtleti";
+import AccessoNegato from "./AccessoNegato";
 
 const Homepage=()=>{
 
@@ -28,12 +29,12 @@ const Homepage=()=>{
               });
             }
           } catch (error) {
-            console.log("ERRORE! Durante il caricamento di tutti gli utenti")
+            console.log("ERRORE! Durante il caricamento di tutti gli utenti!")
           }
     }
 
-console.log(societa)
-console.log(atleti)
+//console.log(societa)
+//console.log(atleti)
     useEffect(()=>{
         fetchUtenti()
     },[])
@@ -41,10 +42,10 @@ console.log(atleti)
     return(
         <div>
             {(sessionStorage.getItem("username")===null || sessionStorage.getItem("username")==="null" )&&(
-                <div>Non sei loggato per accedere ai contenuti esegui il login o registrati!</div>
+                <AccessoNegato/>
             )}
        
-        {(sessionStorage.getItem("username")!==null)&&(
+        {(sessionStorage.getItem("username")!==null && sessionStorage.getItem("username") !== "null")&&(
             <div>
                 <NavbarAthletix/>
                 <Container className="mt-3">

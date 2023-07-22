@@ -17,7 +17,7 @@ const fetchTuttiUtenti= async()=>{
       setUtenti(data);
     }
   } catch (error) {
-    console.log("ERRORE! Durante il caricamento di tutti gli utenti")
+    console.log("ERRORE! Durante il caricamento di tutti gli utenti!")
   }
   
 }
@@ -95,7 +95,7 @@ useEffect(()=>{
                               setMostraRegSocieta(true);
                               divScelta.style.display = "none";
                             }
-                            console.log(scelta);
+                            //console.log(scelta);
                           }}
                         >
                           Procedi

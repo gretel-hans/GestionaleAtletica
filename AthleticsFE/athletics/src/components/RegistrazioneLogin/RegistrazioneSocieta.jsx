@@ -106,8 +106,7 @@ const RegistrazioneSocieta = (props) => {
                   <div className="form-outline form-white mb-4">
                     <input
                       type="text"
-                      id="nomeSocieta"
-                      className="form-control form-control-lg"
+                      className="form-control form-control-lg inputS"
                       placeholder="Nome società...."
                       value={datiRegistrazione.name}
                       onChange={(e) => {
@@ -123,9 +122,8 @@ const RegistrazioneSocieta = (props) => {
                   {" "}
                   <div className="form-outline form-white mb-4">
                     <input
-                      type="email"
-                      id="indirizzo"
-                      className="form-control form-control-lg"
+                      type="text"
+                      className="form-control form-control-lg inputS"
                       placeholder="Indirizzo...."
                       value={datiRegistrazione.indirizzo.nomeVia}
                       onChange={(e) => {
@@ -145,8 +143,7 @@ const RegistrazioneSocieta = (props) => {
                   <div className="form-outline form-white mb-4">
                     <input
                       type="text"
-                      id="civico"
-                      className="form-control form-control-lg"
+                      className="form-control form-control-lg inputS"
                       placeholder="Civico...."
                       value={datiRegistrazione.indirizzo.civico}
                       onChange={(e) => {
@@ -190,9 +187,8 @@ const RegistrazioneSocieta = (props) => {
                   {" "}
                   <div className="form-outline form-white mb-4">
                     <input
-                      type="email"
-                      id="username"
-                      className="form-control form-control-lg"
+                      type="text"
+                      className="form-control form-control-lg inputS"
                       placeholder="Username...."
                       value={datiRegistrazione.username}
                       onChange={(e) => {
@@ -209,8 +205,7 @@ const RegistrazioneSocieta = (props) => {
                   <div className="form-outline form-white mb-4">
                     <input
                       type="email"
-                      id="email"
-                      className="form-control form-control-lg"
+                      className="form-control form-control-lg inputS"
                       placeholder="Email...."
                       value={datiRegistrazione.email}
                       onChange={(e) => {
@@ -228,8 +223,7 @@ const RegistrazioneSocieta = (props) => {
                     <input
                       required
                       type={mostraPass ? "password" : "text"}
-                      id="password"
-                      className="form-control form-control-lg small-text mb-2"
+                      className="form-control form-control-lg small-text mb-2 inputS"
                       placeholder="Password..."
                       value={datiRegistrazione.password}
                       onChange={(e) => {

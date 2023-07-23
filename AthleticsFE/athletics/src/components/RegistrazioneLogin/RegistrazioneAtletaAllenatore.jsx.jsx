@@ -102,7 +102,7 @@ const RegistrazioneAtletaAllenatore = (props) => {
   return (
     <div>
       <div
-        className="card bg-dark text-white"
+        className="card bg-dark text-white Contenitore"
         style={{ border: "border-radius: 6rem" }}
       >
         <div className="card-body md-p-5 text-center">
@@ -121,8 +121,7 @@ const RegistrazioneAtletaAllenatore = (props) => {
                   <div className="form-outline form-white mb-4">
                     <input
                       type="text"
-                      id="nome"
-                      className="form-control form-control-lg"
+                      className="form-control form-control-lg inputS"
                       placeholder="Nome...."
                       value={datiRegistrazione.name}
                       onChange={(e) => {
@@ -139,8 +138,7 @@ const RegistrazioneAtletaAllenatore = (props) => {
                   <div className="form-outline form-white mb-4">
                     <input
                       type="text"
-                      id="cognome"
-                      className="form-control form-control-lg"
+                      className="form-control form-control-lg inputS"
                       placeholder="Cognome...."
                       value={datiRegistrazione.lastname}
                       onChange={(e) => {
@@ -152,7 +150,7 @@ const RegistrazioneAtletaAllenatore = (props) => {
                     />
                   </div>
                 </Col>
-                <Col className="mb-3 mb-md-0">
+                <Col className="mb-3 mb-md-0 opzioneSelect">
                   <Select
                     placeholder="Seleziona genere..."
                     options={generi}
@@ -180,7 +178,6 @@ const RegistrazioneAtletaAllenatore = (props) => {
                   <div className="form-outline form-white mb-4">
                     <input
                       type="date"
-                      id="civico"
                       className="form-control form-control-lg"
                       value={datiRegistrazione.birthdate}
                       onChange={(e) => {
@@ -219,8 +216,7 @@ const RegistrazioneAtletaAllenatore = (props) => {
                   <div className="form-outline form-white mb-4">
                     <input
                       type="text"
-                      id="username"
-                      className="form-control form-control-lg"
+                      className="form-control form-control-lg inputS"
                       placeholder="Username...."
                       value={datiRegistrazione.username}
                       onChange={(e) => {
@@ -237,8 +233,7 @@ const RegistrazioneAtletaAllenatore = (props) => {
                   <div className="form-outline form-white mb-4">
                     <input
                       type="email"
-                      id="email"
-                      className="form-control form-control-lg"
+                      className="form-control form-control-lg inputS"
                       placeholder="Email...."
                       value={datiRegistrazione.email}
                       onChange={(e) => {
@@ -257,7 +252,7 @@ const RegistrazioneAtletaAllenatore = (props) => {
                       required
                       type={mostraPass ? "password" : "text"}
                       id="password"
-                      className="form-control form-control-lg small-text mb-2"
+                      className="form-control form-control-lg small-text mb-2 inputS"
                       placeholder="Password..."
                       value={datiRegistrazione.password}
                       onChange={(e) => {

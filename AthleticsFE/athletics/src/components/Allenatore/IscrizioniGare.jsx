@@ -151,16 +151,15 @@ const IscrizioniGare = () => {
   }, []);
 
   return (
-    <div>
+    <>
       {(sessionStorage.getItem("username") === null ||
         sessionStorage.getItem("username") === "null") && <AccessoNegato />}
 
       {(sessionStorage.getItem("username") !== null ||
         sessionStorage.getItem("username") !== "null") && (
-        <div>
           <div>
             <NavbarAthletix />
-            <section className="vh-100 gradient-custom">
+            <section className="gradient-custom "  >
               <div className="container h-100">
                 <div className="row d-flex justify-content-center h-100">
                   <div className="col-12 col-md-10">
@@ -399,9 +398,8 @@ const IscrizioniGare = () => {
               </div>
             </section>
           </div>
-        </div>
       )}
-    </div>
+     </>
   );
 };
 

@@ -16,6 +16,7 @@ import RicercaAtleti from './components/Ricerche/RicercaAtleti';
 import RicercaSocieta from './components/Ricerche/RicercaSocieta';
 import EventoSpecifico from './components/Ricerche/EventoSpecifico';
 import PaginaInesistente from './components/HomePage/PaginaInesistente';
+import AthletixFooter from './components/HomePage/AthletixFooter';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path="/eventoSpecifico/:id" element={<EventoSpecifico/>}/>
         <Route path="*" element={<PaginaInesistente/>}/>
       </Routes>
+      <AthletixFooter/>
       </BrowserRouter>
     
     </div>

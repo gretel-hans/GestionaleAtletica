@@ -44,7 +44,7 @@ const RicercaSocieta = () => {
         sessionStorage.getItem("username") !== "null" && (
           <div>
             <NavbarAthletix />
-            <section className="vh-100 gradient-custom">
+            <section className="pb-4 gradient-custom">
               <div className="container h-100">
                 <div className="row d-flex justify-content-center h-100 mt-3">
                   <div className="col-12 col-md-11">

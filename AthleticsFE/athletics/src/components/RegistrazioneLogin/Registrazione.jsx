@@ -27,9 +27,8 @@ const Registrazione = () => {
   let divScelta = document.getElementById("selectOpzione");
 
   return (
-    <div>
       <div>
-        <section className="vh-100 gradient-custom">
+        <section className=" gradient-custom" id="Benvenuto">
           <div className="container py-5 h-100">
             <div className="row d-flex justify-content-center align-items-center h-100">
               <div className="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -55,21 +54,23 @@ const Registrazione = () => {
                             {scelta === undefined && <>Seleziona tipo </>}
                             {scelta !== undefined && <>{scelta} </>}
                           </Dropdown.Toggle>
-                          <Dropdown.Menu className="dropdown-menu dropdown-menu-dark text-light">
-                            <Dropdown.Item onClick={() => setScelta("Atleta")}>
+                          <Dropdown.Menu className="dropdown-menu dropdown-menu-dark text-light menuScelta">
+                            <Dropdown.Item className="d-flex justify-content-center"
+                             onClick={() => setScelta("Atleta")}>
                               Atleta
                             </Dropdown.Item>
-                            <Dropdown.Item
+                            <Dropdown.Item className="d-flex justify-content-center"
                               onClick={() => setScelta("Allenatore")}
                             >
                               Allenatore
                             </Dropdown.Item>
-                            <Dropdown.Item
+                            <Dropdown.Item className="d-flex justify-content-center"
                               onClick={() => setScelta("Atleta e allenatore")}
                             >
                               Atleta e allenatore
                             </Dropdown.Item>
-                            <Dropdown.Item onClick={() => setScelta("Societa")}>
+                            <Dropdown.Item className="d-flex justify-content-center"
+                             onClick={() => setScelta("Societa")}>
                               Società
                             </Dropdown.Item>
                           </Dropdown.Menu>
@@ -119,7 +120,6 @@ const Registrazione = () => {
             </div>
           </div>
         </section>
-      </div>
     </div>
   );
 };

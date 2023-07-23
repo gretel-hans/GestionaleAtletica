@@ -18,15 +18,15 @@ const Benvenuto = () => {
     >
       <div
         id="BenvenutoDivOne"
-        className="d-flex flex-column justify-content-around p-4"
+        className="d-flex flex-column justify-content-around p-4 sfondoErrore"
       >
-        <h1 className="my-0">Benvenuto su Athletix...</h1>
+        <h1 className="my-0"><i>Benvenuto su <b>ATHLETIX...</b></i></h1>
         <div className="d-flex justify-content-evenly">
-          <Button variant="light" onClick={NavigateReg}>
+          <Button variant="light" className="btn-lg btn-outline-dark" onClick={NavigateReg}>
             Registrazione
           </Button>
 
-          <Button variant="dark" onClick={NavigateLog}>
+          <Button variant="dark" className="btn-lg btn-outline-light" onClick={NavigateLog}>
             Login
           </Button>
         </div>

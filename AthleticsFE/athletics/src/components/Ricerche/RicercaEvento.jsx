@@ -41,7 +41,7 @@ const RicercaEvento = () => {
         sessionStorage.getItem("username") !== "null" && (
           <>
             <NavbarAthletix />
-            <section className="vh-100 gradient-custom">
+            <section className="gradient-custom pb-4">
               <div className="container h-100">
                 <div className="row d-flex justify-content-center h-100  mt-3">
                   <div className="col-12 col-md-11">

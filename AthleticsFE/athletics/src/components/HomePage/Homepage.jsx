@@ -44,7 +44,7 @@ const Homepage = () => {
         sessionStorage.getItem("username") !== "null" && (
           <div>
             <NavbarAthletix />
-<h1><b> Benvenuto/a nella Homepage di Athletix!</b></h1>
+<h1 className="my-4"><b> Benvenuto/a nella Homepage di Athletix!</b></h1>
             <section className="gradient-custom pb-4">
               <div className="container h-100">
                 <div className="row d-flex justify-content-center h-100  mt-3">

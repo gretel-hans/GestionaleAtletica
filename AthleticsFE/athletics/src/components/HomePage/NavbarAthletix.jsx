@@ -70,6 +70,7 @@ const NavbarAthletix = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
+            
               <Nav.Link href="#home" onClick={esciAccount}>
                 Logout
               </Nav.Link>
@@ -88,6 +89,9 @@ const NavbarAthletix = () => {
               </Link>
               <Link to="/ricercaSocieta" className="nav-link">
                 Società
+              </Link>
+              <Link to="/Homepage" className="nav-link">
+                Homepage
               </Link>
             </Nav>
           </Navbar.Collapse>

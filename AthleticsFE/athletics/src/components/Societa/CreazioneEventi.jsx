@@ -84,7 +84,7 @@ const CreazioneEventi = () => {
       });
       if (response.ok) {
         alert("Evento creato con successo!");
-        window.location.replace("/Homepage");
+        window.location.replace("/ricercaEventi");
       }
     } catch (error) {
       console.log("ERRORE!! Durante la creazione dell'evento!" + error);

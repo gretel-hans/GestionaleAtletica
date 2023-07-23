@@ -89,9 +89,6 @@ const NavbarAthletix = () => {
               <Link to="/ricercaSocieta" className="nav-link">
                 Società
               </Link>
-              <Link to="/ricercaAtleti" className="nav-link">
-                Atleti
-              </Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

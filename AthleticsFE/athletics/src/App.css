@@ -21,6 +21,10 @@ body{
   color:black!important;
 }
 
+.contenitoreIscrizioni{
+  margin-bottom:17em;
+}
+
 .lead{
   font-weight: 400!important;
 }

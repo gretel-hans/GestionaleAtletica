@@ -159,7 +159,7 @@ const IscrizioniGare = () => {
         sessionStorage.getItem("username") !== "null") && (
           <div>
             <NavbarAthletix />
-            <section className="gradient-custom "  >
+            <section className="gradient-custom contenitoreIscrizioni"  >
               <div className="container h-100">
                 <div className="row d-flex justify-content-center h-100">
                   <div className="col-12 col-md-10">

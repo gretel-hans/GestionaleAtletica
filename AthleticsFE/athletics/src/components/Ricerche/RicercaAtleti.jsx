@@ -44,7 +44,7 @@ const RicercaAtleti = () => {
         sessionStorage.getItem("username") !== "null" && (
           <div>
             <NavbarAthletix />
-
+<h1><b> Benvenuto/a nella Homepage di Athletix!</b></h1>
             <section className="gradient-custom pb-4">
               <div className="container h-100">
                 <div className="row d-flex justify-content-center h-100  mt-3">
@@ -95,7 +95,7 @@ const RicercaAtleti = () => {
 
                     <Container>
                       <Row
-                        className="row-cols-1 row-cols-sm-4 mt-4 justify-content-center"
+                        className="row-cols-1 row-cols-sm-4 mt-4 justify-content-center paginaErrore"
                         id="ricercaAtletiRow"
                       >
                         {risultatoAtleti.map((atleta, index) => {

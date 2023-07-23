@@ -88,7 +88,7 @@ const RicercaSocieta = () => {
 
                     <Container>
                       <Row
-                        className="row-cols-1 row-cols-sm-4 mt-4 justify-content-center"
+                        className="row-cols-1 row-cols-sm-4 mt-4 justify-content-center align-items-center paginaErrore"
                         id="ricercaAtletiRow"
                       >
                         {risultatoSocieta.map((societa, index) => {

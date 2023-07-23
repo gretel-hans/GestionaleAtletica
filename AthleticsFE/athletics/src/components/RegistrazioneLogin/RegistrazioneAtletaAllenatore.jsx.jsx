@@ -5,19 +5,22 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Select from "react-select";
 
-const RegistrazioneAtletaAllenatore=(props)=>{
-    const generi=[{value:"Femmina", label:"Donna"},{value:"Maschio", label:"Uomo"}]
-        const [mostraPass, setMostraPass] = useState(true);
+const RegistrazioneAtletaAllenatore = (props) => {
+  const generi = [
+    { value: "Femmina", label: "Donna" },
+    { value: "Maschio", label: "Uomo" },
+  ];
+  const [mostraPass, setMostraPass] = useState(true);
   const [datiRegistrazione, setDatiRegistrazione] = useState({
     name: "",
-    lastname:"",
+    lastname: "",
     username: "",
     email: "",
     password: "",
-    roles:"",
-    genere:"",
-    birthdate:"",
-    societa:undefined
+    roles: "",
+    genere: "",
+    birthdate: "",
+    societa: undefined,
   });
   const [societa, setSocieta] = useState([]);
 
@@ -31,26 +34,26 @@ const RegistrazioneAtletaAllenatore=(props)=>{
 
   const fetchTutteSocieta = async () => {
     try {
-      
-      let response = await fetch(
-        "http://localhost:8080/athletics/societa"
-      );
+      let response = await fetch("http://localhost:8080/athletics/societa");
       let tutteSocieta = await response.json();
-  
+
       const opzioneSocieta = tutteSocieta.map((societa) => ({
         value: societa,
         label: `${societa.name}`,
       }));
       setSocieta(opzioneSocieta);
-      if(props.tipo==="Allenatore"){
-          setDatiRegistrazione({...datiRegistrazione,roles:["ALLENATORE"]})
-      }else if(props.tipo==="Atleta"){
-          setDatiRegistrazione({...datiRegistrazione,roles:["ATLETA"]})
-      }else if(props.tipo==="Atleta e allenatore"){
-          setDatiRegistrazione({...datiRegistrazione,roles:["ATLETA","ALLENATORE"]})
+      if (props.tipo === "Allenatore") {
+        setDatiRegistrazione({ ...datiRegistrazione, roles: ["ALLENATORE"] });
+      } else if (props.tipo === "Atleta") {
+        setDatiRegistrazione({ ...datiRegistrazione, roles: ["ATLETA"] });
+      } else if (props.tipo === "Atleta e allenatore") {
+        setDatiRegistrazione({
+          ...datiRegistrazione,
+          roles: ["ATLETA", "ALLENATORE"],
+        });
       }
     } catch (error) {
-      console.log("ERRORE!! durante il caricamento di tutte le società!!")
+      console.log("ERRORE!! durante il caricamento di tutte le società!!");
     }
   };
 
@@ -58,40 +61,42 @@ const RegistrazioneAtletaAllenatore=(props)=>{
     fetchTutteSocieta();
   }, []);
 
-  const fetchRegister = async() => {
-    /*if(datiRegistrazione.roles.length!==0){
-        console.log(datiRegistrazione)
-    }*/
-    
+  const fetchRegister = async () => {
     try {
-      let response= await fetch("http://localhost:8080/athletics/register",{
-        method:"POST",
+      let response = await fetch("http://localhost:8080/athletics/register", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body:JSON.stringify(datiRegistrazione)
+        body: JSON.stringify(datiRegistrazione),
       });
-      if(response.ok){
-        alert(`${datiRegistrazione.name} il tuo profilo è stato registrato con successo!`)
-        let responseLogin= await fetch("http://localhost:8080/athletics/login", {
+      if (response.ok) {
+        alert(
+          `${datiRegistrazione.name} il tuo profilo è stato registrato con successo!`
+        );
+        let responseLogin = await fetch(
+          "http://localhost:8080/athletics/login",
+          {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({username:datiRegistrazione.username,password:datiRegistrazione.password}),
-          });
-          if(responseLogin.ok){
-            let token = await responseLogin.json();
-            sessionStorage.setItem("bearerToken",token.accessToken);
-            sessionStorage.setItem("username",token.username);
-            window.location.replace('/Homepage')
+            body: JSON.stringify({
+              username: datiRegistrazione.username,
+              password: datiRegistrazione.password,
+            }),
           }
+        );
+        if (responseLogin.ok) {
+          let token = await responseLogin.json();
+          sessionStorage.setItem("bearerToken", token.accessToken);
+          sessionStorage.setItem("username", token.username);
+          window.location.replace("/Homepage");
+        }
       }
-      
     } catch (error) {
-      console.log("ERRORE!! Durante la registrazione "+error);
+      console.log("ERRORE!! Durante la registrazione " + error);
     }
-     
   };
 
   return (
@@ -103,7 +108,9 @@ const RegistrazioneAtletaAllenatore=(props)=>{
         <div className="card-body md-p-5 text-center">
           <div className="mb-md-5 mt-md-4 pb-0">
             <h1 className="mb-1">ATHLETIX</h1>
-            <h2 className="fw-bold mb-3 text-uppercase">Register {props.tipo}</h2>
+            <h2 className="fw-bold mb-3 text-uppercase">
+              Register {props.tipo}
+            </h2>
             <p className="text-white-50 mb-5">
               Inserisci i tuoi dati per registrarti
             </p>
@@ -147,7 +154,7 @@ const RegistrazioneAtletaAllenatore=(props)=>{
                 </Col>
                 <Col className="mb-3 mb-md-0">
                   <Select
-                  placeholder="Seleziona genere..."
+                    placeholder="Seleziona genere..."
                     options={generi}
                     styles={customStyles}
                     theme={(theme) => ({
@@ -162,7 +169,7 @@ const RegistrazioneAtletaAllenatore=(props)=>{
                     onChange={(e) => {
                       setDatiRegistrazione({
                         ...datiRegistrazione,
-                        genere:e.value,
+                        genere: e.value,
                       });
                     }}
                   />
@@ -179,16 +186,15 @@ const RegistrazioneAtletaAllenatore=(props)=>{
                       onChange={(e) => {
                         setDatiRegistrazione({
                           ...datiRegistrazione,
-                          birthdate: e.target.value
+                          birthdate: e.target.value,
                         });
-                        //console.log(e.value)
                       }}
                     />
                   </div>
-                </Col>    
+                </Col>
                 <Col className="mb-3 mb-md-0">
                   <Select
-                  placeholder="Seleziona società..."
+                    placeholder="Seleziona società..."
                     options={societa}
                     styles={customStyles}
                     theme={(theme) => ({
@@ -203,7 +209,7 @@ const RegistrazioneAtletaAllenatore=(props)=>{
                     onChange={(e) => {
                       setDatiRegistrazione({
                         ...datiRegistrazione,
-                        societa:e.value
+                        societa: e.value,
                       });
                     }}
                   />
@@ -248,7 +254,7 @@ const RegistrazioneAtletaAllenatore=(props)=>{
                   {" "}
                   <div className="form-outline form-white mb-4">
                     <input
-                    required
+                      required
                       type={mostraPass ? "password" : "text"}
                       id="password"
                       className="form-control form-control-lg small-text mb-2"
@@ -265,7 +271,6 @@ const RegistrazioneAtletaAllenatore=(props)=>{
                       className="bi bi-eye mt-3 mostraPass"
                       onClick={() => setMostraPass(!mostraPass)}
                     ></i>
-                    
                   </div>
                 </Col>
               </Row>
@@ -273,22 +278,31 @@ const RegistrazioneAtletaAllenatore=(props)=>{
 
             <button
               className="btn btn-outline-light btn-lg px-5 mt-4"
-              onClick={()=>{
-                let c=0;
-                props.listaUtenti.forEach(utente => {
-                  if(datiRegistrazione.email===utente.email || datiRegistrazione.username===utente.username){
+              onClick={() => {
+                let c = 0;
+                props.listaUtenti.forEach((utente) => {
+                  if (
+                    datiRegistrazione.email === utente.email ||
+                    datiRegistrazione.username === utente.username
+                  ) {
                     c++;
                   }
                 });
-                if(c===0){
-                  if (datiRegistrazione.email.length>5&&datiRegistrazione.name.length!==0&&datiRegistrazione.username.length!==0&&datiRegistrazione.password.length!==0&&datiRegistrazione.birthdate.length!==0&&datiRegistrazione.societa!==undefined){
-                    //console.log("passato"+props.tipo)
-                    fetchRegister()
-                  }else{
-                    alert("Riempi tutti i campi!")
+                if (c === 0) {
+                  if (
+                    datiRegistrazione.email.length > 5 &&
+                    datiRegistrazione.name.length !== 0 &&
+                    datiRegistrazione.username.length !== 0 &&
+                    datiRegistrazione.password.length !== 0 &&
+                    datiRegistrazione.birthdate.length !== 0 &&
+                    datiRegistrazione.societa !== undefined
+                  ) {
+                    fetchRegister();
+                  } else {
+                    alert("Riempi tutti i campi!");
                   }
-                }else{
-                  alert("Username e/o email già esistenti!")
+                } else {
+                  alert("Username e/o email già esistenti!");
                 }
               }}
             >
@@ -317,7 +331,6 @@ const RegistrazioneAtletaAllenatore=(props)=>{
       </div>
     </div>
   );
-    
-}
+};
 
 export default RegistrazioneAtletaAllenatore;

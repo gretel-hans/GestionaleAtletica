@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { Button, Container, Row, Col } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import NavbarAthletix from "../HomePage/NavbarAthletix";
 import Card from "react-bootstrap/Card";
 import AccessoNegato from "../HomePage/AccessoNegato";
@@ -9,7 +11,7 @@ const RicercaSocieta = () => {
   const [risultatoSocieta, setRisultatoSocieta] = useState([]);
   const [inputBarra, setInputBarra] = useState("");
   const [nessunRisultato, setNessunRisultato] = useState(false);
-  let risultatoFiltrato=[];
+  let risultatoFiltrato = [];
 
   const fetchSocieta = async () => {
     try {
@@ -24,100 +26,104 @@ const RicercaSocieta = () => {
         setRisultatoSocieta(data);
       }
     } catch (error) {
-      console.log("ERRORE! Durante il caricamento di tutte le società!"+error);
+      console.log(
+        "ERRORE! Durante il caricamento di tutte le società!" + error
+      );
     }
   };
-  //console.log(utenteAtleta)
   useEffect(() => {
     fetchSocieta();
-
   }, []);
 
   return (
     <>
       {(sessionStorage.getItem("username") === null ||
-        sessionStorage.getItem("username") === "null") && (
-          <AccessoNegato/>
-      )}
+        sessionStorage.getItem("username") === "null") && <AccessoNegato />}
 
-      {(sessionStorage.getItem("username") !== null && sessionStorage.getItem("username") !== "null") && (
-        <div>
-          <NavbarAthletix />
-          <section className="vh-100 gradient-custom">
-            <div className="container h-100">
-              <div className="row d-flex justify-content-center h-100 mt-3">
-                <div className="col-12 col-md-11">
-                  <form className="d-flex" role="search">
-                    <input
-                      className="form-control me-2"
-                      type="search"
-                      value={inputBarra}
-                      placeholder="Ricerca società..."
-                      aria-label="Search"
-                      onChange={(e) => {;
-                        setInputBarra(e.target.value);
-                        let c=0
-                        societa.forEach((societa, index) => {
-                          if (
-                            (societa.name.toLowerCase()).includes(e.target.value.toLocaleLowerCase())
-                          ) {
-                            risultatoFiltrato.push(societa)
-                            setRisultatoSocieta(risultatoFiltrato);
-                            setNessunRisultato(false)
-                          }else{
-                            risultatoFiltrato.push(undefined)
-                            setRisultatoSocieta(risultatoFiltrato);
-                            c++
+      {sessionStorage.getItem("username") !== null &&
+        sessionStorage.getItem("username") !== "null" && (
+          <div>
+            <NavbarAthletix />
+            <section className="vh-100 gradient-custom">
+              <div className="container h-100">
+                <div className="row d-flex justify-content-center h-100 mt-3">
+                  <div className="col-12 col-md-11">
+                    <form className="d-flex" role="search">
+                      <input
+                        className="form-control me-2"
+                        type="search"
+                        value={inputBarra}
+                        placeholder="Ricerca società..."
+                        aria-label="Search"
+                        onChange={(e) => {
+                          setInputBarra(e.target.value);
+                          let c = 0;
+                          societa.forEach((societa, index) => {
+                            if (
+                              societa.name
+                                .toLowerCase()
+                                .includes(e.target.value.toLocaleLowerCase())
+                            ) {
+                              risultatoFiltrato.push(societa);
+                              setRisultatoSocieta(risultatoFiltrato);
+                              setNessunRisultato(false);
+                            } else {
+                              risultatoFiltrato.push(undefined);
+                              setRisultatoSocieta(risultatoFiltrato);
+                              c++;
+                            }
+                          });
+                          if (c === risultatoSocieta.length) {
+                            setNessunRisultato(true);
                           }
-                        });
-                        if(c===risultatoSocieta.length){
-                          setNessunRisultato(true)
-                        }
-                      }}
-                    />
+                        }}
+                      />
+                    </form>
 
-                  </form>
+                    {nessunRisultato && (
+                      <>
+                        <h1>La società cercata non è stato trovato!!</h1>
+                      </>
+                    )}
 
-                  {nessunRisultato&&(
-  <>
-  <h1>La società cercata non è stato trovato!!</h1>
-  </>
-)}
-
-                  <Container>
-                    <Row className="row-cols-1 row-cols-sm-4 mt-4 justify-content-center" id="ricercaAtletiRow">
-                      {risultatoSocieta.map((societa, index) => {
-                        if(societa!==undefined){
-                        return (
-                          <Col
-                            className="card m-1 cardPagine"
-                            style={{ width: "14rem", height:"15em" }}
-                            key={index}
-                          >
-                            <Card.Body>
-                              <Card.Title>Società</Card.Title>
-                              <Card.Text>
-                                 <b>{societa.name}</b>
-                                <br />
-                                Regione: {societa.indirizzo.comune.provinca.regione}
-                                <br />
-                                Provincia: {societa.indirizzo.comune.provinca.nome}
-                                <br/>
-                              </Card.Text>
-                            </Card.Body>
-                          </Col>
-                        );
-                        }
-                      })}
-                    </Row>
-                  </Container>
-                  
+                    <Container>
+                      <Row
+                        className="row-cols-1 row-cols-sm-4 mt-4 justify-content-center"
+                        id="ricercaAtletiRow"
+                      >
+                        {risultatoSocieta.map((societa, index) => {
+                          if (societa !== undefined) {
+                            return (
+                              <Col
+                                className="card m-1 cardPagine"
+                                style={{ width: "14rem", height: "15em" }}
+                                key={index}
+                              >
+                                <Card.Body>
+                                  <Card.Title>Società</Card.Title>
+                                  <Card.Text>
+                                    <b>{societa.name}</b>
+                                    <br />
+                                    Regione:{" "}
+                                    {societa.indirizzo.comune.provinca.regione}
+                                    <br />
+                                    Provincia:{" "}
+                                    {societa.indirizzo.comune.provinca.nome}
+                                    <br />
+                                  </Card.Text>
+                                </Card.Body>
+                              </Col>
+                            );
+                          }
+                        })}
+                      </Row>
+                    </Container>
+                  </div>
                 </div>
               </div>
-            </div>
-          </section>
-        </div>
-      )}
+            </section>
+          </div>
+        )}
     </>
   );
 };

@@ -5,33 +5,27 @@ import RegistrazioneAtletaAllenatore from "./RegistrazioneAtletaAllenatore.jsx";
 import RegistrazioneSocieta from "./RegistrazioneSocieta.jsx";
 
 const Registrazione = () => {
-
-  
-
-const [utenti,setUtenti]=useState([]);
-const fetchTuttiUtenti= async()=>{
-  try {
-    let response=await fetch("http://localhost:8080/athletics/utenti");
-    if(response.ok){
-      let data=await response.json();
-      setUtenti(data);
+  const [utenti, setUtenti] = useState([]);
+  const fetchTuttiUtenti = async () => {
+    try {
+      let response = await fetch("http://localhost:8080/athletics/utenti");
+      if (response.ok) {
+        let data = await response.json();
+        setUtenti(data);
+      }
+    } catch (error) {
+      console.log("ERRORE! Durante il caricamento di tutti gli utenti!");
     }
-  } catch (error) {
-    console.log("ERRORE! Durante il caricamento di tutti gli utenti!")
-  }
-  
-}
-useEffect(()=>{
-  fetchTuttiUtenti();
-},[])
+  };
+  useEffect(() => {
+    fetchTuttiUtenti();
+  }, []);
   const [scelta, setScelta] = useState();
   const [mostraRegSocieta, setMostraRegSocieta] = useState(false);
   const [mostraRegPersona, setMostraRegPersona] = useState(false);
 
   let divScelta = document.getElementById("selectOpzione");
-  const cambiaScelta = (e) => {
-    setScelta(e.target.value);
-  };
+
   return (
     <div>
       <div>
@@ -54,32 +48,32 @@ useEffect(()=>{
                         </p>
 
                         <Dropdown>
-                        <Dropdown.Toggle
-                          id="tipoDropdown"
-                          className="btn-light"
-                        >
-                          {scelta === undefined && <>Seleziona tipo </>}
-                          {scelta !== undefined && <>{scelta} </>}
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu className="dropdown-menu dropdown-menu-dark text-light">
-                          <Dropdown.Item onClick={() => setScelta("Atleta")}>
-                            Atleta
-                          </Dropdown.Item>
-                          <Dropdown.Item
-                            onClick={() => setScelta("Allenatore")}
+                          <Dropdown.Toggle
+                            id="tipoDropdown"
+                            className="btn-light"
                           >
-                            Allenatore
-                          </Dropdown.Item>
-                          <Dropdown.Item
-                            onClick={() => setScelta("Atleta e allenatore")}
-                          >
-                            Atleta e allenatore
-                          </Dropdown.Item>
-                          <Dropdown.Item onClick={() => setScelta("Societa")}>
-                            Società
-                          </Dropdown.Item>
-                        </Dropdown.Menu>
-                      </Dropdown>
+                            {scelta === undefined && <>Seleziona tipo </>}
+                            {scelta !== undefined && <>{scelta} </>}
+                          </Dropdown.Toggle>
+                          <Dropdown.Menu className="dropdown-menu dropdown-menu-dark text-light">
+                            <Dropdown.Item onClick={() => setScelta("Atleta")}>
+                              Atleta
+                            </Dropdown.Item>
+                            <Dropdown.Item
+                              onClick={() => setScelta("Allenatore")}
+                            >
+                              Allenatore
+                            </Dropdown.Item>
+                            <Dropdown.Item
+                              onClick={() => setScelta("Atleta e allenatore")}
+                            >
+                              Atleta e allenatore
+                            </Dropdown.Item>
+                            <Dropdown.Item onClick={() => setScelta("Societa")}>
+                              Società
+                            </Dropdown.Item>
+                          </Dropdown.Menu>
+                        </Dropdown>
 
                         <button
                           className="btn btn-outline-light btn-lg px-5 mt-4 "
@@ -95,7 +89,6 @@ useEffect(()=>{
                               setMostraRegSocieta(true);
                               divScelta.style.display = "none";
                             }
-                            //console.log(scelta);
                           }}
                         >
                           Procedi
@@ -109,12 +102,15 @@ useEffect(()=>{
                     </div>
                     {mostraRegSocieta && (
                       <>
-                        <RegistrazioneSocieta listaUtenti={utenti}/>
+                        <RegistrazioneSocieta listaUtenti={utenti} />
                       </>
                     )}
                     {mostraRegPersona && (
                       <>
-                        <RegistrazioneAtletaAllenatore listaUtenti={utenti} tipo={scelta}/>
+                        <RegistrazioneAtletaAllenatore
+                          listaUtenti={utenti}
+                          tipo={scelta}
+                        />
                       </>
                     )}
                   </div>

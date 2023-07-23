@@ -59,10 +59,12 @@ const IscrizioniGare = () => {
     useState(false);
 
   let ContIscrizioni = document.getElementById("ContainerDettagliIscrizioni");
-  const [iscrizioniGare, setIscrizioniGare] = useState([{
-    gara: "",
-    atletiPartecipanti: [{}],
-  }]);
+  const [iscrizioniGare, setIscrizioniGare] = useState([
+    {
+      gara: "",
+      atletiPartecipanti: [{}],
+    },
+  ]);
 
   const customStyles = {
     option: (provided, state) => ({
@@ -87,70 +89,71 @@ const IscrizioniGare = () => {
         }));
         setListaEventi(opzioniEventi);
       }
-      
     } catch (error) {
-      console.log("ERRORE!! "+error)
+      console.log("ERRORE!! " + error);
     }
   };
 
-  const iscrizioneGaraFetch= async(iscrizione,garaCorsa)=>{
+  const iscrizioneGaraFetch = async (iscrizione, garaCorsa) => {
     try {
-        let url=garaCorsa?"/gareCorse":"/gareConcorsi";
-        let response=await fetch(`http://localhost:8080/athletics/iscrizioni${url}`,{
-            method:'POST',
-            body:JSON.stringify(iscrizione),
-            headers:{
-                Authorization:"Bearer "+sessionStorage.getItem("bearerToken"),
-                'content-type':'application/json'
-            }
-        })
-        if(response.ok){
-            alert("Iscrizioni effettuate con successo!")
-            let data=await response.json()
-            window.location.replace(`eventoSpecifico/${eventoSelezionato.value.id}`)
+      let url = garaCorsa ? "/gareCorse" : "/gareConcorsi";
+      let response = await fetch(
+        `http://localhost:8080/athletics/iscrizioni${url}`,
+        {
+          method: "POST",
+          body: JSON.stringify(iscrizione),
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("bearerToken"),
+            "content-type": "application/json",
+          },
         }
-    } catch (error) {
-        console.log("ERRORE!! "+error)
-    }
-  }
-
-  const fetchAtleti=async()=>{
-
-    try {
-      
-      let response= await fetch("http://localhost:8080/athletics/atleti/cercaAtletiConS",{
-          method:"POST",
-          body:sessionStorage.getItem("bearerToken"),
-          headers:{
-              Authorization:"Bearer "+sessionStorage.getItem("bearerToken"),
-              'Content-Type':"text/plain"
-          }
-      })
-      if(response.ok){
-          let data= await response.json();
-         // console.log(data)
-          const opzioniAtleti=data.map((atleta)=>({
-              value:atleta, label:`${atleta.name} ${atleta.lastname} ${atleta.age} ${atleta.genere}`
-          }));
-          setListaAtleti(opzioniAtleti)
-          
+      );
+      if (response.ok) {
+        alert("Iscrizioni effettuate con successo!");
+        window.location.replace(
+          `eventoSpecifico/${eventoSelezionato.value.id}`
+        );
       }
     } catch (error) {
-      console.log("ERRORE!! "+error)
+      console.log("ERRORE!! " + error);
     }
-  }
+  };
+
+  const fetchAtleti = async () => {
+    try {
+      let response = await fetch(
+        "http://localhost:8080/athletics/atleti/cercaAtletiConS",
+        {
+          method: "POST",
+          body: sessionStorage.getItem("bearerToken"),
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("bearerToken"),
+            "Content-Type": "text/plain",
+          },
+        }
+      );
+      if (response.ok) {
+        let data = await response.json();
+        const opzioniAtleti = data.map((atleta) => ({
+          value: atleta,
+          label: `${atleta.name} ${atleta.lastname} ${atleta.age} ${atleta.genere}`,
+        }));
+        setListaAtleti(opzioniAtleti);
+      }
+    } catch (error) {
+      console.log("ERRORE!! " + error);
+    }
+  };
 
   useEffect(() => {
     fetchTuttiEventi();
-    fetchAtleti()
+    fetchAtleti();
   }, []);
 
   return (
     <div>
       {(sessionStorage.getItem("username") === null ||
-        sessionStorage.getItem("username") === "null") && (
-          <AccessoNegato/>
-      )}
+        sessionStorage.getItem("username") === "null") && <AccessoNegato />}
 
       {(sessionStorage.getItem("username") !== null ||
         sessionStorage.getItem("username") !== "null") && (
@@ -195,7 +198,6 @@ const IscrizioniGare = () => {
                                 ...e.value.listaGareCorse,
                                 ...e.value.listaGareConcorsi,
                               ];
-                              //console.log(gareMiste)
                               const o = gareMiste.map((gara) => ({
                                 value: gara,
                                 label: `${gara.tipo} - ${gara.categoria} - ${gara.genereGara}`,
@@ -204,7 +206,6 @@ const IscrizioniGare = () => {
                               setMostraDettagliIscrizioni(false);
                               setCounter(0);
                             }}
-                            //console.log(selezioniGare.listaGareConcorsi[index])
                           />
 
                           <i
@@ -272,17 +273,27 @@ const IscrizioniGare = () => {
                                                 primary: "black",
                                               },
                                             })}
-                                           onChange={(e)=>{
-                                             if (!iscrizioniGare[index]) {
-                                               iscrizioniGare[index] = { gara: "", atletiPartecipanti: [{}] };
+                                            onChange={(e) => {
+                                              if (!iscrizioniGare[index]) {
+                                                iscrizioniGare[index] = {
+                                                  gara: "",
+                                                  atletiPartecipanti: [{}],
+                                                };
                                               }
-                                              let iscrizioneUpdated=[...iscrizioniGare]
-                                              iscrizioneUpdated[index]={gara:e.value,atletiPartecipanti:iscrizioneUpdated[index].atletiPartecipanti};
-                                              setIscrizioniGare(iscrizioneUpdated);
-                                              //console.log(index)
+                                              let iscrizioneUpdated = [
+                                                ...iscrizioniGare,
+                                              ];
+                                              iscrizioneUpdated[index] = {
+                                                gara: e.value,
+                                                atletiPartecipanti:
+                                                  iscrizioneUpdated[index]
+                                                    .atletiPartecipanti,
+                                              };
+                                              setIscrizioniGare(
+                                                iscrizioneUpdated
+                                              );
                                             }}
                                           />
-                                            
                                         </Col>
                                         <Col>
                                           <Select
@@ -302,18 +313,31 @@ const IscrizioniGare = () => {
                                                 primary: "black",
                                               },
                                             })}
-                                            onChange={(e)=>{
-                                                if (!iscrizioniGare[index]) {
-                                                    iscrizioniGare[index] = { gara: "", atletiPartecipanti: [{}] };
-                                                  }
-                                                let listaAtletiSelezionati=[];
-                                                e.forEach((atleta)=>{
-                                                    listaAtletiSelezionati.push(atleta.value)
-                                                })
-                                                let iscrizioneUpdated=[...iscrizioniGare]
-                                                iscrizioneUpdated[index]={atletiPartecipanti:listaAtletiSelezionati, gara:iscrizioneUpdated[index].gara};
-                                                setIscrizioniGare(iscrizioneUpdated);
-                                                //console.log(listaAtletiSelezionati)
+                                            onChange={(e) => {
+                                              if (!iscrizioniGare[index]) {
+                                                iscrizioniGare[index] = {
+                                                  gara: "",
+                                                  atletiPartecipanti: [{}],
+                                                };
+                                              }
+                                              let listaAtletiSelezionati = [];
+                                              e.forEach((atleta) => {
+                                                listaAtletiSelezionati.push(
+                                                  atleta.value
+                                                );
+                                              });
+                                              let iscrizioneUpdated = [
+                                                ...iscrizioniGare,
+                                              ];
+                                              iscrizioneUpdated[index] = {
+                                                atletiPartecipanti:
+                                                  listaAtletiSelezionati,
+                                                gara: iscrizioneUpdated[index]
+                                                  .gara,
+                                              };
+                                              setIscrizioniGare(
+                                                iscrizioneUpdated
+                                              );
                                             }}
                                           />
                                         </Col>
@@ -336,23 +360,33 @@ const IscrizioniGare = () => {
 
                           <button
                             className="btn btn-outline-light btn-lg px-5 mt-4"
-                            onClick={()=>{
-                                //console.log(iscrizioniGare)
-                                iscrizioniGare.forEach((iscrizione)=>{
-                                    gareCorse.forEach((gara)=>{
-                                        if(iscrizione.gara.tipo===gara){
-                                            //console.log("Gara di corsa")
-                                            iscrizioneGaraFetch({garaCorsa:iscrizione.gara,atletiPartecipanti:iscrizione.atletiPartecipanti},true)
-                                        }
-                                    })
-                                    gareConcorsi.forEach((gara)=>{
-                                        if(iscrizione.gara.tipo===gara){
-                                            //console.log("Gara concorso")
-                                            iscrizioneGaraFetch({garaConcorso:iscrizione.gara,atletiPartecipanti:iscrizione.atletiPartecipanti},false)
-                                        }
-                                    })
-
-                                })
+                            onClick={() => {
+                              iscrizioniGare.forEach((iscrizione) => {
+                                gareCorse.forEach((gara) => {
+                                  if (iscrizione.gara.tipo === gara) {
+                                    iscrizioneGaraFetch(
+                                      {
+                                        garaCorsa: iscrizione.gara,
+                                        atletiPartecipanti:
+                                          iscrizione.atletiPartecipanti,
+                                      },
+                                      true
+                                    );
+                                  }
+                                });
+                                gareConcorsi.forEach((gara) => {
+                                  if (iscrizione.gara.tipo === gara) {
+                                    iscrizioneGaraFetch(
+                                      {
+                                        garaConcorso: iscrizione.gara,
+                                        atletiPartecipanti:
+                                          iscrizione.atletiPartecipanti,
+                                      },
+                                      false
+                                    );
+                                  }
+                                });
+                              });
                             }}
                           >
                             Conferma iscrizioni

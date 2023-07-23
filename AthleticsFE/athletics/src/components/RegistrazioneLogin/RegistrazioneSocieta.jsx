@@ -30,20 +30,19 @@ const RegistrazioneSocieta = (props) => {
   };
 
   const fetchTuttiComuni = async () => {
-
     try {
       let response = await fetch(
         "http://localhost:8080/athletics/indirizzi/comuni"
       );
       let tuttiComuni = await response.json();
-  
+
       const opzioneComune = tuttiComuni.map((comune) => ({
         value: comune,
         label: `${comune.nomeComune}`,
       }));
       setComuni(opzioneComune);
     } catch (error) {
-      console.log("ERRORE!! Durante il caricamento di tutti i comuni!"+error);
+      console.log("ERRORE!! Durante il caricamento di tutti i comuni!" + error);
     }
   };
 
@@ -51,37 +50,40 @@ const RegistrazioneSocieta = (props) => {
     fetchTuttiComuni();
   }, []);
 
-  const fetchRegister = async() => {
+  const fetchRegister = async () => {
     try {
-      let response= await fetch("http://localhost:8080/athletics/register",{
-        method:"POST",
+      let response = await fetch("http://localhost:8080/athletics/register", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body:JSON.stringify(datiRegistrazione)
+        body: JSON.stringify(datiRegistrazione),
       });
-      if(response.ok){
-        alert("La tua società è stata registrata con successo! ")
-        let responseLogin= await fetch("http://localhost:8080/athletics/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({username:datiRegistrazione.username,password:datiRegistrazione.password}),
-        });
-        if(responseLogin.ok){
+      if (response.ok) {
+        alert("La tua società è stata registrata con successo! ");
+        let responseLogin = await fetch(
+          "http://localhost:8080/athletics/login",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              username: datiRegistrazione.username,
+              password: datiRegistrazione.password,
+            }),
+          }
+        );
+        if (responseLogin.ok) {
           let token = await responseLogin.json();
-          sessionStorage.setItem("bearerToken",token.accessToken);
-          sessionStorage.setItem("username",token.username);
-          window.location.replace('/Homepage')
+          sessionStorage.setItem("bearerToken", token.accessToken);
+          sessionStorage.setItem("username", token.username);
+          window.location.replace("/Homepage");
         }
       }
-
-      
     } catch (error) {
-      console.log("ERRORE!! Durante la registrazione!!"+error);
+      console.log("ERRORE!! Durante la registrazione!!" + error);
     }
-     
   };
 
   return (
@@ -155,14 +157,13 @@ const RegistrazioneSocieta = (props) => {
                             civico: e.target.value,
                           },
                         });
-                        //console.log(e.value)
                       }}
                     />
                   </div>
                 </Col>
                 <Col className="mb-3 mb-md-0">
                   <Select
-                  placeholder="Seleziona comune..."
+                    placeholder="Seleziona comune..."
                     options={comuni}
                     styles={customStyles}
                     theme={(theme) => ({
@@ -174,7 +175,6 @@ const RegistrazioneSocieta = (props) => {
                         primary: "black",
                       },
                     })}
-                    //value={datiRegistrazione.indirizzo.comune}
                     onChange={(e) => {
                       setDatiRegistrazione({
                         ...datiRegistrazione,
@@ -226,7 +226,7 @@ const RegistrazioneSocieta = (props) => {
                   {" "}
                   <div className="form-outline form-white mb-4">
                     <input
-                    required
+                      required
                       type={mostraPass ? "password" : "text"}
                       id="password"
                       className="form-control form-control-lg small-text mb-2"
@@ -250,22 +250,32 @@ const RegistrazioneSocieta = (props) => {
 
             <button
               className="btn btn-outline-light btn-lg px-5 mt-4"
-              onClick={()=>{
-                let c=0;
-                props.listaUtenti.forEach(utente => {
-                  if(datiRegistrazione.email===utente.email || datiRegistrazione.username===utente.username){
+              onClick={() => {
+                let c = 0;
+                props.listaUtenti.forEach((utente) => {
+                  if (
+                    datiRegistrazione.email === utente.email ||
+                    datiRegistrazione.username === utente.username
+                  ) {
                     c++;
                   }
                 });
-                if(c==0){
-                  if (datiRegistrazione.email.length>5&&datiRegistrazione.name.length!==0&&datiRegistrazione.username.length!==0&&datiRegistrazione.password.length!==0&&datiRegistrazione.indirizzo.nomeVia.length!==0&&datiRegistrazione.indirizzo.civico.length!==0&&datiRegistrazione.indirizzo.comune!==null){
-                   
-                    fetchRegister()
-                  }else{
-                    alert("Riempi tutti i campi!")
+                if (c == 0) {
+                  if (
+                    datiRegistrazione.email.length > 5 &&
+                    datiRegistrazione.name.length !== 0 &&
+                    datiRegistrazione.username.length !== 0 &&
+                    datiRegistrazione.password.length !== 0 &&
+                    datiRegistrazione.indirizzo.nomeVia.length !== 0 &&
+                    datiRegistrazione.indirizzo.civico.length !== 0 &&
+                    datiRegistrazione.indirizzo.comune !== null
+                  ) {
+                    fetchRegister();
+                  } else {
+                    alert("Riempi tutti i campi!");
                   }
-                }else{
-                  alert("Username e/o email già esistenti!")
+                } else {
+                  alert("Username e/o email già esistenti!");
                 }
               }}
             >

@@ -11,16 +11,15 @@ const NavbarAthletix = () => {
   const [societa, setSocieta] = useState(false);
   const [atleta, setAtleta] = useState(false);
 
-const verificaRuoli=(ruoli)=>{
-  ruoli.forEach((ruolo,index) => {
-    if(ruolo.roleName==="ROLE_ATLETA"){
-      setAtleta(true)
-    }else if(ruolo.roleName==="ROLE_ALLENATORE"){
-      setAllenatore(true)
-    }else if(ruolo.roleName==="ROLE_SOCIETA")
-    setSocieta(true)
-  });
-}
+  const verificaRuoli = (ruoli) => {
+    ruoli.forEach((ruolo, index) => {
+      if (ruolo.roleName === "ROLE_ATLETA") {
+        setAtleta(true);
+      } else if (ruolo.roleName === "ROLE_ALLENATORE") {
+        setAllenatore(true);
+      } else if (ruolo.roleName === "ROLE_SOCIETA") setSocieta(true);
+    });
+  };
 
   const fetchUtente = async (u, t) => {
     try {
@@ -44,11 +43,11 @@ const verificaRuoli=(ruoli)=>{
     }
   };
 
-  const esciAccount=()=>{
-    sessionStorage.setItem("username",null)
-    sessionStorage.setItem("bearerToken",null)
-    window.location.replace("/Login")
-  }
+  const esciAccount = () => {
+    sessionStorage.setItem("username", null);
+    sessionStorage.setItem("bearerToken", null);
+    window.location.replace("/Login");
+  };
 
   useEffect(() => {
     let username = sessionStorage.getItem("username");
@@ -56,8 +55,6 @@ const verificaRuoli=(ruoli)=>{
     fetchUtente(username, token);
   }, []);
 
-
- 
   return (
     <>
       <Navbar
@@ -73,17 +70,28 @@ const verificaRuoli=(ruoli)=>{
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#home" onClick={esciAccount}>Logout</Nav.Link>
-              {societa&&(
-                <Link to="/creaEvento" className="nav-link">Crea Evento</Link>
+              <Nav.Link href="#home" onClick={esciAccount}>
+                Logout
+              </Nav.Link>
+              {societa && (
+                <Link to="/creaEvento" className="nav-link">
+                  Crea Evento
+                </Link>
               )}
-              {allenatore&&(
-                <Link to="/IscrizioniGare" className="nav-link">Effettua iscrizioni</Link>
+              {allenatore && (
+                <Link to="/IscrizioniGare" className="nav-link">
+                  Effettua iscrizioni
+                </Link>
               )}
-              <Link to="/ricercaEventi" className="nav-link">Eventi</Link>
-              <Link to="/ricercaSocieta" className="nav-link">Società</Link>
-              <Link to="/ricercaAtleti" className="nav-link">Atleti</Link>
-
+              <Link to="/ricercaEventi" className="nav-link">
+                Eventi
+              </Link>
+              <Link to="/ricercaSocieta" className="nav-link">
+                Società
+              </Link>
+              <Link to="/ricercaAtleti" className="nav-link">
+                Atleti
+              </Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import NavbarAthletix from "../HomePage/NavbarAthletix";
+import NavbarAthletix from "./NavbarAthletix";
 import Card from "react-bootstrap/Card";
-import AccessoNegato from "../HomePage/AccessoNegato";
+import AccessoNegato from "./AccessoNegato";
 
-const RicercaAtleti = () => {
+const Homepage = () => {
   const [atleti, setAtleti] = useState([]);
   const [risultatoAtleti, setRisultatoAtleti] = useState([]);
   const [inputBarra, setInputBarra] = useState("");
@@ -137,4 +137,4 @@ const RicercaAtleti = () => {
   );
 };
 
-export default RicercaAtleti;
+export default Homepage;

@@ -11,11 +11,11 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import CreazioneEventi from './components/Societa/CreazioneEventi';
 import IscrizioniGare from './components/Allenatore/IscrizioniGare';
 import RicercaEvento from './components/Ricerche/RicercaEvento';
-import RicercaAtleti from './components/Ricerche/RicercaAtleti';
 import RicercaSocieta from './components/Ricerche/RicercaSocieta';
 import EventoSpecifico from './components/Ricerche/EventoSpecifico';
 import PaginaInesistente from './components/HomePage/PaginaInesistente';
 import AthletixFooter from './components/HomePage/AthletixFooter';
+import Homepage from './components/HomePage/Homepage';
 
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
         <Route path="/" element={<Benvenuto/>}/>
         <Route path="/Registrazione" element={<Registrazione/>}/>
         <Route path="/Login" element={<Login/>}/>
-        <Route path="/Homepage" element={<RicercaAtleti/>}/>
+        <Route path="/Homepage" element={<Homepage/>}/>
         <Route path="/creaEvento" element={<CreazioneEventi/>}/>
         <Route path="/IscrizioniGare" element={<IscrizioniGare/>}/>
         <Route path="/ricercaEventi" element={<RicercaEvento/>}/>

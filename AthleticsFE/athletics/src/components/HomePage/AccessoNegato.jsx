@@ -4,8 +4,8 @@ const AccessoNegato = () => {
   return (
     <div className="d-flex align-items-center justify-content-center vh-100 paginaErrore">
       <div className="text-center sfondoErrore">
-        <h1 className="display-1 fw-bold ">401</h1>
-        <p className="fs-3 text-danger">Accesso negato.</p>
+        <h1 className="display-1 fw-bold titoli">401</h1>
+        <p className="fs-3 text-danger titoli">Accesso negato.</p>
         <p className="lead">
           Per poter accedere ai contenuti di Athletix devi effettuare l'accesso!
         </p>

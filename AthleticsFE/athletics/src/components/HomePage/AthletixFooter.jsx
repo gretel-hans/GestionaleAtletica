@@ -14,16 +14,16 @@ const AthletixFooter=()=>{
 <footer className="text-center text-light pt-4 mt-5" id="footerAthletix">
 
 
-    <Container className="container text-center mt-0">
+    <Container className="container text-center my-0">
       <Row className="row mt-3 row-cols-1 ">
         <Col>
-        <h6 className="text-uppercase fw-bold mb-3">Repository</h6>
+        <h6 className="text-uppercase fw-bold mb-3 titoli">Repository</h6>
           <p>
           <Link to="https://github.com/gretel-hans" target={"_blank"}>Gretel-hans</Link>
              </p>
           </Col>
           <Col>
-          <h6 className="text-uppercase fw-bold mb-3">Contatti</h6>
+          <h6 className="text-uppercase fw-bold mb-3 titoli">Contatti</h6>
           <p><i className="fas fa-home me-3"></i> Adjei Hansel Sarpong</p>
           <p>
             <Link to="mailto:adjeihansel@icloud.com">adjeihansel@icloud.com</Link>
@@ -35,7 +35,7 @@ const AthletixFooter=()=>{
       </Row>
     </Container>
   <hr></hr>
-  <div className="text-center p-4">
+  <div className="text-center p-4 titoli">
     © {dataAttuale} Copyright:&nbsp;<u>Athletix</u>
   </div>
 </footer>

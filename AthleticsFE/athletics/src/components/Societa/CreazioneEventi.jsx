@@ -48,7 +48,7 @@ const CreazioneEventi = () => {
   };
 
   const [evento, setEvento] = useState({
-    codice: sessionStorage.getItem("bearerToken"),
+    codice: localStorage.getItem("bearerToken"),
     nomeEvento: "",
     dataEvento: "",
     listaGareCorse: [
@@ -77,7 +77,7 @@ const CreazioneEventi = () => {
       let response = await fetch("http://localhost:8080/athletics/eventi", {
         method: "POST",
         headers: {
-          Authorization: "Bearer " + sessionStorage.getItem("bearerToken"),
+          Authorization: "Bearer " + localStorage.getItem("bearerToken"),
           "Content-Type": "application/json",
         },
         body: JSON.stringify(evento),
@@ -93,19 +93,19 @@ const CreazioneEventi = () => {
 
   return (
     <>
-      {(sessionStorage.getItem("username") === null ||
-        sessionStorage.getItem("username") === "null") && <AccessoNegato />}
+      {(localStorage.getItem("username") === null ||
+        localStorage.getItem("username") === "null") && <AccessoNegato />}
 
-      {sessionStorage.getItem("username") !== null &&
-        sessionStorage.getItem("username") !== "null" && (
+      {localStorage.getItem("username") !== null &&
+        localStorage.getItem("username") !== "null" && (
           <div>
             <NavbarAthletix />
             <section className="gradient-custom contenitoreIscrizioni">
               <div className="container h-100">
                 <div className="row d-flex justify-content-center h-100">
                   <div className="col-12 col-md-10">
-                    <h1 className="mt-2">
-                      Benvenuto nella creazione di Eventi!
+                    <h1 className="my-3 titoli">
+                      <b>Benvenuto nella creazione di Eventi!</b>
                     </h1>
                     <div
                       className="card bg-dark text-white"
@@ -193,7 +193,7 @@ const CreazioneEventi = () => {
                                     isMulti
                                     name="concorsi"
                                     options={gareConcorsi}
-                                    className="basic-multi-select"
+                                    className="basic-multi-select mb-3"
                                     classNamePrefix="select"
                                     placeholder="Seleziona/ricerca le gare dei concorsi da aggiungere"
                                     styles={customStyles}
@@ -405,7 +405,7 @@ const CreazioneEventi = () => {
                                     name="corse"
                                     options={gareCorse}
                                     placeholder="Seleziona/ricerca le gare di corsa da aggiungere"
-                                    className="basic-multi-select"
+                                    className="basic-multi-select mb-3"
                                     classNamePrefix="select"
                                     styles={customStyles}
                                     theme={(theme) => ({

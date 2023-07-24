@@ -76,8 +76,8 @@ const RegistrazioneSocieta = (props) => {
         );
         if (responseLogin.ok) {
           let token = await responseLogin.json();
-          sessionStorage.setItem("bearerToken", token.accessToken);
-          sessionStorage.setItem("username", token.username);
+          localStorage.setItem("bearerToken", token.accessToken);
+          localStorage.setItem("username", token.username);
           window.location.replace("/Homepage");
         }
       }
@@ -94,8 +94,8 @@ const RegistrazioneSocieta = (props) => {
       >
         <div className="card-body md-p-5 text-center">
           <div className="mb-md-5 mt-md-4 pb-0">
-            <h1 className="mb-1">ATHLETIX</h1>
-            <h2 className="fw-bold mb-3 text-uppercase">Register Società</h2>
+            <h1 className="mb-1 titoli">ATHLETIX</h1>
+            <h2 className="fw-bold mb-3 text-uppercase titoli">Register Società</h2>
             <p className="text-white-50 mb-5">
               Inserisci i tuoi dati per registrarti
             </p>

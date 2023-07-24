@@ -17,7 +17,7 @@ const RicercaEvento = () => {
     try {
       let response = await fetch("http://localhost:8080/athletics/eventi", {
         headers: {
-          Authorization: "Bearer " + sessionStorage.getItem("bearerToken"),
+          Authorization: "Bearer " + localStorage.getItem("bearerToken"),
         },
       });
       if (response.ok) {
@@ -36,9 +36,9 @@ const RicercaEvento = () => {
   }, []);
   return (
     <>
-      {sessionStorage.getItem("username") === null && <AccessoNegato />}
-      {sessionStorage.getItem("username") !== null &&
-        sessionStorage.getItem("username") !== "null" && (
+      {localStorage.getItem("username") === null && <AccessoNegato />}
+      {localStorage.getItem("username") !== null &&
+        localStorage.getItem("username") !== "null" && (
           <>
             <NavbarAthletix />
             <section className="gradient-custom pb-4">
@@ -76,56 +76,61 @@ const RicercaEvento = () => {
                         }}
                       />
                     </form>
-                    {nessunRisultato && (
-                      <>
-                        <h1>L'evento cercato non è stato trovato!!</h1>
-                      </>
-                    )}
+
                     <Container>
                       <Row
-                        className="row-cols-1 row-cols-sm-4 mt-4 justify-content-center align-items-center paginaErrore"
+                        className="row-cols-1 mt-4 justify-content-center align-items-center paginaErrore"
                         id="ricercaAtletiRow"
                       >
-                        {risultatoLive.map((evento, index) => {
-                          if (evento !== undefined) {
-                            return (
-                              <Col
-                                className="card m-2 cardPagine"
-                                style={{ width: "15rem", height: "17rem" }}
-                                key={index}
-                              >
-                                <Card.Body
-                                  className="cardEvento"
-                                  onClick={() =>
-                                    window.location.replace(
-                                      `/eventoSpecifico/${evento.id}`
-                                    )
-                                  }
+                        {!nessunRisultato &&
+                          risultatoLive.map((evento, index) => {
+                            if (evento !== undefined) {
+                              return (
+                                <Col
+                                  className="card m-2 cardPagine"
+                                  style={{ width: "15rem", height: "17rem" }}
+                                  key={index}
                                 >
-                                  <Card.Title>Evento</Card.Title>
-                                  <Card.Text>
-                                    <b>{evento.nomeEvento} </b>
-                                    <br />
-                                    Data: {evento.dataEvento}
-                                    <br />
-                                    Organizzatore: {evento.organizzatori.name}
-                                    <br />
-                                    Luogo: Via{" "}
-                                    {evento.organizzatori.indirizzo.nomeVia +
-                                      " " +
-                                      evento.organizzatori.indirizzo.civico +
-                                      ", " +
-                                      evento.organizzatori.indirizzo.comune
-                                        .cap +
-                                      " " +
-                                      evento.organizzatori.indirizzo.comune
-                                        .provinca.sigla}
-                                  </Card.Text>
-                                </Card.Body>
-                              </Col>
-                            );
-                          }
-                        })}
+                                  <Card.Body
+                                    className="cardEvento"
+                                    onClick={() =>
+                                      window.location.replace(
+                                        `/eventoSpecifico/${evento.id}`
+                                      )
+                                    }
+                                  >
+                                    <Card.Title className="titoli">Evento</Card.Title>
+                                    <Card.Text>
+                                      <b>{evento.nomeEvento} </b>
+                                      <br />
+                                      Data: {evento.dataEvento}
+                                      <br />
+                                      Organizzatore: {evento.organizzatori.name}
+                                      <br />
+                                      Luogo: Via{" "}
+                                      {evento.organizzatori.indirizzo.nomeVia +
+                                        " " +
+                                        evento.organizzatori.indirizzo.civico +
+                                        ", " +
+                                        evento.organizzatori.indirizzo.comune
+                                          .cap +
+                                        " " +
+                                        evento.organizzatori.indirizzo.comune
+                                          .provinca.sigla}
+                                    </Card.Text>
+                                  </Card.Body>
+                                </Col>
+                              );
+                            }
+                          })}
+
+                        {nessunRisultato && (
+                          <Col xs={12}>
+                            <h1 className="text-danger titoli">
+                              <b> L'evento cercato non è stato trovato!!</b>
+                            </h1>
+                          </Col>
+                        )}
                       </Row>
                     </Container>
                   </div>

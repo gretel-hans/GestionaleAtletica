@@ -20,7 +20,7 @@ const EventoSpecifico = () => {
         `http://localhost:8080/athletics/eventi/${params.id}`,
         {
           headers: {
-            Authorization: "Bearer " + sessionStorage.getItem("bearerToken"),
+            Authorization: "Bearer " + localStorage.getItem("bearerToken"),
           },
         }
       );
@@ -55,18 +55,18 @@ const EventoSpecifico = () => {
   }, []);
   return (
     <>
-      {(sessionStorage.getItem("username") === null ||
-        sessionStorage.getItem("username") === "null") && <AccessoNegato />}
+      {(localStorage.getItem("username") === null ||
+        localStorage.getItem("username") === "null") && <AccessoNegato />}
 
-      {sessionStorage.getItem("username") !== null &&
-        sessionStorage.getItem("username") !== "null" && (
+      {localStorage.getItem("username") !== null &&
+        localStorage.getItem("username") !== "null" && (
           <div>
             <NavbarAthletix />
             <section className=" gradient-custom ContenitoreGare">
               <div className="container h-100">
                 <div className="row d-flex justify-content-center h-100 mt-3">
                   <div className="col-12 ">
-                    <h1>
+                    <h1 className="titoli">
                       <b>{evento.nomeEvento}</b>
                     </h1>
                     <p>{evento.dataEvento}</p>
@@ -91,15 +91,15 @@ const EventoSpecifico = () => {
                       </>
                     )}
                     <hr></hr>
-                    <h3 className="mt-2 mb-5">Elenco Gare e iscritti</h3>
+                    <h3 className="mt-2 mb-5 titoli">Elenco Gare e iscritti</h3>
                     {gare.map((garaSingola, index) => {
                       return (
                         <div key={index} className="my-4" id="contenitoreGara">
-                          <h5>
+                          <h5 className="titoli">
                             {" "}
-                            <u>
-                              {garaSingola.tipo} {garaSingola.categoria}
-                            </u>
+                            
+                              {garaSingola.tipo} {garaSingola.categoria} {garaSingola.genereGara}
+                            
                           </h5>
                           <Container>
                             <Row>

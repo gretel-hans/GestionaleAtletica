@@ -44,14 +44,14 @@ const NavbarAthletix = () => {
   };
 
   const esciAccount = () => {
-    sessionStorage.setItem("username", null);
-    sessionStorage.setItem("bearerToken", null);
+    localStorage.setItem("username", null);
+    localStorage.setItem("bearerToken", null);
     window.location.replace("/Login");
   };
 
   useEffect(() => {
-    let username = sessionStorage.getItem("username");
-    let token = sessionStorage.getItem("bearerToken");
+    let username = localStorage.getItem("username");
+    let token = localStorage.getItem("bearerToken");
     fetchUtente(username, token);
   }, []);
 

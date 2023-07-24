@@ -39,7 +39,7 @@ const Registrazione = () => {
                   <div className="card-body md-p-5 text-center">
                     <div id="selectOpzione">
                       <div className="mb-5 mt-md-4 pb-0">
-                        <h2 className="fw-bold mb-2 text-uppercase">
+                        <h2 className="fw-bold mb-2 text-uppercase titoli">
                           Registrazione Athletix
                         </h2>
                         <p className="text-white-50 mb-5">

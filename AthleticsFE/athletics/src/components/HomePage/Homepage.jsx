@@ -17,7 +17,7 @@ const Homepage = () => {
     try {
       let response = await fetch("http://localhost:8080/athletics/atleti", {
         headers: {
-          Authorization: "Bearer " + sessionStorage.getItem("bearerToken"),
+          Authorization: "Bearer " + localStorage.getItem("bearerToken"),
         },
       });
       if (response.ok) {
@@ -37,14 +37,14 @@ const Homepage = () => {
 
   return (
     <>
-      {(sessionStorage.getItem("username") === null ||
-        sessionStorage.getItem("username") === "null") && <AccessoNegato />}
+      {(localStorage.getItem("username") === null ||
+        localStorage.getItem("username") === "null") && <AccessoNegato />}
 
-      {sessionStorage.getItem("username") !== null &&
-        sessionStorage.getItem("username") !== "null" && (
+      {localStorage.getItem("username") !== null &&
+        localStorage.getItem("username") !== "null" && (
           <div>
             <NavbarAthletix />
-<h1 className="my-4"><b> Benvenuto/a nella Homepage di Athletix!</b></h1>
+<h1 className="my-4 titoli"><b> Benvenuto/a nella Homepage di Athletix!</b></h1>
             <section className="gradient-custom pb-4">
               <div className="container h-100">
                 <div className="row d-flex justify-content-center h-100  mt-3">
@@ -87,18 +87,14 @@ const Homepage = () => {
                       />
                     </form>
 
-                    {nessunRisultato && (
-                      <>
-                        <h1>L'atleta cercato non è stato trovato!!</h1>
-                      </>
-                    )}
+                    
 
                     <Container>
                       <Row
-                        className="row-cols-1 row-cols-sm-4 mt-4 justify-content-center paginaErrore"
+                        className="row-cols-1 mt-4 justify-content-center align-items-center paginaErrore"
                         id="ricercaAtletiRow"
                       >
-                        {risultatoAtleti.map((atleta, index) => {
+                        {!nessunRisultato&&risultatoAtleti.map((atleta, index) => {
                           if (atleta !== undefined) {
                             return (
                               <Col
@@ -107,7 +103,7 @@ const Homepage = () => {
                                 key={index}
                               >
                                 <Card.Body>
-                                  <Card.Title>Atleta</Card.Title>
+                                  <Card.Title className="titoli">Atleta</Card.Title>
                                   <Card.Text>
                                     <b>
                                       {" "}
@@ -125,6 +121,13 @@ const Homepage = () => {
                             );
                           }
                         })}
+                        {nessunRisultato && (
+                          <Col xs={12}>
+                            <h1 className="text-danger titoli">
+                              <b> L'atleta cercato non è stato trovato!!</b>
+                            </h1>
+                          </Col>
+                        )}
                       </Row>
                     </Container>
                   </div>

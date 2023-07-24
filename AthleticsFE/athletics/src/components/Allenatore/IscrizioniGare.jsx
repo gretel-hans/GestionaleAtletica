@@ -78,7 +78,7 @@ const IscrizioniGare = () => {
     try {
       let response = await fetch("http://localhost:8080/athletics/eventi", {
         headers: {
-          Authorization: "Bearer " + sessionStorage.getItem("bearerToken"),
+          Authorization: "Bearer " + localStorage.getItem("bearerToken"),
         },
       });
       if (response.ok) {
@@ -103,7 +103,7 @@ const IscrizioniGare = () => {
           method: "POST",
           body: JSON.stringify(iscrizione),
           headers: {
-            Authorization: "Bearer " + sessionStorage.getItem("bearerToken"),
+            Authorization: "Bearer " + localStorage.getItem("bearerToken"),
             "content-type": "application/json",
           },
         }
@@ -125,9 +125,9 @@ const IscrizioniGare = () => {
         "http://localhost:8080/athletics/atleti/cercaAtletiConS",
         {
           method: "POST",
-          body: sessionStorage.getItem("bearerToken"),
+          body: localStorage.getItem("bearerToken"),
           headers: {
-            Authorization: "Bearer " + sessionStorage.getItem("bearerToken"),
+            Authorization: "Bearer " + localStorage.getItem("bearerToken"),
             "Content-Type": "text/plain",
           },
         }
@@ -152,19 +152,19 @@ const IscrizioniGare = () => {
 
   return (
     <>
-      {(sessionStorage.getItem("username") === null ||
-        sessionStorage.getItem("username") === "null") && <AccessoNegato />}
+      {(localStorage.getItem("username") === null ||
+        localStorage.getItem("username") === "null") && <AccessoNegato />}
 
-      {(sessionStorage.getItem("username") !== null ||
-        sessionStorage.getItem("username") !== "null") && (
+      {(localStorage.getItem("username") !== null ||
+        localStorage.getItem("username") !== "null") && (
           <div>
             <NavbarAthletix />
             <section className="gradient-custom contenitoreIscrizioni"  >
               <div className="container h-100">
                 <div className="row d-flex justify-content-center h-100">
                   <div className="col-12 col-md-10">
-                    <h1 className="mt-2">
-                      Benvenuto nella creazione di Eventi!
+                    <h1 className="mt-2 titoli">
+                      <b>Benvenuto nella sezione d'iscrizioni!</b>
                     </h1>
                     <div
                       className="card bg-dark text-white"

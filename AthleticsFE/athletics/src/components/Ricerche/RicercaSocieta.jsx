@@ -17,7 +17,7 @@ const RicercaSocieta = () => {
     try {
       let response = await fetch("http://localhost:8080/athletics/societa", {
         headers: {
-          Authorization: "Bearer " + sessionStorage.getItem("bearerToken"),
+          Authorization: "Bearer " + localStorage.getItem("bearerToken"),
         },
       });
       if (response.ok) {
@@ -37,11 +37,11 @@ const RicercaSocieta = () => {
 
   return (
     <>
-      {(sessionStorage.getItem("username") === null ||
-        sessionStorage.getItem("username") === "null") && <AccessoNegato />}
+      {(localStorage.getItem("username") === null ||
+        localStorage.getItem("username") === "null") && <AccessoNegato />}
 
-      {sessionStorage.getItem("username") !== null &&
-        sessionStorage.getItem("username") !== "null" && (
+      {localStorage.getItem("username") !== null &&
+        localStorage.getItem("username") !== "null" && (
           <div>
             <NavbarAthletix />
             <section className="pb-4 gradient-custom">
@@ -80,18 +80,14 @@ const RicercaSocieta = () => {
                       />
                     </form>
 
-                    {nessunRisultato && (
-                      <>
-                        <h1>La società cercata non è stato trovato!!</h1>
-                      </>
-                    )}
+                   
 
                     <Container>
                       <Row
-                        className="row-cols-1 row-cols-sm-4 mt-4 justify-content-center align-items-center paginaErrore"
+                        className="row-cols-1 mt-4 justify-content-center align-items-center paginaErrore"
                         id="ricercaAtletiRow"
                       >
-                        {risultatoSocieta.map((societa, index) => {
+                        {!nessunRisultato&&risultatoSocieta.map((societa, index) => {
                           if (societa !== undefined) {
                             return (
                               <Col
@@ -100,7 +96,7 @@ const RicercaSocieta = () => {
                                 key={index}
                               >
                                 <Card.Body>
-                                  <Card.Title>Società</Card.Title>
+                                  <Card.Title className="titoli">Società</Card.Title>
                                   <Card.Text>
                                     <b>{societa.name}</b>
                                     <br />
@@ -116,6 +112,13 @@ const RicercaSocieta = () => {
                             );
                           }
                         })}
+                         {nessunRisultato && (
+                          <Col xs={12}>
+                            <h1 className="text-danger titoli">
+                              <b> La società cercata non è stata trovata!!</b>
+                            </h1>
+                          </Col>
+                        )}
                       </Row>
                     </Container>
                   </div>

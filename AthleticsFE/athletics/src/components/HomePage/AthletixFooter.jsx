@@ -1,6 +1,4 @@
-import  Nav from "react-bootstrap/Nav"
 import Container from "react-bootstrap/Container"
-import Navbar from "react-bootstrap/Navbar"
 import { Link } from "react-router-dom"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
@@ -19,18 +17,22 @@ const AthletixFooter=()=>{
         <Col>
         <h6 className="text-uppercase fw-bold mb-3 titoli">Repository</h6>
           <p>
-          <Link to="https://github.com/gretel-hans" target={"_blank"}>Gretel-hans</Link>
+          <Link to="https://github.com/gretel-hans" target={"_blank"}>GitHub</Link>
              </p>
           </Col>
           <Col>
           <h6 className="text-uppercase fw-bold mb-3 titoli">Contatti</h6>
           <p><i className="fas fa-home me-3"></i> Adjei Hansel Sarpong</p>
           <p>
+            <Link to="Tel:+393476952468">+39 347 695 2468</Link>
+          </p>
+          <p>
             <Link to="mailto:adjeihansel@icloud.com">adjeihansel@icloud.com</Link>
           </p>
           <p>
-            <Link to="Tel:+393476952468">+39 347 695 2468</Link>
-            </p>
+            <Link to="https://www.linkedin.com/in/hansel-sarpong-adjei/" target={"_blank"}>Linkedln</Link>
+          </p>
+          
         </Col>
       </Row>
     </Container>

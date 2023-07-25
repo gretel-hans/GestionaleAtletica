@@ -25,7 +25,7 @@ const Benvenuto = () => {
           id="BenvenutoDivOne"
           className="d-flex flex-column justify-content-around p-4 sfondoErrore"
         >
-          <h1 className="my-0">
+          <h1 className="my-0 titoli">
             <i>
               Benvenuto su <b>ATHLETIX...</b>
             </i>

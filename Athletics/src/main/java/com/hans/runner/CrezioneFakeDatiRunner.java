@@ -31,6 +31,7 @@ import com.hans.service.GaraConcorsoService;
 import com.hans.service.GaraCorsaService;
 import com.hans.service.IndirizzoService;
 import com.hans.service.SocietaService;
+import com.hans.service.UtenteService;
 
 @Component
 public class CrezioneFakeDatiRunner implements CommandLineRunner{
@@ -54,6 +55,7 @@ public class CrezioneFakeDatiRunner implements CommandLineRunner{
 	
 	@Autowired AuthService authService;
 	
+	@Autowired UtenteService utenteS;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -75,8 +77,6 @@ public class CrezioneFakeDatiRunner implements CommandLineRunner{
 		
 		iscriviAtleti();
 
-
-	
 	}
 
 

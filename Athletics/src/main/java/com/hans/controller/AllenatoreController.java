@@ -28,8 +28,13 @@ public class AllenatoreController {
 	
 	@GetMapping("/{id}")
 	@PreAuthorize("isAuthenticated()")
-	public ResponseEntity<Allenatore> cercaAllenatore(@PathVariable Long id) {
-		return new ResponseEntity<>(allenatoreService.cercaAllenatoreConId(id),HttpStatus.OK);
+	public ResponseEntity<?> cercaAllenatore(@PathVariable Long id) {
+		Allenatore a=allenatoreService.cercaAllenatoreConId(id);
+		if(a!=null){
+			return new ResponseEntity<>(a,HttpStatus.OK);
+		}else{
+			return new ResponseEntity<>("ERRORE!! L'allenatore cercato non esiste!",HttpStatus.BAD_REQUEST);
+		}
 	}
 
 }

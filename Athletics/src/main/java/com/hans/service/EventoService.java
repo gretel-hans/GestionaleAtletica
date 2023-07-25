@@ -53,6 +53,10 @@ public class EventoService {
 	}
 	
 	public Evento cercaEventoConId(Long id) {
-		return eventoRepo.findById(id).get();
+		if(eventoRepo.existsById(id)){
+			return eventoRepo.findById(id).get();
+		}else{
+			return null;
+		}
 	}
 }

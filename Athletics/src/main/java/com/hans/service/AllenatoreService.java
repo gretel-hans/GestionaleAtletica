@@ -23,7 +23,11 @@ public class AllenatoreService {
 	}
 	
 	public Allenatore cercaAllenatoreConId(Long id) {
-		return aRepo.findById(id).get();
+		if(aRepo.existsById(id)){
+			return aRepo.findById(id).get();
+		}else{
+			return null;
+		}
 	}
 
 	public Allenatore cercaAllenatoreConEmail(String email) {

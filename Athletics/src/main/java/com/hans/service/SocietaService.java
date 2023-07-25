@@ -23,7 +23,11 @@ public class SocietaService {
 	}
 	
 	public Societa cercaSocietaConId(Long id) {
-		return sRepo.findById(id).get();
+		if(sRepo.existsById(id)){
+			return sRepo.findById(id).get();
+		}else{
+			return null;
+		}
 	}
 	
 	public Societa cercaSocietaConEmail(String s) {

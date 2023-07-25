@@ -25,8 +25,13 @@ public class SocietaController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Societa> cercaSocietaConId(@PathVariable Long id) {
-		return new ResponseEntity<>(societaService.cercaSocietaConId(id),HttpStatus.OK);
+	public ResponseEntity<?> cercaSocietaConId(@PathVariable Long id) {
+		Societa s=societaService.cercaSocietaConId(id);
+		if(s!=null){
+			return new ResponseEntity<>(s,HttpStatus.OK);
+		}else{
+			return new ResponseEntity<>("ERRORE!! La società cercata non esiste!!",HttpStatus.BAD_REQUEST);
+		}
 	}
 
 }

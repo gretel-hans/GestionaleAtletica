@@ -30,7 +30,10 @@ public class AtletaService {
 	}
 	
 	public Atleta cercaAtletaConId(Long id) {
-		return atletaRepo.findById(id).get();
+		if(atletaRepo.existsById(id)){
+			return atletaRepo.findById(id).get();
+		}else
+		return null;
 	}
 
 	public List<Atleta> cercaAtletiConSocieta(String c){

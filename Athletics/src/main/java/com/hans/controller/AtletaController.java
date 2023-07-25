@@ -30,8 +30,13 @@ public class AtletaController {
 	
 	@GetMapping("/{id}")
 	@PreAuthorize("isAuthenticated()")
-	public ResponseEntity<Atleta> cercaAtletaConId(@PathVariable Long id) {
-		return new ResponseEntity<>(atletaService.cercaAtletaConId(id),HttpStatus.OK);
+	public ResponseEntity<?> cercaAtletaConId(@PathVariable Long id) {
+		Atleta a=atletaService.cercaAtletaConId(id);
+		if(a!=null){
+			return new ResponseEntity<>(a,HttpStatus.OK);
+		}else{
+			return new ResponseEntity<>("ERRORE!! L'atleta cercato non esiste!",HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	@PostMapping("/cercaAtletiConS")

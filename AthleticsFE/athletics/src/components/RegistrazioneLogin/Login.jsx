@@ -57,7 +57,7 @@ const Login = () => {
                   >
                     <div className="card-body p-5 text-center">
                       <div className="mb-md-5 mt-md-4 pb-0">
-                        <h2 className="fw-bold mb-2 text-uppercase">
+                        <h2 className="fw-bold mb-2 text-uppercase titoli">
                           Benvenuto {localStorage.getItem("username")}
                         </h2>
 
@@ -70,7 +70,7 @@ const Login = () => {
                           Accedi
                         </button>
                         <button
-                          className="btn btn-outline-light btn-lg px-5 mt-4"
+                          className="btn btn-outline-light btn-lg ms-2 px-5 mt-4"
                           onClick={() => {
                             localStorage.setItem("username", null);
                             localStorage.setItem("bearerToken", null);

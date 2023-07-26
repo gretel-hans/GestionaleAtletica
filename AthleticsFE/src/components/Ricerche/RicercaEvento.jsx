@@ -36,7 +36,7 @@ const RicercaEvento = () => {
   }, []);
   return (
     <>
-      {localStorage.getItem("username") === null && <AccessoNegato />}
+      {(localStorage.getItem("username") === null || localStorage.getItem("username") === "null")&& <AccessoNegato />}
       {localStorage.getItem("username") !== null &&
         localStorage.getItem("username") !== "null" && (
           <>

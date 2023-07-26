@@ -1,4 +1,4 @@
-# Benvenuto nel file README di Athletix!
+# Benvenuto nel file README di Athletix !!
 
 Athletix è un'applicazione Full Stack che ti consente di gestire una serie di informazioni riguardo l'atletica. Questo file ti fornirà una serie di indicazioni per sfruttare al meglio l'applicazione.
 

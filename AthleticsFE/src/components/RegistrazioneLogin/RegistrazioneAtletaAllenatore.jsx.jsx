@@ -7,8 +7,8 @@ import Select from "react-select";
 
 const RegistrazioneAtletaAllenatore = (props) => {
   const generi = [
-    { value: "Femmina", label: "Donna" },
-    { value: "Maschio", label: "Uomo" },
+    { value: "Donna", label: "Donna" },
+    { value: "Uomo", label: "Uomo" },
   ];
   const [mostraPass, setMostraPass] = useState(true);
   const [datiRegistrazione, setDatiRegistrazione] = useState({
@@ -169,6 +169,7 @@ const RegistrazioneAtletaAllenatore = (props) => {
                         ...datiRegistrazione,
                         genere: e.value,
                       });
+                      console.log(e.value)
                     }}
                   />
                 </Col>

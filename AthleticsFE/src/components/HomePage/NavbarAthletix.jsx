@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { SALVA_INFO } from "../../redux/reducers/SalvaInfoUtente";
 
 const NavbarAthletix = () => {
   const [utente, setUtene] = useState();
@@ -10,6 +12,7 @@ const NavbarAthletix = () => {
   const [allenatore, setAllenatore] = useState(false);
   const [societa, setSocieta] = useState(false);
   const [atleta, setAtleta] = useState(false);
+  const dispatch = useDispatch();
 
   const verificaRuoli = (ruoli) => {
     ruoli.forEach((ruolo, index) => {
@@ -19,6 +22,26 @@ const NavbarAthletix = () => {
         setAllenatore(true);
       } else if (ruolo.roleName === "ROLE_SOCIETA") setSocieta(true);
     });
+  };
+
+  const fetchU = async (id,s) => {
+    try {
+      let response = await fetch(`http://localhost:8080/athletics/${s}/${id}`,{
+        headers:{
+          Authorization:"Bearer "+localStorage.getItem("bearerToken")
+        }
+      });
+      if (response.ok) {
+        let dati = await response.json();
+        console.log(dati);
+        dispatch({
+          type:SALVA_INFO,
+          payload:dati
+        })
+      }
+    } catch (error) {
+      console.log("ERRORE!! Nella lettura dei dati dell'utente!")
+    }
   };
 
   const fetchUtente = async (u, t) => {
@@ -37,6 +60,15 @@ const NavbarAthletix = () => {
         let data = await response.json();
         setUtene(data);
         verificaRuoli(data.roles);
+        data.roles.forEach((ruolo, index) => {
+          if (ruolo.roleName === "ROLE_SOCIETA") {
+            fetchU(data.id,"societa");
+          } else if (ruolo.roleName === "ROLE_ATLETA") {
+            fetchU(data.id,"atleti")
+          }else{
+            fetchU(data.id,"allenatori")
+          }
+        });
       }
     } catch (error) {
       console.log("ERRORE " + error);
@@ -70,7 +102,6 @@ const NavbarAthletix = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-            
               <Nav.Link href="#home" onClick={esciAccount}>
                 Logout
               </Nav.Link>

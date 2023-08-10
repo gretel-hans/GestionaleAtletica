@@ -39,7 +39,7 @@ Athletix è un'applicazione Full Stack che ti consente di gestire una serie di i
 
 Attualmente, questa è solo la prima versione di Athletix. Sono previsti ulteriori sviluppi con l'aggiunta di nuove funzionalità.
 
-Grazie per l'attenzione e spero che tu possa goderti Athletix in tutte le sue forme!
+Grazie per l'attenzione, spero che tu possa goderti Athletix in tutte le sue forme!
 
 In caso di dubbi o problemi, non esitare a contattarmi tramite la mia mail: adjeihansel@icloud.com.
 

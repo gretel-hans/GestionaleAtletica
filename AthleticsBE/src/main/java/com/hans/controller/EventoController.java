@@ -36,9 +36,13 @@ public class EventoController {
 	
 	@PostMapping()
 	@PreAuthorize("hasRole('SOCIETA')")
-	public ResponseEntity<Evento> creaEvento(@RequestBody Evento e) {
-		eventoService.salvaEvento(e);
-		return new ResponseEntity<>(eventoService.cercaEventoConId(e.getId()),HttpStatus.CREATED);
+	public ResponseEntity<?> creaEvento(@RequestBody Evento e) {
+		Evento ev=eventoService.salvaEvento(e);
+		if(ev!=null) {
+			return new ResponseEntity<>(eventoService.cercaEventoConId(e.getId()),HttpStatus.CREATED);			
+		}else{
+			return new ResponseEntity<>("Errore nella creazione dell'evento in quanto già esistente in tal data!!",HttpStatus.BAD_REQUEST);
+		}
 	}
 
 }

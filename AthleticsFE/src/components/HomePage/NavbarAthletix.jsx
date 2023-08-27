@@ -33,7 +33,6 @@ const NavbarAthletix = () => {
       });
       if (response.ok) {
         let dati = await response.json();
-        console.log(dati);
         dispatch({
           type:SALVA_INFO,
           payload:dati

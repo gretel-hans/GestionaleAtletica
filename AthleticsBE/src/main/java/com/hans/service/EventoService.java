@@ -27,6 +27,8 @@ public class EventoService {
 	
 	@Autowired JwtTokenProvider tokenP;
 	
+	public int ev=0;
+	
 	public Evento salvaEvento(Evento a) {
 		List<GaraConcorso> listaConcorsi=new ArrayList<GaraConcorso>();
 		a.getListaGareConcorsi().forEach(g->{
@@ -40,12 +42,24 @@ public class EventoService {
 		});
 		a.setListaGareCorse(listaCorse);
 		String email=tokenP.getUsername(a.getCodice());
-		System.out.println("eccola: "+email);
 		Societa s=societaService.cercaSocietaConEmail(email);
 		a.setOrganizzatori(s);
 		a.setLuogoGara(s.getIndirizzo());
 		a.setCodice(null);
-		return eventoRepo.save(a);
+		
+		List<Evento> listaEventiSocieta=eventoRepo.findByOrganizzatori(a.getOrganizzatori());
+		listaEventiSocieta.forEach(evento->{
+			if(evento.getDataEvento().equals(a.getDataEvento())) {
+				ev++;
+				System.out.println("Ecco la data dell'evento: " + evento.getDataEvento());
+			}
+		});
+		
+		if(ev>0) {
+			return null;
+		}else {
+			return eventoRepo.save(a);			
+		}
 	}
 	
 	public List<Evento> cercaTuttiEventi(){
